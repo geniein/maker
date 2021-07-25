@@ -1,23 +1,23 @@
 import React from 'react'
-import { Container, Li, Ul } from './styles'
+import { Container, TopMenuLi, TopMenuUl } from './styles'
 
 const TopMenu = () => {
     return (
         <Container>
-            <Ul>
-                <Li>
+            <TopMenuUl>
+                <TopMenuLi>
                     영상
-                </Li>
-                <Li>
-                    편지
-                </Li>
-                <Li>
+                </TopMenuLi>
+                <TopMenuLi>
+                    편지
+                </TopMenuLi>
+                <TopMenuLi>
                     성장
-                </Li>
-                <Li>
+                </TopMenuLi>
+                <TopMenuLi>
                     감사
-                </Li>
-            </Ul>
+                </TopMenuLi>
+            </TopMenuUl>
         </Container>       
     )
 }

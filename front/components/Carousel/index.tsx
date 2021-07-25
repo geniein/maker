@@ -24,7 +24,10 @@ const Carousel:FC<Props> = ({images}) => {
             <span>{images && images.length}</span>            
             </NavBox>
             <SlideBox>
-                <SlideList>
+                <SlideList style= {{                    
+                        transform: `translate3d(
+                          $1048px, 0px, 0px`,                      
+                }}>
                     {images?.map((image, no) => {
                         if(no === currNo){
                             return (<SlideContent key={no}>

@@ -10,7 +10,7 @@ const Main = () => {
         <div>
             <Header/>
             <TopMenu/>
-            <Carousel images={["/dist/images/cloud.jpeg","/dist/images/new.jpeg"]}/>
+            <Carousel images={["/dist/images/castle.jpg","/dist/images/uyuni.jpg","/dist/images/cloud.jpeg","/dist/images/new.jpeg"]}/>
             <Content/>
             <Footer/>
         </div>

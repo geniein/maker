@@ -8,20 +8,20 @@ export const Container = styled.div`
     position: relative;
 `;
 
-export const Img = styled.img`
+export const TopMenuImg = styled.img`
     margin: 0 auto;    
     height: 40px;    
 `;
 
-export const Ul = styled.ul`
+export const TopMenuUl = styled.ul`
     float: left;    
     margin: 10px 0px 0px 10px;
     color: #848484;
+    list-style:none; 
 `;
 
-export const Li = styled.li`
+export const TopMenuLi = styled.li`
     display: inline;
     padding-right: 20px;
     text-align: -webkit-match-parent;
-    list-style:none;    
     `;

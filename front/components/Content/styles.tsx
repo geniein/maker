@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`    
-    margin: 30 auto;
     width: 100%;
-    height: 100px;      
+    height: auto;
+    border-bottom: 1px solid #ececec;
+    border-top: 1px solid #ececec;    
+    margin-top: 1px;    
 `;
 
 export const Img = styled.img`
@@ -31,3 +33,35 @@ export const Ptag = styled.li`
     text-align: left;
     font-family: 'noto_b';   
     `;
+export const CardList = styled.div`
+    display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  overflow-x: auto; // 👈 중요
+  scroll-behavior: smooth; // 중요. 부드럽게 움직이게 하려고.
+
+  .card-item {
+    flex-shrink: 0; // 👈 중요
+    margin: 0 10px 0 0; // 각 아이템간의 간격
+  }
+  /* 스크롤바 속성 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+
+  button {
+    position: absolute;
+    z-index: 10;
+  }
+
+  .left-button {
+    left: 35px;
+  }
+
+  .right-button {
+    right: 35px;
+  }
+`;
