@@ -42,8 +42,8 @@ const mockCardList = [
                 background: 'linear-gradient(to right, #ffd194, #70e1f5)'
             }}/> 
             <CardList>
-                {mockCardList.map((val:any) =>{
-                    return <Card img={val.img} title={val.title} text={val.text} price={val.price}/>
+                {mockCardList.map((val:any, i:number) =>{
+                    return <Card key={i} img={val.img} title={val.title} text={val.text} price={val.price}/>
                 })} 
             </CardList>                   
         </Container>

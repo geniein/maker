@@ -49,7 +49,7 @@ export const TopMenuLi = styled.li`
             line-height: initial;    
         }
         
-        li:nth-child(1){
+        li:nth-of-type(1){
             width: 110px;
             float: left;
                  
@@ -62,7 +62,7 @@ export const TopMenuLi = styled.li`
             }
         }
         
-        li:nth-chile(2){
+        li:nth-of-type(2){
             width: 360px;
             float: right;
             line-height: initial;

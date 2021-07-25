@@ -8,7 +8,7 @@ const Footer = () => {
                 <li className='footer_top_l'> 
                     <p className='footer_title'>
                         Footer <br/>
-                        <div className='font'>hello world</div>
+                        <span className='font'>hello world</span>
                     </p>
                     <p className='cs_title'>
                         CS CENTER
@@ -25,16 +25,16 @@ const Footer = () => {
                         Tel : 010-0000-0000
                     </p> */}
                     <p className='time'>
-                        <div style={{
+                        <span style={{
                             marginRight: '45px',
                             display: 'inline'
-                        }}>평일</div>
+                        }}>평일</span>
                         AM 10:30 - PM 07:00</p>
                     <p className='lunch'>
-                        <div style={{
+                        <span style={{
                             marginRight: '22px',
                             display: 'inline'
-                        }}>점심시간</div>
+                        }}>점심시간</span>
                         PM 12:00 - PM 01:00</p>
                     <p className='holiday'>주말(토,일) 및 공휴일은 휴무입니다.</p>
                 </li>

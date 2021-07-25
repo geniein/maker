@@ -17,20 +17,20 @@ export const LoginTop = styled.div`
 `;
 export const LoginContent = styled.div`    
     position: relative;    
-    width:100%;
-    margin: 0 auto;    
-    ul {        
-        display: inline-block;
-        list-style:none;        
-    }    
+    width:100%;    
+    text-align: center;    
+    .login_ul {
+        display: flex;
+        justify-content: center;
+        list-style:none; 
+    }
 `;
 
-export const LoginLayoutLeft = styled.li`
-    float: left;
+export const LoginLayoutLeft = styled.li`    
     width: 500px;
     height: 400px;
     padding: 30px;
-    margin: 20px 0 103px 0;
+    margin: 20px 40px 103px 40px;
     border: 1px solid #e0e0e0;
 
     .login_title{
@@ -40,7 +40,7 @@ export const LoginLayoutLeft = styled.li`
         text-align: left;
     }
     .login_box {
-        width: 40%;
+        width: 100%;
         height: 40px;
         position: relative;
         margin: 0 auto 25px 0;
@@ -66,42 +66,30 @@ export const LoginLayoutLeft = styled.li`
                     border-radius: 2px;        
                 }  
     }
-    // .btn_wrap{
-    //     text-align: center;        
-    //     width: 100%;
-        
-    //     .login_btn{
-    //         color: #fff;
-    //         cursor: pointer;
-    //         background: #eac684;
-    //         border: 0px;
-    //         width: 322px;
-    //         height: 60px;            
-    //         border-radius: 2px;        
-    //     }    
-    //     .sub_options{
-    //         list-style: none;
-    //         margin: 30px auto;
-    //         width: 320px;
-    //         height: 30px;
-            
-    //         li{
-    //             float: left;
-    //             width: 100px;
-    //             height: 30px;
-    //             text-align: center;
-    //             line-height: 30px;
-    //         }
-    //     }
-    // }
+    .btn_wrap{
+        text-align: center;        
+        width: 100%;         
+        .sub_options{
+            list-style: none;
+            margin: 30px auto;
+            width: 400px;
+            height: 30px;            
+            li{              
+                display: inline-block;                  
+                width: 100px;
+                height: 30px;
+                text-align: center;
+                line-height: 30px;
+            }
+        }
+    }
 `;
 
-export const LoginLayoutRight = styled.li`
-    float: right;
+export const LoginLayoutRight = styled.li`    
     width: 500px;
     height: 400px;
     padding: 30px;
-    margin: 20px 40px 103px 0;
+    margin: 20px 40px 103px 40px;
     border: 1px solid #e0e0e0;    
 
     .login_title{
@@ -116,11 +104,11 @@ export const LoginLayoutRight = styled.li`
         margin: 0 auto;
         color: #fff;
         line-height: 60px;
-        font-size: 15px;
+        font-size: 15px;        
         cursor:pointer;
         span {
             position: relative;
-            left: 5px;
+            left: -50px;
             top: -1.5px;
             padding:0 20px 0 10px;
             img {

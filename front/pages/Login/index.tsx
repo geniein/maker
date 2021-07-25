@@ -18,10 +18,10 @@ const Login = () => {
                 </p>
             </LoginTop>
             <LoginContent>
-                <ul style={{width:'100%'}}>
+                <ul className='login_ul' style={{width:'100%'}}>
                     <LoginLayoutLeft>
                         <form id='logininfo'>
-                            <p className='login_title'>회원로그인</p>
+                            <p className='login_title'>회원로그인</p>                           
                             <div className='login_box'>
                                 <input type='text' id='userId' className='login_text' placeholder='input your ID'>
                                 </input>
@@ -31,23 +31,25 @@ const Login = () => {
                                 </input>
                             </div>
                             <div className='login_box'>
-                                <input type='submit' className='login_btn'></input>                          
+                                <input type='submit' className='login_btn' value='로그인'></input>                          
                             </div>
-                            {/* <div className='btn_wrap'>
-                                <input type='submit' className='login_btn'></input>                          
+                            <div className='btn_wrap'>                                
                                 <ul className='sub_options'>
                                     <li>
                                         아이디 찾기
-                                    </li>
+                                    </li>                                
                                     <li>
                                         비밀번호 찾기
+                                    </li>                                    
+                                    <li>
+                                        회원가입
                                     </li>
                                 </ul>  
-                            </div>                      */}
+                            </div>                     
                         </form>
                     </LoginLayoutLeft>                                        
                     <LoginLayoutRight>
-                        <p className='login_title'>SNS계정로그인</p>
+                        <p className='login_title'>SNS계정로그인</p>                        
                         <div className='sns_box naver'>
                             <span>
                                 <img src='/dist/images/logo/logo_naver.png'/>
@@ -59,6 +61,11 @@ const Login = () => {
                                 <img src='/dist/images/logo/logo_kakao.png'/>
                             </span>
                             카카오 로그인
+                        </div>
+                        <div className='sns_info'>
+                            <span>SNS를 통한 로그인 시,<br/></span>
+                            회원만이 누릴 수 있는 혜택에서 제외될 수 있습니다. <br/>
+                             간단한 회원가입으로 회원혜택을 누려보세요!                            
                         </div>
                     </LoginLayoutRight>
                 </ul>
