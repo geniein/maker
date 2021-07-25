@@ -36,7 +36,11 @@ const mockCardList = [
         <Container>            
             <Notice/>
             <SubTitle text={['CUSTOME SERVICE', 'MAKER is for CUSTOMER']}/>                        
-            <SubTitle text={['BEST SERVICE', 'BEST SERVICE LIST']}/> 
+            <SubTitle text={['BEST SERVICE', 'BEST SERVICE LIST']} style={{                
+                // background: '#70e1f5',
+                // background: '-webkit-linear-gradient(to right, #ffd194, #70e1f5)',  
+                background: 'linear-gradient(to right, #ffd194, #70e1f5)'
+            }}/> 
             <CardList>
                 {mockCardList.map((val:any) =>{
                     return <Card img={val.img} title={val.title} text={val.text} price={val.price}/>

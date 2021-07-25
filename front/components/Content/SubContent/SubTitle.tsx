@@ -4,11 +4,12 @@ import { SubTitleCon, SubTitleList } from './styles'
 
 interface Props{
     text:any;
+    style?:any;
 }
 
-const SubTitle:FC<Props> = ({text}) => {    
+const SubTitle:FC<Props> = ({text, style}) => {    
     return (
-        <SubTitleCon>
+        <SubTitleCon style={style}>
             <SubTitleList>
                 {text}
             </SubTitleList>

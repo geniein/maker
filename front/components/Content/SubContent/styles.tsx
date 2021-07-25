@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 
-export const NoticeCon = styled.ul`    
+export const NoticeCon = styled.ul`
     width: 1200px;
     height: 54px;
     list-style: none;    
     margin: 0 auto;
     border-bottom: 1px solid #ececec;
-    border-top: 1px solid #ececec;    
+    border-top: 1px solid #ececec;   
     `;
 export const NoticeSub = styled.li`
     color: #eac784;
@@ -44,7 +44,7 @@ export const SubTitleCon = styled.ul`
     list-style: none;
     width: 100%;    
     text-align: center;
-    margin: 1px auto;
+    margin: 1px auto;    
     `;
 
 export const SubTitleList = styled.p`

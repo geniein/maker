@@ -1,16 +1,29 @@
-import React from 'react'
-import {Container, Img, Ul, Li} from './styles';
+import React, { useCallback } from 'react'
+import { useHistory } from 'react-router';
+import {Container, HeaderLogo} from './styles';
 
 const Header = () => {
+    const history = useHistory();
+
+    const onClickLogo = () => {
+        history.push('/');
+    }
+    const onClickLogin = () => {
+        history.push('login');
+    };
+    const onClickSignup = () => {
+        history.push('signup');
+    };
+
     return (        
         <Container>            
-            <Img src="/dist/images/logo.gif"/>
-            <Ul>
-                <Li>로그인</Li>
-                <Li>회원가입</Li>
-                <Li>쿠폰등록</Li>
-                <Li>고객지원</Li>
-            </Ul>
+            <HeaderLogo src="/dist/images/logo.gif" onClick={onClickLogo} style={{cursor:'pointer'}}/>
+            <ul>
+                <li onClick={onClickLogin}>로그인</li>
+                <li onClick={onClickSignup}>회원가입</li>
+                <li>쿠폰등록</li>
+                <li>고객지원</li>
+            </ul>
         </Container>        
     )
 }
