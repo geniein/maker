@@ -301,10 +301,9 @@ const Signup = () => {
                 </BtnWrap>
             </SignupContent>
             }
-            {passAgree && <SignupContent>
-                <div className='signup_table'>
-                    <form>
-                        <table>
+            {passAgree && <SignupContent>                
+                    <form className='signup_table'>
+                        <table style={{marginBottom:'auto'}}>
                             <tbody>
                                 <tr>
                                     <th>
@@ -335,7 +334,7 @@ const Signup = () => {
                                 </tr> 
                             </tbody>
                         </table>
-                        <table>
+                        <table style={{marginBottom:'auto'}}>
                             <tbody>
                                 <tr>
                                     <th>
@@ -366,8 +365,7 @@ const Signup = () => {
                                 </tr> 
                             </tbody>
                         </table>
-                    </form>
-                </div>
+                    </form>                
             </SignupContent>
             }
             <Footer/>

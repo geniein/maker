@@ -26,10 +26,12 @@ export const SignupContent = styled.div`
         list-style:none; 
     }
     .signup_table{
-        height:500px;
-        display: flex;
-        justify-content: center;        
-        list-style:none; 
+        margin-top:30px;
+        //height:500px;
+        display: inline-flex;        
+        // justify-content: center;        
+        // flex-direction:column;
+        // list-style:none; 
     }
 `;
 
