@@ -35,11 +35,11 @@ export const Ptag = styled.li`
     `;
 export const CardList = styled.div`
     display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
-  overflow-x: auto; // 👈 중요
-  scroll-behavior: smooth; // 중요. 부드럽게 움직이게 하려고.
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    overflow-x: auto; // 👈 중요
+    scroll-behavior: smooth; // 중요. 부드럽게 움직이게 하려고.
 
   .card-item {
     flex-shrink: 0; // 👈 중요

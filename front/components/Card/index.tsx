@@ -1,10 +1,28 @@
-import React from "react";
+import React, { FC, useCallback } from "react";
+import { useHistory } from "react-router";
 import StyledCard from "./styles";
 
-const Card = ({ img = "", title = "", text = "", price = "" }) => {
+interface Props{
+  id:number;
+  img:string,
+  title:string,
+  text:string,
+  price:string,  
+}
+
+const Card:FC<Props> = ({ id, img, title, text, price }) => {
+
+  const history = useHistory();
+  const onClickCard = useCallback(
+      (id:number) => {
+          console.log('push')
+          history.push(`/detail/${id}`);
+      },
+      [],
+  )
   return (
     <StyledCard className="card-item">
-      <div className="card-image-wrapper">
+      <div className="card-image-wrapper" onClick={()=>onClickCard(id)}>
         <img className="card-img" src={img}></img>
       </div>
       <div className="card-content">
