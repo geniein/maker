@@ -3,6 +3,7 @@ import Content from '@components/Content'
 import Footer from '@components/Footer'
 import Header from '@components/Header'
 import TopMenu from '@components/TopMenu'
+import axios from 'axios'
 import React, { useCallback, useRef, useState } from 'react'
 import { BtnValid, BtnWrap, InputBox, SignupAgree, SignupContent, SignupTop } from './styles'
 
@@ -232,6 +233,10 @@ const Signup = () => {
     const [agreeMarket, setAgreeMarket] = useState(false);
     const [agreeAll, setAgreeAll] = useState(false);
     const [passAgree, setPassAgree] = useState(false);
+
+    const [emailId, setEmailId] = useState('');    
+    const [userName, setUserName] = useState('');    
+    const [userPassword, setUserPassword] = useState('');    
     
     const onClickAgree = () =>{                
         if(!agreeTerms || !agreePrivate){
@@ -253,6 +258,15 @@ const Signup = () => {
             setAgreeMarket(true);
         }
     },[agreeTerms,agreePrivate,agreeMarket,agreeAll]);
+
+    const onClickSignup = useCallback((e:any) =>{
+        e.preventDefault();
+        axios.post('/api/users',{
+            email:emailId,
+            name:userName,
+            password:userPassword
+        }).then((res)=>console.log(res)).catch((e)=>console.log(e));
+    },[emailId, userName, userPassword]);
     return (
         <div>
             <Header/>
@@ -311,7 +325,7 @@ const Signup = () => {
                                         <span>Account Information</span>
                                     </th>
                                     <td>
-                                        <InputBox placeholder='Input your ID'></InputBox>
+                                        <InputBox placeholder='Input your ID' onChange={(e)=>{setEmailId(e.target.value)}}></InputBox>
                                     </td>                                    
                                 </tr>                                
                                 <tr>
@@ -323,7 +337,7 @@ const Signup = () => {
                                 <tr>
                                     <th/>
                                     <td>
-                                        <InputBox placeholder='Input your Password'></InputBox>
+                                        <InputBox type='password' placeholder='Input your Password'onChange={(e)=>{setUserPassword(e.target.value)}}></InputBox>
                                     </td>                                    
                                 </tr> 
                                 <tr>
@@ -342,7 +356,7 @@ const Signup = () => {
                                         <span>Account Information</span>
                                     </th>
                                     <td>
-                                        <InputBox placeholder='Input your ID'></InputBox>
+                                        <InputBox placeholder='Input your Name' onChange={(e)=>{setUserName(e.target.value)}}></InputBox>
                                     </td>                                    
                                 </tr>                                
                                 <tr>
@@ -365,7 +379,11 @@ const Signup = () => {
                                 </tr> 
                             </tbody>
                         </table>
-                    </form>                
+                    </form>
+                    <BtnWrap>
+                    <input type='submit' className='btn_submit' value='회원가입' onClick={onClickSignup}></input>
+                    <input type='submit' className='btn_submit_kakao' value='취소' onClick={()=>history.go(-1)}/>                    
+                </BtnWrap>                
             </SignupContent>
             }
             <Footer/>

@@ -3,10 +3,23 @@ import Content from '@components/Content'
 import Footer from '@components/Footer'
 import Header from '@components/Header'
 import TopMenu from '@components/TopMenu'
-import React from 'react'
+import axios from 'axios'
+import React, { useCallback, useState } from 'react'
 import { LoginTop, LoginContent, LoginLayoutLeft, LoginLayoutRight } from './styles'
 
 const Login = () => {
+    const [userId, setUserId] = useState('');
+    const [userPassword, setUserPassword] = useState('');
+
+    const onClickLogin = useCallback(
+        () => {
+            axios.post('/api/users/login',{
+                email: userId,
+                password: userPassword
+            });
+        },
+        [userId, userPassword],
+    )
     return (
         <div>
             <Header/>
@@ -23,15 +36,15 @@ const Login = () => {
                         <form id='logininfo'>
                             <p className='login_title'>회원로그인</p>                           
                             <div className='login_box'>
-                                <input type='text' id='userId' className='login_text' placeholder='input your ID'>
+                                <input type='text' id='userId' className='login_text' placeholder='input your ID' onChange={(e:any)=>{setUserId(e.target.value)}}>
                                 </input>
                             </div>
                             <div className='login_box'>
-                                <input type='text' id='userPwd' className='login_text' placeholder='input your Password'>
+                                <input type='password' id='userPwd' className='login_text' placeholder='input your Password' onChange={(e:any)=>{setUserPassword(e.target.value)}}>
                                 </input>
                             </div>
                             <div className='login_box'>
-                                <input type='submit' className='login_btn' value='로그인'></input>                          
+                                <input type='submit' className='login_btn' value='로그인' onClick={onClickLogin}></input>                          
                             </div>
                             <div className='btn_wrap'>                                
                                 <ul className='sub_options'>

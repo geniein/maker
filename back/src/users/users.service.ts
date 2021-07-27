@@ -38,17 +38,18 @@ export class UsersService {
     });
   }
 
-  async signup(email: string, nickname: string, password: string) {
+  async signup(email: string, name: string, password: string) {
     const hashedPassword = await bcrypt.hash(password, 12);
-    // const user = await this.usersRepository.findOne({ where: { email } });
-    // if (user) {
-    //   return false;
-    // }
-    // const returned = await this.usersRepository.save({
-    //   email,
-    //   nickname,
-    //   password: hashedPassword,
-    // });
+    const user = await this.usersRepository.findOne({ where: { email } });
+    if (user) {
+      return false;
+    }
+    const returned = await this.usersRepository.save({
+      email,
+      name,
+      password: hashedPassword,
+      createdAt: new Date()
+    });
     return true;
   }
 }
