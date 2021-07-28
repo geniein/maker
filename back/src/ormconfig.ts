@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import dotenv from 'dotenv';
+import { ItemContents } from './entities/ItemContents';
 import { Users } from './entities/Users';
 
 dotenv.config();
@@ -12,13 +13,14 @@ const config: TypeOrmModuleOptions = {
   password: process.env.DB_PASSWORD ||'password',
   database: process.env.DB_DATABASE ||'slack',
   entities: [    
-    Users,    
+    Users,
+    ItemContents
   ],
   migrations: [__dirname + '/src/migrations/*.ts'],
   cli: { migrationsDir: 'src/migrations' },
   autoLoadEntities: true,
   charset: 'utf8mb4',
-  synchronize: false,
+  synchronize: true,
   logging: true,
   keepConnectionAlive: true,
 };

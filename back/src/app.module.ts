@@ -14,6 +14,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { ItemContentsModule } from './item-contents/item-contents.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { AuthModule } from './auth/auth.module';
     }),
     TypeOrmModule.forRoot(ormconfig),
     UsersModule,
-    AuthModule],
+    AuthModule,
+    ItemContentsModule],
   controllers: [AppController],
   providers: [AppService],
 })

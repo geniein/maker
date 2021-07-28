@@ -31,10 +31,10 @@ async function bootstrap() {
   // );
 
   const config = new DocumentBuilder()
-  .setTitle('Sleact API')
-  .setDescription('Sleact 개발을 위한 API 문서입니다.')
+  .setTitle('Maker API')
+  .setDescription('Maker 개발을 위한 API 문서입니다.')
   .setVersion('1.0')
-  .addCookieAuth('connect.sid')
+  // .addCookieAuth('connect.sid')
   .build();
   
   const document = SwaggerModule.createDocument(app, config);

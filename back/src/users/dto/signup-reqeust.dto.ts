@@ -15,7 +15,15 @@ export class SignupRequestDto {
     example: 'Shaco',
     description: '이름',
   })
-  public name: string;
+  public userName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    example: 'Shaco',
+    description: '별명',
+  })
+  public userId: string;
 
   @IsString()
   @IsNotEmpty()
@@ -24,4 +32,12 @@ export class SignupRequestDto {
     description: '비밀번호',
   })
   public password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    example: '01011112222',
+    description: '전화번호',
+  })
+  public phoneNumber: string;
 }

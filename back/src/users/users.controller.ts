@@ -1,18 +1,21 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, ForbiddenException, Response, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { SignupRequestDto } from './dto/SignupReqeustDto';
+import { SignupRequestDto } from './dto/signup-reqeust.dto';
 import { ApiCookieAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Users } from 'src/entities/Users';
 import { User } from '../decorators/user.decorator';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+import { LoggedInGuard } from 'src/auth/log-in.guard';
+import { NotLoggedInGuard } from 'src/auth/not-log-in.guard';
 
 @ApiTags('USERS')
 @Controller('api/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiOperation({summary: '회원가입'})
+  @UseGuards(NotLoggedInGuard)
   @Post()
   async signup(@Body() data: SignupRequestDto) {
     console.log(data);
@@ -22,8 +25,10 @@ export class UsersController {
     }
     const result = await this.usersService.signup(
       data.email,
-      data.name,
+      data.userName,
       data.password,
+      data.phoneNumber,
+      data.userId
     );
     if (result) {
       return 'ok';
@@ -49,24 +54,10 @@ export class UsersController {
 
   @ApiCookieAuth('connect.sid')
   @ApiOperation({ summary: '로그아웃' })
-  // @UseGuards(LoggedInGuard)
+  @UseGuards(LoggedInGuard)
   @Post('logout')
   async logout(@Response() res) {
     res.clearCookie('connect.sid', { httpOnly: true });
     return res.send('ok');
-  }
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
-  }
+  }   
 }
