@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import * as ormconfig from './ormconfig';
+import typeOrmConfig from '../ormconfig';
 
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 
@@ -15,16 +15,19 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ItemContentsModule } from './item-contents/item-contents.module';
+import { ItemReviewsModule } from './item-reviews/item-reviews.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: ['.env']
     }),
-    TypeOrmModule.forRoot(ormconfig),
+    TypeOrmModule.forRoot(typeOrmConfig),
     UsersModule,
     AuthModule,
-    ItemContentsModule],
+    ItemContentsModule,
+    ItemReviewsModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

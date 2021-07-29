@@ -14,14 +14,17 @@ export class ItemContentsController {
 
   @ApiOperation({ summary: '컨텐츠 리스트 가져오기' })
   @Get()
-  async getItemContents(@ItemContent() itemcontent: ItemContents) {
-    return itemcontent || false;
+  async findItemContents(@ItemContent() itemcontent: ItemContents) {    
+    const rtn = await this.itemContentsService.findItemContents();
+    // return itemcontent || false;
+    return rtn || false;
   }
 
   @ApiOperation({ summary: '컨텐츠 가져오기' })
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return this.itemContentsService.findOne(+id);
+  async findItemContent(@Param('id') id: string) {
+    const rtn = await this.itemContentsService.findItemContents(id);
+    return rtn || false;
   }
 
   @ApiOperation({ summary: '컨텐츠 추가' })

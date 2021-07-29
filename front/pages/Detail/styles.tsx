@@ -9,7 +9,11 @@ export const DetailTop = styled.div`
         position: relative;
         width: 644px;
         height: 362px;
-        display: inline-flex;        
+        display: inline-flex;
+        img{
+            width:100%
+            height:auto
+        }    
     }
     .detail_src_close{
         width: 20px;

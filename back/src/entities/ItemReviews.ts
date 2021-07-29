@@ -17,19 +17,19 @@ import {
     @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
     id: number;
     
-    @Column('varchar', { name: 'uk', length: 100, nullable:true })
+    @Column('varchar', { name: 'uk', length: 100})
     uk: string;
 
-    @Column('varchar', { name: 'contnetKey', length: 100, nullable:true })
-    contnetKey: string;
-  
+    @Column('varchar', { name: 'contentKey', length: 100})
+    contentKey: string;
+
     @Column('varchar', { name: 'category', length: 50 })
     category: string;
   
     @Column('varchar', { name: 'title', length: 100})
     title: string;
 
-    @Column('varchar', { name: 'hashTag', length: 100 })
+    @Column('varchar', { name: 'hashTag', length: 100, nullable:true })
     hashTag: string;
 
     @Column('varchar', { name: 'content', length: 2000})

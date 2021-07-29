@@ -4,13 +4,13 @@ import StyledCard from "./styles";
 
 interface Props{
   id:number;
-  img:string,
+  thumbnail:string,
   title:string,
-  text:string,
+  hashTag:string,
   price:string,  
 }
 
-const Card:FC<Props> = ({ id, img, title, text, price }) => {
+const Card:FC<Props> = ({ id, thumbnail, title, hashTag, price }) => {
 
   const history = useHistory();
   const onClickCard = useCallback(
@@ -23,11 +23,11 @@ const Card:FC<Props> = ({ id, img, title, text, price }) => {
   return (
     <StyledCard className="card-item">
       <div className="card-image-wrapper" onClick={()=>onClickCard(id)}>
-        <img className="card-img" src={img}></img>
+        <img className="card-img" src={thumbnail}></img>
       </div>
       <div className="card-content">
         <h1 className="card-header">{title}</h1>
-        <h3 className="card-middle">{text}</h3>
+        <h3 className="card-middle">{hashTag}</h3>
         <p className="card-price">{price}</p>
       </div>
     </StyledCard>

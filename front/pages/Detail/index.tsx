@@ -2,10 +2,20 @@ import Footer from '@components/Footer'
 import Header from '@components/Header'
 import Review from '@components/Review'
 import TopMenu from '@components/TopMenu'
+import fetcher from '@utils/fetcher'
 import React from 'react'
+import { useParams } from 'react-router'
+import useSWR from 'swr'
 import { DetailTop } from './styles'
 
 const Detail = () => {
+    const { id:cardId } = useParams<{ id: string }>();
+    const {data} = useSWR(`/api/item-contents/${cardId}`,fetcher);    
+    
+    if(data ===undefined) return(<div>Processing</div>); //data loading...
+    
+    const {category, title, content, hashTag, price,srcPath, thumbnail} = data[0];
+
     return (
         <div>
             <Header/>
@@ -13,15 +23,16 @@ const Detail = () => {
             <DetailTop>
                 <form>
                     <div className='detail_src'>
-                        <img src='/dist/images/castle.jpg' width='100%' height='auto'/>
+                        <img src={thumbnail} />
                     </div>
                     <div className='detail_info'>
-                        <p className='detail_title'>First Time w Maker</p>
+                        <p className='detail_title'>{title}</p> {/* First Time w Maker */}
                         <p className='detail_sub_price'>
-                            20,000
-                            <span className='discount_line'>50,000</span>
+                            {price * 0.5}
+                            <span className='discount_line'>{price}</span>
                         </p>
-                        <p className='detail_tag'># Share the whole new wolrd Experience w us</p>
+                            <p className='detail_tag'>{hashTag}</p>
+                        {/* # Share the whole new wolrd Experience w us */}
                         <div>
                             <ul className='detail_options'>
                                 <li>

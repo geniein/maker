@@ -32,7 +32,7 @@ const Carousel:FC<Props> = ({images}) => {
                         if(no === currNo){
                             return (<SlideContent key={no}>
                             <picture>
-                                <img src={image}></img>
+                                <img src={image} ></img>
                             </picture>
                             </SlideContent>)
                         }                        

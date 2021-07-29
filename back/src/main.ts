@@ -4,6 +4,8 @@ import { AppModule } from './app.module';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 
+declare const module: any;//Hot reload
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT;  
@@ -58,9 +60,9 @@ async function bootstrap() {
     console.log(`NESTJS Listening on ${port}`);
   });
 
-  // if (module.hot) {
-  //   module.hot.accept();
-  //   module.hot.dispose(() => app.close());
-  // }
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 }
 bootstrap();

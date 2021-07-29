@@ -1,36 +1,41 @@
 import Card from '@components/Card';
+import fetcher from '@utils/fetcher';
 import React from 'react'
+import useSWR from 'swr';
 import {CardList, Container} from './styles';
 import {Notice, SubTitle} from './SubContent';
 
 const Content = () => {    
-    const mockCardList = [
-        {
-            img : "/dist/images/castle.jpg",
-            title : "CASTLE",        
-            text : "CASTLE BLACK",
-            price : "40,000"
-        },
-        {
-            img : "/dist/images/uyuni.jpg",
-            title : "UYUNI",        
-            text : "UYUNI DESERT",
-            price : "50,000"
-        },
-        {
-            img : "/dist/images/cloud.jpg",
-            title : "CLOUD",        
-            text : "AWESOME CLOUD",
-            price : "40,000"
-        },
-        {
-            img : "/dist/images/new.jpg",
-            title : "NEW",        
-            text : "BRAND NEW",
-            price : "90,000"
-        },
-    ]
-
+    // const mockCardList = [
+    //     {
+    //         thumnail : "/dist/images/castle.jpg",
+    //         title : "CASTLE",        
+    //         hashTag : "CASTLE BLACK",
+    //         price : "40,000"
+    //     },
+    //     {
+    //         thumnail : "/dist/images/uyuni.jpg",
+    //         title : "UYUNI",        
+    //         hashTag : "UYUNI DESERT",
+    //         price : "50,000"
+    //     },
+    //     {
+    //         thumnail : "/dist/images/cloud.jpg",
+    //         title : "CLOUD",        
+    //         hashTag : "AWESOME CLOUD",
+    //         price : "40,000"
+    //     },
+    //     {
+    //         thumnail : "/dist/images/new.jpg",
+    //         title : "NEW",        
+    //         hashTag : "BRAND NEW",
+    //         price : "90,000"
+    //     },
+    // ]
+    const {data:cardList} = useSWR('/api/item-contents', fetcher)
+    
+    if(cardList == undefined) return(<div>Processing...</div>)
+    console.log(cardList)
     return (
         <Container>            
             <Notice/>
@@ -41,8 +46,8 @@ const Content = () => {
                 background: 'linear-gradient(to right, #ffd194, #70e1f5)'
             }}/> 
             <CardList>
-                {mockCardList.map((val:any, i:number) =>{
-                    return <Card key={i} id={i} img={val.img} title={val.title} text={val.text} price={val.price}/>
+                {cardList.map((val:any, i:number) =>{
+                    return <Card key={val.id} id={val.uk} thumbnail={val.thumbnail} title={val.title} hashTag={val.hashTag} price={val.price}/>
                 })} 
             </CardList>                   
         </Container>

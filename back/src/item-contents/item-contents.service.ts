@@ -15,16 +15,19 @@ export class ItemContentsService {
     return `This action returns all itemContents`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} itemContent`;
-  }
-
   update(id: number, updateItemContentDto: UpdateItemContentDto) {
     return `This action updates a #${id} itemContent`;
   }
 
   remove(id: number) {
     return `This action removes a #${id} itemContent`;
+  }
+  async findItemContents(id?){    
+    const result = id === undefined ?
+      await this.itemcontentsRepository.find() :
+      await this.itemcontentsRepository.find({where:{uk:id}}); 
+    // const result =await this.itemcontentsRepository.find({where:{id:id}});
+    return result;
   }
 
   async addItemContent(category:string, title:string, price:number, hashTag:string, content:string, author:string, srcPath:string, thumbnail:string){

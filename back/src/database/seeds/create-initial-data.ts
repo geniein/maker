@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import { ItemContents } from 'src/entities/ItemContents';
+import { ItemContents } from '../../entities/ItemContents';
 
 
 export class CreateInitialData implements Seeder {    
@@ -9,9 +9,9 @@ export class CreateInitialData implements Seeder {
       .createQueryBuilder()
       .insert()
       .into(ItemContents)
-      .values([
+      .values([          
           { id: 1,
-            uk:"A#ssw123",
+            uk:"A1ssw123",
             category: 'All',
             title: '[Notice]New Wolrd',
             price: 40000,
@@ -22,7 +22,7 @@ export class CreateInitialData implements Seeder {
             thumbnail:'/dist/images/castle.jpg',
             },
         { id: 2,
-            uk:"A#ssw1234",
+            uk:"A2ssw1234",
             category: 'All',
             title: '[UYUNI]',
             price: 50000,
@@ -33,7 +33,7 @@ export class CreateInitialData implements Seeder {
             thumbnail:'/dist/images/uyuni.jpg',
             },
         { id: 3,
-            uk:"A#ssw12345",
+            uk:"A3ssw12345",
             category: 'All',
             title: '[CLOUD]',
             price: 60000,
@@ -41,10 +41,10 @@ export class CreateInitialData implements Seeder {
             content:'신세계에 오신걸 환영합니다.',
             author:'ingenie',
             srcPath:'/dist/images/resource/',
-            thumbnail:'/dist/images/cloud.jpg"',
+            thumbnail:'/dist/images/cloud.jpg',
             },
         { id: 4,
-            uk:"A#ssw123456",
+            uk:"A5ssw123456",
             category: 'All',
             title: '[NEW]',
             price: 70000,
@@ -52,8 +52,9 @@ export class CreateInitialData implements Seeder {
             content:'신세계에 오신걸 환영합니다.',
             author:'ingenie',
             srcPath:'/dist/images/resource/',
-            thumbnail:'/dist/images/new.jpg"',
-            }])
+            thumbnail:'/dist/images/new.jpg',
+            }
+    ])
       .execute();    
   }
 }

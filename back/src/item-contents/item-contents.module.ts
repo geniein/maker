@@ -10,7 +10,6 @@ import { ItemContent } from 'src/decorators/user.decorator';
     TypeOrmModule.forFeature([ItemContents]),
   ],
   controllers: [ItemContentsController],
-  providers: [ItemContentsService],
-  exports: [ItemContentsService]
+  providers: [ItemContentsService],  
 })
 export class ItemContentsModule {}
