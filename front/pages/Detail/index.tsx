@@ -4,13 +4,14 @@ import Review from '@components/Review'
 import TopMenu from '@components/TopMenu'
 import fetcher from '@utils/fetcher'
 import React from 'react'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import useSWR from 'swr'
 import { DetailTop } from './styles'
 
 const Detail = () => {
     const { id:cardId } = useParams<{ id: string }>();
     const {data} = useSWR(`/api/item-contents/${cardId}`,fetcher);    
+    const history = useHistory();
     
     if(data ===undefined) return(<div>Processing</div>); //data loading...
     
@@ -62,6 +63,8 @@ const Detail = () => {
                         <p className='detail_price'>20,000</p>
                         <div className='detail_btn'>Order</div>
                         <div className='detail_btn'>Cancel</div>
+                        {/* Temp Component form Testing AddContent Component */}
+                        <div className='detail_btn' onClick={()=>history.push('/addcontent')}>New Post</div>
                     </div>
                 </form>
             </DetailTop> 

@@ -4,12 +4,12 @@ export const DetailTop = styled.div`
     display: inline-block;
     width: 1200px;
     margin-top: 70px;
-
+    
     .detail_src{
         position: relative;
         width: 644px;
         height: 362px;
-        display: inline-flex;
+        display: inline-flex;        
         img{
             width:100%
             height:auto

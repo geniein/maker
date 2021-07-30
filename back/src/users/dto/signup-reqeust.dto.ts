@@ -40,4 +40,12 @@ export class SignupRequestDto {
     description: '전화번호',
   })
   public phoneNumber: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    example: '1:관리자, 2:일반사용자',
+    description: '사용자 Level',
+  })
+  public level: string;
 }

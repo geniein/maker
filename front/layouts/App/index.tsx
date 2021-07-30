@@ -4,6 +4,7 @@ import Main from '@pages/Main'
 import Login from '@pages/Login'
 import Signup from '@pages/Signup';
 import Detail from '@pages/Detail';
+import AddContent from '@pages/AddContent';
 
 declare global{
   interface Window{
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/detail/:id" component={Detail} />
+          <Route path="/addcontent" component={AddContent} />
         </Switch>
       </div>
     );

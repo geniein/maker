@@ -25,6 +25,9 @@ import {
   
     @Column('varchar', { name: 'password', length: 100, select: false })
     password: string;
+
+    @Column('varchar', { name: 'level', length: 2, default: "1"})
+    level: string;
   
     @CreateDateColumn()
     createdAt: Date;
