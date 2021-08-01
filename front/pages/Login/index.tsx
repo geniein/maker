@@ -5,17 +5,25 @@ import Header from '@components/Header'
 import TopMenu from '@components/TopMenu'
 import axios from 'axios'
 import React, { useCallback, useState } from 'react'
+import { useHistory } from 'react-router'
 import { LoginTop, LoginContent, LoginLayoutLeft, LoginLayoutRight } from './styles'
 
 const Login = () => {
+    const history = useHistory();
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
 
     const onClickLogin = useCallback(
-        () => {
+        (e) => {
+            e.preventDefault();
             axios.post('/api/users/login',{
                 email: userId,
                 password: userPassword
+            }).then((res)=>{                
+                console.log('sucess');
+                history.push('/');
+            }).catch((err)=>{
+                alert('입력정보를 확인해주시기 바라니다.');
             });
         },
         [userId, userPassword],

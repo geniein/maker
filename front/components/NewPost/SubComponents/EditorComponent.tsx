@@ -1,10 +1,15 @@
 import useInput from '@hooks/useInput';
-import React, { Component, useState } from 'react';
+import React, { Component, FC, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const EditorComponent = () =>{
+interface Props{
+    value:string,
+    onChange: (val:any)=>void;
+}
 
+const EditorComponent:FC<Props> = ({value, onChange}) =>{
+    
     const [ content, onChangeContent, setContent ] = useInput('');
 
     const toolbar = {toolbar:[
@@ -26,17 +31,21 @@ const EditorComponent = () =>{
       ];
 
     return(
-        <div style={{ display: 'flex', justifyContent:'center'}}>
-            {/* <link rel="stylesheet" href="//cdn.quilljs.com/1.2.6/quill.snow.css"/> */}
-            <div style={{height: "650px"}}>
+        <div>
+         {/* <div style={{ display: 'flex', justifyContent:'center'}}>            
+             <div style={{height: "800px"}}>                 */}
                 <ReactQuill 
                     style={{height: "600px"}} 
                     theme="snow" 
                     modules={toolbar} 
                     formats={quillFormat}
-                    onChange={(content, delta, source, editor) => console.log(editor.getHTML())}                      
+                    value={value || ''}
+                    onChange={(content, delta, source, editor) => onChange(editor.getHTML())}                      
                     />
-            </div>
+                    <div style={{display: 'flex', justifyContent: 'center'}}>                    
+                </div>
+        {/* </div>
+         </div> */}
         </div>
     )
 }

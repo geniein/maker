@@ -18,7 +18,7 @@ export class UsersService {
     });
   }
 
-  async signup(email: string, name: string, password: string, phoneNumber: string, userId: string) {
+  async signup(email: string, userName: string, password: string, phoneNumber: string, userId: string) {
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = await this.usersRepository.findOne({ where: { email } });
     if (user) {
@@ -26,7 +26,7 @@ export class UsersService {
     }
     const returned = await this.usersRepository.save({
       email,
-      name,
+      userName,
       password: hashedPassword,
       userId,      
       phoneNumber,

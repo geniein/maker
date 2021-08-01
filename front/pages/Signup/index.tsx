@@ -263,7 +263,7 @@ const Signup = () => {
         e.preventDefault();
         axios.post('/api/users',{
             email:emailId,
-            name:userName,
+            userName:userName,
             password:userPassword
         }).then((res)=>console.log(res)).catch((e)=>console.log(e));
     },[emailId, userName, userPassword]);

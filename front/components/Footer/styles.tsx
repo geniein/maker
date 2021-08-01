@@ -103,7 +103,7 @@ export const FooterTop = styled.ul`
         }
         .btn_wrap {
             list-style: none;
-            width: 400px;
+            width: 100px;
             display: inline-block;
             text-align: l;
             
@@ -137,7 +137,7 @@ export const FooterTop = styled.ul`
 
 export const FooterMid = styled.ul`
     list-style: none;
-    width: 1100px;
+    width: 100%;
     margin: 20px 0;
     text-align: left;
 
@@ -152,7 +152,7 @@ export const FooterMid = styled.ul`
 export const FooterBot = styled.ul`
     list-style: none;
     text-align: left;
-    width: 1110px;
+    width: 100%;
     margin: 0;
 
     li {

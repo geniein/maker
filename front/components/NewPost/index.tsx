@@ -1,33 +1,78 @@
-import React, { MutableRefObject, useRef } from 'react'
+import axios from 'axios'
+import React, { MutableRefObject, useRef, useState } from 'react'
+import { useHistory } from 'react-router'
+import { CancelBtn, NewPostWrap, PostBtn } from './styles'
 import EditorComponent from './SubComponents/EditorComponent'
 import UploadFiles from './SubComponents/UploadFiles'
 
 const NewPost = () =>{
-    const categoryList = [{value:1, text:"Notice"},{value:2, text:"Update"}]
-    const uploadReferenece = useRef<HTMLDivElement>(null);
+    //temp
+    const categoryList = [{value:1, text:"Notice"},{value:2, text:"Update"}]    
 
-    //useImperativeHandle 확인하기
-    const onClickSearch = async()=>{
-        if(uploadReferenece !== null) console.log(uploadReferenece?.current);
-        // await uploadReferenece.current.upload()
-        //uploadReferenece
-        // await 
-        
-        // .then( (result:any) => {
-        //     const files = result;
-        //     alert('저장 완료');
-        // }).catch( (err:any) =>{
-        //     console.log(err);
-        // });
+    const history = useHistory();
+    const uploadReferenece = useRef<any>(null);
+
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    
+    const onClickCancel = () =>{
+        history.go(-1);
+    }
+    
+    const onClickTest = async()=>{
+        await uploadReferenece?.current?.upload().then( (result:any) => {
+            console.log(result);
+        })
+    }
+
+    const onClickPost = async()=>{
+
+        if (title.trim() == '') {
+            alert('제목을 입력해주세요'); return;
+        }
+        if (content.trim() == '') {
+            alert('내용을 입력해주세요'); return;
+        }
+        if(uploadReferenece !== null){
+            await uploadReferenece?.current?.upload().then( (result:any) => {
+                const files = result;
+                console.log(result);
+
+                axios.post('/api/item-contents/newPost',{
+                    title,
+                    content,
+                    category:'NOTICE',
+                    price: 50000,
+                    hashTag: '#FIRST COMMIT',
+                    author: 'ingenie',
+                    srcPath:'test',
+                    thumbnail: 'test'
+                })
+                alert('저장 완료');
+            }).catch( (err:any) =>{
+                console.log(err);
+            });            
+        }
+    }
+    const onEditorChnage = (val:any) =>{
+        setContent(val);
     }
     return (
-        <div>
-            <EditorComponent></EditorComponent>
-            <UploadFiles ref={uploadReferenece} />
-            <div className="text-center pd12">
-                <button className="lf-button primary" onClick={onClickSearch}>저장</button>
+        <NewPostWrap>
+            <div style={{display:'flex',justifyContent:'center'}}>
+                <div style={{width:'60%', marginBottom:'30px'}}>
+                    <input style={{width:'100%', height:'30px', marginBottom:'20px'}} onChange={(e)=>setTitle(e.target.value)} placeholder='제목'/>
+                    <UploadFiles ref={uploadReferenece} />
+                    <EditorComponent value={content} onChange={onEditorChnage}/>                    
+                    {/* <div className="text-center pd12">
+                        <button className="lf-button primary" onClick={onClickSearch}>저장</button>
+                    </div>       */}
+                    <PostBtn onClick={onClickPost}>Post</PostBtn>
+                    <CancelBtn onClick={onClickTest}>Test</CancelBtn>
+                    {/* <CancelBtn onClick={onClickCancel}>Cancel</CancelBtn> */}
+                </div>
             </div>
-        </div>
+        </NewPostWrap>
     )
 }
 

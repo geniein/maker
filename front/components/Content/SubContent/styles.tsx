@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const NoticeCon = styled.ul`
-    width: 1200px;
+    width: 100%;
     height: 54px;
     list-style: none;    
     margin: 0 auto;

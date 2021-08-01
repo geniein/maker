@@ -11,7 +11,7 @@ export const NavBox = styled.div`
 
 export const ImageSlide = styled.div`
   position: relative;
-  width: 100%;
+  width: ${props => props.style?.width};
   height: auto;
   margin: auto;
   padding-bottom: 30px;  

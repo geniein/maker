@@ -1,13 +1,14 @@
 
-import React, { FC, useCallback, useState } from 'react'
+import React, { CSSProperties, FC, useCallback, useState } from 'react'
 import * as FaIcons from 'react-icons/fa';
 import { ImageSlide, NavBox, SlideBox, SlideContent, SlideList, ButtonPrev, ButtonNext } from './styles';
 
 interface Props {
     images: string[];
+    stlyes: CSSProperties;
 }
 
-const Carousel:FC<Props> = ({images}) => {
+const Carousel:FC<Props> = ({images , stlyes}) => {
     const [currNo, setCurrNo] = useState(0);
     
     const onChangeImage = useCallback((index:any) => {        
@@ -17,7 +18,7 @@ const Carousel:FC<Props> = ({images}) => {
       },[currNo]);
       
     return (         
-        <ImageSlide>
+        <ImageSlide style={stlyes}>
             <NavBox>
             <span>{currNo + 1}</span>
             <span>/</span>

@@ -45,7 +45,7 @@ export class UsersController {
   }
   
   @ApiOperation({ summary: '로그인' })
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(LocalAuthGuard)  
   @Post('login')
   async login(@User() user: Users) {
     console.log('Log In');

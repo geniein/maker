@@ -4,16 +4,12 @@ export const DetailTop = styled.div`
     display: inline-block;
     width: 1200px;
     margin-top: 70px;
-    
+
     .detail_src{
         position: relative;
         width: 644px;
         height: 362px;
         display: inline-flex;        
-        img{
-            width:100%
-            height:auto
-        }    
     }
     .detail_src_close{
         width: 20px;
@@ -33,7 +29,7 @@ export const DetailTop = styled.div`
         text-align: left;
     }
     .detail_title {
-        font-size: 20px;
+        font-size: 20px; 
         color: #383838;
         display: inline-block;
         margin-bottom: 10px;

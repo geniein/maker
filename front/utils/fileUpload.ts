@@ -5,9 +5,8 @@ const fileUpload = (file:any) => {
 
     for (const key of Object.keys(file)) {
         formData.append('file', file[key]);
-    }    
-
-    return axios.post("/api/upload/files", formData, {
+    }        
+    return axios.post("/api/item-contents/files", formData, {        
         headers: {
             "Content-Type": "multipart/form-data",
         }

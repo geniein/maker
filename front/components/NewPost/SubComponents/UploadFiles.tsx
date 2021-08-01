@@ -6,28 +6,25 @@ const UploadFiles = forwardRef((props, ref) => {
     const [selectedFiles, setSelectedFiles] = useState(undefined);
     const [message, setMessage] = useState('');
 
-    const selectFile = (e:any) => {
+    const selectFile = (e:any) => {        
         setSelectedFiles(e.target.files);
     };
 
     const fileInput = useRef(null);
 
     useImperativeHandle(ref, () => ({
-        upload: () => {
+        upload: () => {                        
             return new Promise((resolve, reject) => {
-
+                console.log(selectedFiles);
                 if (selectedFiles) {
-
                     let result = fileUpload(selectedFiles)
                         .then((response:any) => {
-                            setMessage(response.data.message);
-                            resolve(response.data.files);
+                            setMessage(response.data);
+                            resolve(response.data);
                             //return UploadService.getFiles();
                         })
                         .catch((err:any) => {
-
                             // if(fileInput!==null) {fileInput.current.value = ''};
-
                             setSelectedFiles(undefined);
                             if (err.response.data.message) {
                                 setMessage(err.response.data.message);
@@ -41,7 +38,7 @@ const UploadFiles = forwardRef((props, ref) => {
                 }
             })
         }
-    }),[fileInput]);
+    }),[selectedFiles]);
 
     return(
         <div>

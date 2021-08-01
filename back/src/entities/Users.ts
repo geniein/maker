@@ -20,8 +20,8 @@ import {
     @Column('varchar', { name: 'email', unique: true, length: 30 })
     email: string;
   
-    @Column('varchar', { name: 'name', length: 30 })
-    name: string;
+    @Column('varchar', { name: 'userName', length: 30 })
+    userName: string;
   
     @Column('varchar', { name: 'password', length: 100, select: false })
     password: string;

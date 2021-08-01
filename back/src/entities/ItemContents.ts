@@ -32,7 +32,7 @@ import {
     @Column('varchar', { name: 'hashTag', length: 100 })
     hashTag: string;
 
-    @Column('varchar', { name: 'content', length: 2000})
+    @Column('varchar', { name: 'content', length: 4000})
     content: string;
 
     @Column('varchar', { name: 'author', length: 30 })
