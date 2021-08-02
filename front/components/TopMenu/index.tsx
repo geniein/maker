@@ -1,7 +1,9 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 import { Container, TopMenuLi, TopMenuUl } from './styles'
 
 const TopMenu = () => {
+    const history = useHistory();
     return (
         <Container>
            <div style={{
@@ -29,8 +31,7 @@ const TopMenu = () => {
                        </ul>
                    </TopMenuLi>
                    <TopMenuLi>
-                        <div style={{
-                            cursor:'pointer',
+                        <div style={{                            
                             display:'inline'
                        }}>
                            Wolrd
@@ -45,6 +46,10 @@ const TopMenu = () => {
                            </li>
                        </ul>
                    </TopMenuLi>
+                   <TopMenuLi style={{color:'#cccccc'}}> | </TopMenuLi>
+                   <TopMenuLi onClick={()=>history.push('/customservice')}>이벤트</TopMenuLi>
+                   <TopMenuLi>공지사항</TopMenuLi>
+                   <TopMenuLi>후기</TopMenuLi>
                </TopMenuUl>
            </div>
         </Container>       

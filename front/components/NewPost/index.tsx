@@ -18,12 +18,6 @@ const NewPost = () =>{
     const onClickCancel = () =>{
         history.go(-1);
     }
-    
-    const onClickTest = async()=>{
-        await uploadReferenece?.current?.upload().then( (result:any) => {
-            console.log(result);
-        })
-    }
 
     const onClickPost = async()=>{
 
@@ -47,8 +41,11 @@ const NewPost = () =>{
                     author: 'ingenie',
                     srcPath:'test',
                     thumbnail: 'test'
-                })
-                alert('저장 완료');
+                }).then((res:any)=>{
+                    alert('Sucess Post');
+                }).catch((err:any)=>{
+                    console.log(err);
+                })                
             }).catch( (err:any) =>{
                 console.log(err);
             });            
@@ -67,9 +64,10 @@ const NewPost = () =>{
                     {/* <div className="text-center pd12">
                         <button className="lf-button primary" onClick={onClickSearch}>저장</button>
                     </div>       */}
-                    <PostBtn onClick={onClickPost}>Post</PostBtn>
-                    <CancelBtn onClick={onClickTest}>Test</CancelBtn>
-                    {/* <CancelBtn onClick={onClickCancel}>Cancel</CancelBtn> */}
+                    <div style={{ display: 'flex', justifyContent:'center'}}>
+                        <PostBtn onClick={onClickPost}>Post</PostBtn>
+                        <CancelBtn onClick={onClickCancel}>Cancel</CancelBtn>
+                    </div>                    
                 </div>
             </div>
         </NewPostWrap>

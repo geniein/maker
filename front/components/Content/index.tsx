@@ -5,33 +5,7 @@ import useSWR from 'swr';
 import {CardList, Container} from './styles';
 import {Notice, SubTitle} from './SubContent';
 
-const Content = () => {    
-    // const mockCardList = [
-    //     {
-    //         thumnail : "/dist/images/castle.jpg",
-    //         title : "CASTLE",        
-    //         hashTag : "CASTLE BLACK",
-    //         price : "40,000"
-    //     },
-    //     {
-    //         thumnail : "/dist/images/uyuni.jpg",
-    //         title : "UYUNI",        
-    //         hashTag : "UYUNI DESERT",
-    //         price : "50,000"
-    //     },
-    //     {
-    //         thumnail : "/dist/images/cloud.jpg",
-    //         title : "CLOUD",        
-    //         hashTag : "AWESOME CLOUD",
-    //         price : "40,000"
-    //     },
-    //     {
-    //         thumnail : "/dist/images/new.jpg",
-    //         title : "NEW",        
-    //         hashTag : "BRAND NEW",
-    //         price : "90,000"
-    //     },
-    // ]
+const Content = () => {       
     const {data:cardList} = useSWR('/api/item-contents', fetcher)
     
     if(cardList == undefined) return(<div>Processing...</div>)

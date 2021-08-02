@@ -27,7 +27,7 @@ export const TopMenuLi = styled.li`
     float: left;
     margin-left: 34px;
     position: relative;
-    
+    cursor: pointer;
     ul {
         position: absolute;
         top: 20px;
