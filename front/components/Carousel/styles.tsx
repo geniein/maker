@@ -45,8 +45,27 @@ export const SlideContent = styled.div`
     text-align: center;
 
     img {
+      width: 100%;      
+      height: ${props => props.style?.height};
+    }
+    .circle_wrap{      
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
       width: 100%;
-      height: 500px;
+      height: 5%;      
+      display:inline-flex;
+      justify-content:center;
+      align-items: center;
+    }
+    .circle{
+      width: 1%;
+      height: 50%;
+      background-color: #ffffff;
+      border: 1px solid #ffffff;
+      border-radius: 50%;
+      margin-right: 10px;
+      cursor: pointer;
     }
   }  
 `;

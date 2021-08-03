@@ -38,7 +38,7 @@ export const CSMenu = styled.div`
         border-top: 1px solid rgb(255, 200, 99);
         width: 150px;
         position: relative;        
-    }
+    }   
 `;    
 
 export const Container = styled.div`
@@ -61,6 +61,8 @@ export const Container = styled.div`
         }
     }
 `;
+export const NoticeWrap = styled.div`
+`;
 export const NoticeTable = styled.table`
     width: 1200px;
     margin-bottom: 50px;
@@ -75,7 +77,7 @@ export const NoticeTable = styled.table`
     tr{
         display: table-row;
         vertical-align: inherit;
-        border-color: inherit;
+        border-color: inherit;        
     }
     th{
         height: 70px;
@@ -90,6 +92,12 @@ export const NoticeTable = styled.table`
         color: #565656;
         text-align: center;
     }
+    .notice_row{
+        cursor: pointer;
+    }
+    .notice_row:hover{
+        background-color: #FFF0F5;
+    }        
 `;
 
 export const Paging = styled.ul`
@@ -107,4 +115,36 @@ export const Paging = styled.ul`
         text-align: center !important;
         line-height: 20px !important;
     }
+`;
+
+export const NoticeInner = styled.div`    
+    .notice_sub{
+        width: 130px;
+        background-color: #f7f7f7;
+        border-right: 1px solid #dadada;
+    }
+    .notice_title{
+        text-align: left;
+        text-indent: 10px;
+    }
+    .notice_view{
+        padding: 15px 0px;
+        border-bottom: 1px solid #dadada;
+        width: 1200px;
+        margin: 0 auto;
+    }
+`;
+
+export const GoListBtn = styled.div`
+    color: #fff;
+    cursor: pointer;
+    background: #eac684;
+    margin: 50px 20px 0px 20px;
+    border: 0px;
+    width: 250px;
+    height: 60px;            
+    border-radius: 2px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 `;

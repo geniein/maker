@@ -12,7 +12,7 @@ const AddContent = () => {
             <Header/>
             <TopMenu/>
             <div>                
-                <NewPost/>                     
+                <NewPost des={"item-contents"}/>                     
             </div>   
             <Footer/>
         </div>

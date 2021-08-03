@@ -13,3 +13,10 @@ export const ItemContent = createParamDecorator(
     return request.itemcontent;
   },
 );
+
+export const Notice = createParamDecorator(
+  (data: unknown, ctx: ExecutionContext) => {  
+    const request = ctx.switchToHttp().getRequest();
+    return request.notices;
+  },
+);

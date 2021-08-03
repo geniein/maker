@@ -16,6 +16,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ItemContentsModule } from './item-contents/item-contents.module';
 import { ItemReviewsModule } from './item-reviews/item-reviews.module';
+import { NoticesModule } from './notices/notices.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { ItemReviewsModule } from './item-reviews/item-reviews.module';
     UsersModule,
     AuthModule,
     ItemContentsModule,
-    ItemReviewsModule
+    ItemReviewsModule,
+    NoticesModule
   ],
   controllers: [AppController],
   providers: [AppService],

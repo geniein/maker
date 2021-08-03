@@ -1,13 +1,41 @@
 import Footer from '@components/Footer'
 import Header from '@components/Header'
+import NewPost from '@components/NewPost'
 import TopMenu from '@components/TopMenu'
-import React from 'react'
-import { Container, CSMenu, CSTop, NoticeTable, Paging } from './styles'
+import fetcher from '@utils/fetcher'
+import axios from 'axios'
+import React, { FC, useCallback, useState } from 'react'
+import { useLocation } from 'react-router'
+import useSWR from 'swr'
+import { Container, CSMenu, CSTop, NoticeInner, NoticeTable, Paging, GoListBtn, NoticeWrap } from './styles'
 
-const CustomService = () => {
+const CustomService = () => {    
+    const [newState, setNewState] = useState(false);
+    const [innerState, setInnerState] = useState(false);
+    const [innerValue, setInnerValue] = useState<any>(undefined);
+    
+    const location = useLocation<any>(); //location    
+    
+    const {data:noticeList} = useSWR(`/api/notices`,fetcher);
+    const onClickNotice = useCallback((id:number)=>{
+        axios.get(`/api/notices/${id+1}`).then((res)=>{            
+            setInnerState(true);
+            setInnerValue(res.data[0]);            
+        })
+    },[innerState, innerValue]);
+    const onClickMenuNoti = () =>{
+        setNewState(false);
+        setInnerState(false);
+    }
+
+    if(location?.state !== undefined){                
+        onClickNotice(location.state.notice);
+        delete location.state;
+    }
+
     return (
         <div>
-             <Header/>
+            <Header/>
             <TopMenu/> 
             <CSTop>
                 <p>
@@ -17,7 +45,7 @@ const CustomService = () => {
             </CSTop>
             <CSMenu>
                 <ul>
-                    <li>
+                    <li onClick={onClickMenuNoti}>
                         공지사항                        
                     </li>
                     <li>
@@ -30,26 +58,60 @@ const CustomService = () => {
             </CSMenu>
             <Container>
                 <div className='title'>공지사항 <span>중요한 소식을 확인하세요</span></div>
-                <NoticeTable>
-                    <tbody>
-                        <tr>
-                            <th></th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                            <th>작성일</th>
-                        </tr>
-                        <tr>
-                            <td>공지</td>
-                            <td>Hellow World</td>
-                            <td>ingenie</td>
-                            <td>2021.08.01</td>
-                        </tr>
-                    </tbody>
-                </NoticeTable>
-                <Paging>
-                    <li>1</li>
-                    <li>2</li>
-                </Paging>
+                {!(newState || innerState) && <NoticeWrap>
+                    <NoticeTable>
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>작성일</th>
+                            </tr>                       
+                            {noticeList?.map((val:any,idx:number)=>{
+                                return(
+                                <tr className='notice_row' key={idx} onClick={()=>onClickNotice(idx)}>
+                                    <td>공지</td>
+                                    <td>{val.title}</td>
+                                    <td>{val.author}</td>
+                                    <td>{val.createdAt.substring(0,10)}</td>
+                                </tr>)
+                            })}
+                        </tbody>
+                    </NoticeTable>
+                    <Paging>
+                        <li>1</li>
+                        <li>2</li>
+                    </Paging>
+                    <div style={{height:'50px'}}>
+                        <button onClick={()=>setNewState(!newState)}>NewPost</button>
+                    </div> 
+                </NoticeWrap>
+                }             
+                {
+                    !newState && innerState && <NoticeInner>
+                        <NoticeTable>
+                            <tbody>
+                                <tr>
+                                    <td className='notice_sub'>제목</td>
+                                    <td className='notice_title'>{innerValue?.title}</td>                         
+                                </tr>
+                                <tr>
+                                    <td className='notice_sub'>제목</td>
+                                    <td className='notice_title'>{innerValue?.author}</td>                         
+                                </tr>
+                            </tbody>                        
+                        </NoticeTable>
+                        <div className='notice_view' dangerouslySetInnerHTML={{__html:innerValue?.content}}>                            
+                        </div>
+                        <div style={{display:'flex', justifyContent:'center'}}>
+                            <GoListBtn onClick={onClickMenuNoti}>목록</GoListBtn>
+                        </div>                        
+                    </NoticeInner>                    
+                }
+                {
+                    newState && !innerState && <NewPost des="notices"/>
+                }               
+
             </Container>            
             <Footer/>
         </div>

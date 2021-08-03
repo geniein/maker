@@ -14,8 +14,7 @@ const Card:FC<Props> = ({ id, thumbnail, title, hashTag, price }) => {
 
   const history = useHistory();
   const onClickCard = useCallback(
-      (id:number) => {
-          console.log('push')
+      (id:number) => {          
           history.push(`/detail/${id}`);
       },
       [],

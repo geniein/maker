@@ -10,7 +10,7 @@ const Main = () => {
         <div>
             <Header/>
             <TopMenu/>
-            <Carousel images={["/dist/images/castle.jpg","/dist/images/uyuni.jpg","/dist/images/cloud.jpg","/dist/images/new.jpg"]} stlyes={{width:'100%'}}/>
+            <Carousel images={["/dist/images/castle.jpg","/dist/images/uyuni.jpg","/dist/images/cloud.jpg","/dist/images/new.jpg"]} stlyes={{width:'100%', height:'500px'}}/>
             <Content/>
             <Footer/>
         </div>

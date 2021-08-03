@@ -1,11 +1,15 @@
 import axios from 'axios'
-import React, { MutableRefObject, useRef, useState } from 'react'
+import React, { MutableRefObject, useRef, useState, VFC } from 'react'
 import { useHistory } from 'react-router'
 import { CancelBtn, NewPostWrap, PostBtn } from './styles'
 import EditorComponent from './SubComponents/EditorComponent'
 import UploadFiles from './SubComponents/UploadFiles'
 
-const NewPost = () =>{
+interface Props{
+    des: string;//API DESTINATION
+}
+
+const NewPost:VFC<Props> = ({des}) =>{
     //temp
     const categoryList = [{value:1, text:"Notice"},{value:2, text:"Update"}]    
 
@@ -32,7 +36,7 @@ const NewPost = () =>{
                 const files = result;
                 console.log(result);
 
-                axios.post('/api/item-contents/newPost',{
+                axios.post(`/api/${des}/newPost`,{
                     title,
                     content,
                     category:'NOTICE',

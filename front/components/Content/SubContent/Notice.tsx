@@ -1,11 +1,28 @@
+import fetcher from '@utils/fetcher';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import useSWR from 'swr';
 import {NoticeCon, NoticeContent, NoticeSub, NoticeTip} from './styles';
 
 const Notice = ()=> {
+    const {data:noticeList} = useSWR(`/api/notices`,fetcher);
     return (
         <NoticeCon>
-            <NoticeSub>NOTICE</NoticeSub>
-            <NoticeContent>+ Maker 업그레이드 되었습니다.</NoticeContent>
+            <NoticeSub> <Link to='/customservice' style={{textDecoration:'none', color:'inherit'}}>NOTICE</Link></NoticeSub>
+            {noticeList?.map((val:any, idx:number)=>{
+                if(idx != 0) return null;
+                return <NoticeContent key={idx}>
+                    <Link to={{
+                        pathname: `/customservice`,
+                        state: {
+                            notice: idx                            
+                        }
+                    }} 
+                    style={{textDecoration:'none', color:'inherit'}}>
+                    + {val.title}
+                    </Link>
+                    </NoticeContent>
+            })}            
             <NoticeTip>Tip!</NoticeTip>
             <NoticeTip>노하우!</NoticeTip>            
         </NoticeCon>

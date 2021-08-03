@@ -19,11 +19,11 @@ const Carousel:FC<Props> = ({images , stlyes}) => {
       
     return (         
         <ImageSlide style={stlyes}>
-            <NavBox>
+            {/* <NavBox>
             <span>{currNo + 1}</span>
             <span>/</span>
             <span>{images && images.length}</span>            
-            </NavBox>
+            </NavBox> */}
             <SlideBox>
                 <SlideList style= {{                    
                         transform: `translate3d(
@@ -33,7 +33,14 @@ const Carousel:FC<Props> = ({images , stlyes}) => {
                         if(no === currNo){
                             return (<SlideContent key={no}>
                             <picture>
-                                <img src={image} ></img>
+                                <img src={image} style={stlyes}></img>
+                                <div className='circle_wrap'>
+                                    {images?.map((image, no)=>{
+                                        return(
+                                            <div className='circle' key={no} onClick={()=>onChangeImage(no)}></div>                                    
+                                        )
+                                    })}                                    
+                                </div>
                             </picture>
                             </SlideContent>)
                         }                        
@@ -42,9 +49,9 @@ const Carousel:FC<Props> = ({images , stlyes}) => {
                 <ButtonPrev onClick={() => onChangeImage(currNo-1)}>
                         <FaIcons.FaChevronLeft/>
                     </ButtonPrev>
-                    <ButtonNext onClick={() => onChangeImage(currNo + 1)}>
-                        <FaIcons.FaChevronRight/>
-                    </ButtonNext>
+                <ButtonNext onClick={() => onChangeImage(currNo + 1)}>
+                    <FaIcons.FaChevronRight/>
+                </ButtonNext>
             </SlideBox>
         </ImageSlide>
     )
