@@ -19,10 +19,17 @@ export class ItemReviewsController {
     const result = this.itemReviewsService.findItemReviews();
     return result || false;
   }
-  @ApiOperation({ summary: '리뷰 가져오기' })
-  @Get(':id')
-  async findItemReview(@Param('id') id: string) {
-    const result = this.itemReviewsService.findItemReviews(id);
+  // @ApiOperation({ summary: '리뷰 가져오기' })
+  // @Get(':id')
+  // async findItemReview(@Param('id') id: string) {
+  //   const result = this.itemReviewsService.findItemReviews(id);
+  //   return result || false;
+  // }
+
+  @ApiOperation({ summary: '관련 리뷰 리스트 가져오기' })
+  @Get(':ck')
+  async findItemReviewsByCK(@Param('ck') ck: string) {
+    const result = this.itemReviewsService.findItemReviews(ck);
     return result || false;
   }
   

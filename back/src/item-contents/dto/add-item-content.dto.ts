@@ -25,6 +25,13 @@ export class AddItemContentDto {
     description: '가격',
   })
   public price: number;
+  
+  @IsNumber()
+  @ApiProperty({
+    example: '50',
+    description: '할인률',
+  })
+  public discount: number;
 
   @IsString()
   @ApiProperty({

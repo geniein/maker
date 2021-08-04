@@ -30,7 +30,7 @@ export class ItemContentsService {
     return result;
   }
 
-  async addItemContent(category:string, title:string, price:number, hashTag:string, content:string, author:string, srcPath:string, thumbnail:string){
+  async addItemContent(category:string, title:string, price:number, hashTag:string, content:string, author:string, srcPath:string, thumbnail:string, discount:number){
     const plain = author + new Date().getTime().toString();
     const uk = await bcrypt.hash(plain, 12);
     const result = await this.itemcontentsRepository.save({
@@ -42,7 +42,8 @@ export class ItemContentsService {
       content,
       author,
       srcPath,
-      thumbnail      
+      thumbnail,
+      discount      
     });
     return result;    
   }

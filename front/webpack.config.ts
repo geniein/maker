@@ -79,6 +79,10 @@ const config: webpack.Configuration = {
         target: 'http://localhost:3055',
         changeOrigin: true,
       },
+      '/public/':{
+        target: 'http://localhost:3055',
+        changeOrigin: true,
+      }
     },
   },  
 };

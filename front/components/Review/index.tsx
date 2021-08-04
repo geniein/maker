@@ -1,7 +1,19 @@
 import { Paging, ReviewWrap, TableWrap } from './styles'
-import React from 'react'
+import React, { FC, useEffect, useState } from 'react'
+import axios from 'axios'
 
-const Review = () =>{
+interface Props{
+    ck: string
+}
+
+const Review:FC<Props> = ({ck}) =>{
+    const [reviewList, setReviewList] = useState<any>(undefined);
+    useEffect(()=>{
+        axios.get(`/api/item-reviews/${ck}`).then((res)=>{
+            console.log(res.data);
+            setReviewList(res.data);
+        })
+    },[])
     return (
         <ReviewWrap>
             Review
@@ -14,13 +26,17 @@ const Review = () =>{
                         <th>평점</th>
                         <th>작성일</th>
                     </tr>
-                    <tr>
-                        <th>후기</th>
-                        <th>새로운 세상</th>
-                        <th>뉴월드</th>
-                        <th>5/5</th>
-                        <th>2021.07.28</th>
-                    </tr>
+                    {reviewList?.map((val:any,idx:number)=>{
+                        return(
+                        <tr key={idx} className='review_row'>
+                            <th>{val.category}</th>
+                            <th>{val.title}</th>
+                            <th>{val.author}</th>
+                            <th>rating</th>
+                            <th>{val.createdAt.substring(0,10)}</th>                            
+                        </tr>
+                        )
+                    })}                   
                 </tbody>
             </TableWrap>
             <Paging>

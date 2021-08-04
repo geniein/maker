@@ -44,7 +44,8 @@ export class ItemContentsController {
       data.content,
       data.author,
       data.srcPath,
-      data.thumbnail
+      data.thumbnail,
+      data.discount
     );
 
     if (result) {
@@ -62,10 +63,9 @@ export class ItemContentsController {
   @Post('files')
   async addItemContentFileUpload(@UploadedFile() file: Express.Multer.File) {
     // const itemcontent = this.itemContentsService.findByUk(data.)
-    const result =true;
-    console.log(file);
+    const result = file && `/${file.destination}/${file.originalname}`
     if (result) {
-      return 'ok';
+      return result;
     } else {
       throw new ForbiddenException();
     }    

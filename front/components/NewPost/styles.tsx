@@ -31,3 +31,17 @@ export const CancelBtn = styled.div`
     justify-content: center;
     align-items: center;
 `;
+
+export const ItemContentWrap = styled.table`
+    width:100%;
+    margin-bottom: 10px;
+    tr{
+        width:100%;
+    }
+    th{
+        width:20%;
+    }
+    td{
+        width:30%;
+    }
+`;

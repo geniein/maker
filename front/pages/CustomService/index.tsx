@@ -13,6 +13,7 @@ const CustomService = () => {
     const [newState, setNewState] = useState(false);
     const [innerState, setInnerState] = useState(false);
     const [innerValue, setInnerValue] = useState<any>(undefined);
+    const [currPage, setCurrPage] =useState(0);
     
     const location = useLocation<any>(); //location    
     
@@ -68,6 +69,7 @@ const CustomService = () => {
                                 <th>작성일</th>
                             </tr>                       
                             {noticeList?.map((val:any,idx:number)=>{
+                                if(idx >= currPage*10 && idx < (currPage+1)*10)
                                 return(
                                 <tr className='notice_row' key={idx} onClick={()=>onClickNotice(idx)}>
                                     <td>공지</td>
@@ -79,8 +81,12 @@ const CustomService = () => {
                         </tbody>
                     </NoticeTable>
                     <Paging>
-                        <li>1</li>
-                        <li>2</li>
+                        <li>&lt;</li>
+                        {noticeList && [...Array(Math.ceil(noticeList.length/10))].map((val:any,idx:number)=>{
+                            console.log(val);
+                            return <li key={idx} onClick={()=>setCurrPage(idx)}>{idx+1}</li> 
+                        })}                                               
+                        <li>&gt;</li>
                     </Paging>
                     <div style={{height:'50px'}}>
                         <button onClick={()=>setNewState(!newState)}>NewPost</button>

@@ -10,10 +10,10 @@ export class ItemReviewsService {
   constructor(
     @InjectRepository(ItemReviews) private itemreviewsRepository: Repository<ItemReviews>,
   ){}
-  async findItemReviews(id?){    
-    const result = id === undefined ?
+  async findItemReviews(ck?){    
+    const result = ck === undefined ?
       await this.itemreviewsRepository.find() :
-      await this.itemreviewsRepository.find({where:{uk:id}}); 
+      await this.itemreviewsRepository.find({where:{contentKey:ck}}); 
     // const result =await this.itemcontentsRepository.find({where:{id:id}});
     return result;
   }

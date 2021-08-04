@@ -6,7 +6,7 @@ import fetcher from '@utils/fetcher'
 import React, { FC } from 'react'
 import { useHistory, useParams } from 'react-router'
 import useSWR from 'swr'
-import { DetailTop } from './styles'
+import { DetailBtnWrap, DetailTop } from './styles'
 
 interface Props{
     user:string;
@@ -19,7 +19,7 @@ const Detail:FC<Props> = () => {
     
     if(data ===undefined) return(<div>Processing</div>); //data loading...
     
-    const {category, title, content, hashTag, price,srcPath, thumbnail} = data[0];
+    const {category, title, content, hashTag, price,srcPath, thumbnail, uk} = data[0];
 
     return (
         <div>
@@ -65,12 +65,14 @@ const Detail:FC<Props> = () => {
                             </ul>
                         </div>
                         <p className='detail_price'>20,000</p>
-                        <div className='detail_btn'>Order</div>
-                        <div className='detail_btn'>Cancel</div>                                                
+                        <DetailBtnWrap>
+                            <div className='detail_btn'>Order</div>
+                            <div className='detail_btn'>Cancel</div>                                                
+                        </DetailBtnWrap>
                     </div>
                 </form>
             </DetailTop> 
-            <Review/>                      
+            <Review ck={uk}/>                      
             <Footer/>
         </div>
     )

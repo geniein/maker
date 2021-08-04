@@ -1,15 +1,23 @@
 import styled from '@emotion/styled';
 
 export const DetailTop = styled.div`
-    display: inline-block;
-    width: 1200px;
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
     margin-top: 70px;
 
-    .detail_src{
-        position: relative;
-        width: 644px;
-        height: 362px;
-        display: inline-flex;        
+    .detail_src{        
+        width:50%;
+        // height: 362px;
+        display: inline-flex;
+        justify-content:center;
+        align-items:center; 
+        text-align:center;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }       
     }
     .detail_src_close{
         width: 20px;
@@ -23,7 +31,7 @@ export const DetailTop = styled.div`
         cursor: pointer;
     }
     .detail_info{
-        width: 495px;
+        width: 40%;
         height: auto;
         float: right;
         text-align: left;
@@ -103,11 +111,21 @@ export const DetailTop = styled.div`
         font-size: 13px;
         height: 32px;
         line-height: 32px;
-    }
-    .detail_btn{
-        cursor: pointer;
-        float: left;
-        margin: 5px 4px 5px 0px;
-        height: 45px;
-    }
+    }    
+    `;
+
+    export const DetailBtnWrap = styled.div`
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        .detail_btn{
+            display: inline-flex;
+            justify-content:center;
+            align-items: center;
+            cursor: pointer;            
+            margin: 5px 4px 5px 0px;
+            width: 200px;
+            height: 45px;
+            border: solid;        
+        }
     `;

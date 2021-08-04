@@ -29,6 +29,9 @@ import {
     @Column('int', { name: 'price'})
     price: number;
 
+    @Column('int', { name: 'discount'})
+    discount: number;
+
     @Column('varchar', { name: 'hashTag', length: 100 })
     hashTag: string;
 

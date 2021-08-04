@@ -13,7 +13,7 @@ export const multerOptions = {
 
   storage: diskStorage({
     destination: (request, file, callback) => {
-      const uploadPath: string = 'dist/public';
+      const uploadPath: string = 'public';
 
       if (!existsSync(uploadPath)) {        
         mkdirSync(uploadPath);
@@ -21,8 +21,8 @@ export const multerOptions = {
       callback(null, uploadPath);
     },
 
-    filename: (request, file, callback) => {
-      callback(null, 'test');
+    filename: (request, file, callback) => {      
+      callback(null, file.originalname);
     }
   })
 }

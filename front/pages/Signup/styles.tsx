@@ -118,7 +118,7 @@ export const BtnWrap = styled.div`
         cursor: pointer;
         border-radius: 5px;
         background-color: #42a70a;
-        background-image: url(/dist/images/logo/logo_naver.png);
+        background-image: url(/public/logo/logo_naver.png);
         background-repeat: no-repeat;
         background-position: 10px center;
     }
@@ -131,7 +131,7 @@ export const BtnWrap = styled.div`
         cursor: pointer;
         border-radius: 5px;
         background-color: #f5dc00;
-        background-image: url(/dist/images/logo/logo_kakao.png);
+        background-image: url(/public/logo/logo_kakao.png);
         background-repeat: no-repeat;
         background-position: 10px center;
     }

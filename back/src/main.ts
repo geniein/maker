@@ -17,7 +17,6 @@ async function bootstrap() {
     origin: true,
     credentials: true,
   });
-
   app.useStaticAssets(
     process.env.NODE_ENV === 'production'
       ? path.join(__dirname, '..', '..', 'uploads')
@@ -31,7 +30,7 @@ async function bootstrap() {
       ? path.join(__dirname, '..', '..', 'public')
       : path.join(__dirname, '..', 'public'),
     {
-      prefix: '/dist',
+      prefix: '/public',
     },
   );
 

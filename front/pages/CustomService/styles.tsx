@@ -114,6 +114,7 @@ export const Paging = styled.ul`
         height: 20px !important;
         text-align: center !important;
         line-height: 20px !important;
+        cursor:pointer;
     }
 `;
 

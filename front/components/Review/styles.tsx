@@ -32,6 +32,12 @@ export const TableWrap = styled.table`
         font-weight: 600;
         color: #626262;
     }
+    .review_row{
+        cursor: pointer;
+    }
+    .review_row:hover{
+        background-color: #FFF0F5;
+    }        
     `;
 
 export const Paging = styled.ul`
@@ -56,3 +62,5 @@ export const ReviewComent = styled.div`
     padding: 20px;
     text-align: left;
 `;
+
+export const ReviewListWarp = styled.div``;
