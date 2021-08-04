@@ -19,23 +19,25 @@ const Detail:FC<Props> = () => {
     
     if(data ===undefined) return(<div>Processing</div>); //data loading...
     
-    const {category, title, content, hashTag, price,srcPath, thumbnail, uk} = data[0];
+    const {category, title, content, hashTag, price,srcPath, thumbnail, uk, discount} = data[0];
 
     return (
         <div>
             <Header/>
             <TopMenu/> 
-            <DetailTop>
-                <form>
+            <DetailTop>                
                     <div className='detail_src'>
                         <img src={thumbnail} />
                     </div>
+                    <div style={{width:'5%'}}>
+
+                    </div>
                     <div className='detail_info'>
-                        <p className='detail_title'>{title}</p> {/* First Time w Maker */}
-                        <p className='detail_sub_price'>
-                            {price * 0.5}
+                        <div className='detail_title'>{title}</div> {/* First Time w Maker */}
+                        <div className='detail_sub_price'>
+                            {discount === 0 ? price : price * (discount*0.01)}
                             <span className='discount_line'>{price}</span>
-                        </p>
+                        </div>
                             <p className='detail_tag'>{hashTag}</p>
                         {/* # Share the whole new wolrd Experience w us */}
                         <div>
@@ -59,18 +61,17 @@ const Detail:FC<Props> = () => {
                                     <select className='detail_sub_select'>
                                         <option value='0'>Crazy Box</option>
                                         <option value='1'>Special Options</option>
-                                    </select>
-                                    <p className='detail_sub_info'>[Watch out] Careful yourself</p>
-                                </li>
+                                    </select>                                    
+                                </li>                                
                             </ul>
                         </div>
+                        <p className='detail_sub_info'>[Watch out] Careful yourself</p>
                         <p className='detail_price'>20,000</p>
                         <DetailBtnWrap>
                             <div className='detail_btn'>Order</div>
                             <div className='detail_btn'>Cancel</div>                                                
                         </DetailBtnWrap>
-                    </div>
-                </form>
+                    </div>                
             </DetailTop> 
             <Review ck={uk}/>                      
             <Footer/>

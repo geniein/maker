@@ -21,8 +21,11 @@ export const CSMenu = styled.div`
     height: 70px;
     margin-bottom: 20px;
     ul{
+        display:inline-flex;
+        justify-content:center;
+        flex-direction:row;
         text-align: center;
-        width: 750px;
+        width: 100%;
         margin: 0 auto;
         list-style: none;
     }
@@ -42,7 +45,7 @@ export const CSMenu = styled.div`
 `;    
 
 export const Container = styled.div`
-    width: 1200px;
+    width: 80%;
     margin: 0 auto;
     .title {
         text-align: left;
@@ -50,7 +53,7 @@ export const Container = styled.div`
         color: #525252;
         margin-bottom: 30px;
         font-weight: bold;
-        width: 1200px;
+        width: 100%;
         margin: 30px auto;
         span{
             font-size: 12px;
@@ -64,7 +67,7 @@ export const Container = styled.div`
 export const NoticeWrap = styled.div`
 `;
 export const NoticeTable = styled.table`
-    width: 1200px;
+    width: 100%;
     margin-bottom: 50px;
     border-spacing: 0px;
     margin: 0 auto;
@@ -131,7 +134,7 @@ export const NoticeInner = styled.div`
     .notice_view{
         padding: 15px 0px;
         border-bottom: 1px solid #dadada;
-        width: 1200px;
+        width: 100%;
         margin: 0 auto;
     }
 `;

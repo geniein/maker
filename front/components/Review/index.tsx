@@ -8,6 +8,7 @@ interface Props{
 
 const Review:FC<Props> = ({ck}) =>{
     const [reviewList, setReviewList] = useState<any>(undefined);
+    const [currPage,setCurrPage] =useState(0);
     useEffect(()=>{
         axios.get(`/api/item-reviews/${ck}`).then((res)=>{
             console.log(res.data);
@@ -27,7 +28,7 @@ const Review:FC<Props> = ({ck}) =>{
                         <th>작성일</th>
                     </tr>
                     {reviewList?.map((val:any,idx:number)=>{
-                        return(
+                        if(idx >= currPage*5 && idx < (currPage+1)*5) return(
                         <tr key={idx} className='review_row'>
                             <th>{val.category}</th>
                             <th>{val.title}</th>
@@ -40,8 +41,11 @@ const Review:FC<Props> = ({ck}) =>{
                 </tbody>
             </TableWrap>
             <Paging>
-                <li>1</li>
-                <li>2</li>
+                <li>&lt;</li>
+                {reviewList && [...Array(Math.ceil(reviewList.length/5))].map((val:any,idx:number)=>{                    
+                    return <li key={idx} onClick={()=>setCurrPage(idx)}>{idx+1}</li> 
+                })}                                               
+                <li>&gt;</li>
             </Paging>
         </ReviewWrap>
     )

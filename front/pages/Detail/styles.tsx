@@ -1,18 +1,18 @@
 import styled from '@emotion/styled';
 
 export const DetailTop = styled.div`
-    display: inline-flex;
-    justify-content: center;
+    display: flex;
+    justify-content: center;    
     width: 100%;
     margin-top: 70px;
 
     .detail_src{        
-        width:50%;
-        // height: 362px;
+        width:35%;        
         display: inline-flex;
         justify-content:center;
         align-items:center; 
         text-align:center;
+        margin-left:20px;
         img{
             width: 100%;
             height: 100%;
@@ -31,19 +31,20 @@ export const DetailTop = styled.div`
         cursor: pointer;
     }
     .detail_info{
-        width: 40%;
-        height: auto;
-        float: right;
+        display: inline-flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-right:20px; 
+        width: 25%;
+        height: auto;        
         text-align: left;
     }
     .detail_title {
         font-size: 20px; 
-        color: #383838;
-        display: inline-block;
+        color: #383838;        
         margin-bottom: 10px;
     }
-    .detail_share {
-        display: inline-block;
+    .detail_share {        
         float: right;
     }
     .detail_sub_price{
@@ -59,7 +60,7 @@ export const DetailTop = styled.div`
         margin-bottom: 10px;
     }
     .detail_options{
-        list-style: none;
+        list-style: none;        
         padding: 10px 0px 0;
         border-top: 1px solid #ccc;
         text-align: left;
@@ -67,23 +68,24 @@ export const DetailTop = styled.div`
         margin-top: 10px;
         
         li{
+            display: inline-flex;
+            justify-content: flex-start;
+            flex-direction:row;
             text-align: left;
             margin-top: 10px;
         }
     }
-    .detail_sub_title{
-        display: inline-block;
+    .detail_sub_title{    
         width: 100px;
         height: 35px;
         line-height: 35px;
         background: #ffffff;
-        color: #525252;
-        text-align: center;
+        color: #525252;        
         border-radius: 5px;
     }
     .detail_sub_select{
         border-radius: 3px;
-        width: 380px;
+        width: 280px;
         height: 40px;
         border: 1px solid #ccc;
         font-family: inherit;

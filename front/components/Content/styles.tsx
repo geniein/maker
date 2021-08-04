@@ -36,6 +36,7 @@ export const Ptag = styled.li`
 export const CardList = styled.div`
     display: flex;
     align-items: center;
+    flex-wrap:wrap;
     width: 100%;
     padding: 20px;
     overflow-x: auto; // 👈 중요

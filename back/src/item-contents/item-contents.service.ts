@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import bcrypt from 'bcrypt';
 import { ItemContents } from 'src/entities/ItemContents';
+import uuidRandom from 'src/utils/uuidRandom';
 import { Repository } from 'typeorm';
 import { UpdateItemContentDto } from './dto/update-item-content.dto';
 
@@ -30,9 +31,8 @@ export class ItemContentsService {
     return result;
   }
 
-  async addItemContent(category:string, title:string, price:number, hashTag:string, content:string, author:string, srcPath:string, thumbnail:string, discount:number){
-    const plain = author + new Date().getTime().toString();
-    const uk = await bcrypt.hash(plain, 12);
+  async addItemContent(category:string, title:string, price:number, hashTag:string, content:string, author:string, srcPath:string, thumbnail:string, discount:number){    
+    const uk = uuidRandom();
     const result = await this.itemcontentsRepository.save({
       uk,
       category,

@@ -35,17 +35,13 @@ const EditorComponent:FC<Props> = ({value, onChange}) =>{
          {/* <div style={{ display: 'flex', justifyContent:'center'}}>            
              <div style={{height: "800px"}}>                 */}
                 <ReactQuill 
-                    style={{height: "600px"}} 
+                    style={{height: "600px", marginBottom:'20px'}} 
                     theme="snow" 
                     modules={toolbar} 
                     formats={quillFormat}
                     value={value || ''}
                     onChange={(content, delta, source, editor) => onChange(editor.getHTML())}                      
-                    />
-                    <div style={{display: 'flex', justifyContent: 'center'}}>                    
-                </div>
-        {/* </div>
-         </div> */}
+                    />                          
         </div>
     )
 }
