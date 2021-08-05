@@ -68,7 +68,7 @@ const Detail:FC<Props> = () => {
                         <p className='detail_sub_info'>[Watch out] Careful yourself</p>
                         <p className='detail_price'>20,000</p>
                         <DetailBtnWrap>
-                            <div className='detail_btn'>Order</div>
+                            <div className='detail_btn' onClick={()=>history.push('/order')}>Order</div>
                             <div className='detail_btn'>Cancel</div>                                                
                         </DetailBtnWrap>
                     </div>                
