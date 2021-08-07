@@ -7,6 +7,7 @@ import Detail from '@pages/Detail';
 import AddContent from '@pages/AddContent';
 import CustomService from '@pages/CustomService';
 import Order from '@pages/Order';
+import Cart from '@pages/Cart';
 
 declare global{
   interface Window{
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/addcontent" component={AddContent} />
           <Route path="/customservice" component={CustomService} />
           <Route path="/order" component={Order} />
+          <Route path="/user/cart" component={Cart} />
         </Switch>
       </div>
     );

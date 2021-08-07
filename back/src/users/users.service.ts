@@ -34,4 +34,18 @@ export class UsersService {
     });
     return true;
   }
+
+  async addCart(email:string, userName:string, cart:string){
+    const cartList = this.usersRepository.findOne({
+      where: { email },
+      select: ['cartList'],
+    });
+    const cartCount = (await cartList).cartList.split(',').length;
+    console.log(`cartCount : ${cartCount}`);
+    if(cartCount > 10){
+      return false;
+    }else{      
+    }
+
+  }
 }

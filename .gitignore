@@ -38,7 +38,8 @@ web_modules/
 .next
 out
 .nuxt
-dist
+front/dist/*.js*
+front/dist/report.html
 .cache/
 .vuepress/dist
 .serverless/

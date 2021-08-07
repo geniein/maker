@@ -17,6 +17,7 @@ import { AuthModule } from './auth/auth.module';
 import { ItemContentsModule } from './item-contents/item-contents.module';
 import { ItemReviewsModule } from './item-reviews/item-reviews.module';
 import { NoticesModule } from './notices/notices.module';
+import { ItemCartsModule } from './item-carts/item-carts.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { NoticesModule } from './notices/notices.module';
     AuthModule,
     ItemContentsModule,
     ItemReviewsModule,
-    NoticesModule
+    NoticesModule,
+    ItemCartsModule
   ],
   controllers: [AppController],
   providers: [AppService],

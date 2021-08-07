@@ -26,7 +26,7 @@ const TopMenu = () => {
                                <p>부분보기</p>
                            </li>
                            <li>
-                               <img src='/dist/images/logo.gif'/>
+                               <img src='/public/logo.gif'/>
                            </li>
                        </ul>
                    </TopMenuLi>
@@ -42,7 +42,7 @@ const TopMenu = () => {
                                <p>부분보기</p>
                            </li>
                            <li>
-                               <img src='/dist/images/logo.gif'/>
+                               <img src='/public/logo.gif'/>
                            </li>
                        </ul>
                    </TopMenuLi>

@@ -73,13 +73,13 @@ const Login = () => {
                         <p className='login_title'>SNS계정로그인</p>                        
                         <div className='sns_box naver'>
                             <span>
-                                <img src='/dist/images/logo/logo_naver.png'/>
+                                <img src='/public/logo/logo_naver.png'/>
                             </span>
                             네이버 로그인
                         </div>
                         <div className='sns_box kakao'>
                             <span>
-                                <img src='/dist/images/logo/logo_kakao.png'/>
+                                <img src='/public/logo/logo_kakao.png'/>
                             </span>
                             카카오 로그인
                         </div>

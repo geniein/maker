@@ -5,10 +5,10 @@ services: #
         container_name: mysql-maker
         ports:
             - "3306:3306"
-        environment: :
+        environment:
             MYSQL_ROOT_PASSWORD: "password"
         command:
             - --character-set-server=utf8mb4
             - --collation-server=utf8mb4_unicode_ci
         volumes:
-            - /home/
+            - /Users/ingenie/docker/db:/var/lib/mysql

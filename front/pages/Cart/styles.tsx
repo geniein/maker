@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
-export const OrderInfoWrap = styled.div`
+
+
+export const CartWrap = styled.div`
     display: inline-flex;
     flex-flow: column wrap;
     width: 90%;
@@ -10,17 +12,10 @@ export const OrderInfoWrap = styled.div`
         color: #525252;
         margin: 30px 0px 10px 20px;        
         font-weight: bold;
-        width: 100%;        
-        span{
-            font-size: 12px;
-            margin-left: 10px;
-            border-left: 1px solid #ccc;
-            padding: 0px 10px;
-            color: #b9b9b9;
-        }
-    }   
+        width: 100%;               
+    }     
 `;
-export const OrderTable = styled.table`
+export const CartTable = styled.table`
     width: 100%;    
     border-spacing: 0px;
     margin: 0 auto;
@@ -46,20 +41,20 @@ export const OrderTable = styled.table`
         font-size: 15px;
         color: #565656;     
         img{
-            width: 100%;         
+            width: 100%;           
             object-fit: contain;
         }   
     }
-    .order_src{        
+    .cart_src{        
         padding: 25px 0px 25px 20px;
         width:30%        
     }
-    .order_title{
+    .cart_title{
         text-align:center;
         width:30%
         padding: 25px 0px;
     }
-    .order_options{        
+    .cart_options{        
         width:40%
         padding: 25px 0px;
     }
@@ -93,24 +88,6 @@ export const OrderTable = styled.table`
     }
 `;
 
-export const PaySelector = styled.div`
-    width:100%
-    ul{
-        width: 100%;
-        position: relative;        
-    }
-    li{
-        display: block;
-        float: left;
-        margin-right: 9px;
-        padding: 0 0 0 2px;
-        font-size: 12px;
-        line-height: 39px;
-        letter-spacing: -1px;
-    }
-    
-`;
-
 export const PayBtn = styled.div`
     color: #fff;
     cursor: pointer;
@@ -118,6 +95,20 @@ export const PayBtn = styled.div`
     margin: 50px 20px 30px 20px;
     border: 0px;
     width: 250px;
+    height: 60px;            
+    border-radius: 2px;
+    display: inline-flex;
+    justify-content: center;    
+    align-items: center;
+`;
+
+export const RemoveBtn = styled.div`
+    color: #fff;
+    cursor: pointer;
+    background: pink;
+    margin: 50px 20px 30px 20px;
+    border: 0px;
+    width: 50%;
     height: 60px;            
     border-radius: 2px;
     display: inline-flex;

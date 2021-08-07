@@ -41,13 +41,13 @@ const Footer = () => {
                 <li className='footer_top_c'>
                     <ul className='sns_wrap'>
                         <li>
-                            <img src='/dist/images/footer/sns_f.png'/>
+                            <img src='/public/footer/sns_f.png'/>
                         </li>
                         <li>
-                            <img src='/dist/images/footer/sns_i.png'/>
+                            <img src='/public/footer/sns_i.png'/>
                         </li>
                         <li>
-                            <img src='/dist/images/footer/sns_b.png'/>
+                            <img src='/public/footer/sns_b.png'/>
                         </li>
                     </ul>
                     <ul className='btn_wrap'>

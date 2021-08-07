@@ -103,11 +103,11 @@ const Order:FC<Props> = ({contentId, options}) => {
                             </td>
                         </tr>
                     </tbody>
-                </OrderTable>
-                <div style={{width:'100%', display: 'inline-flex', justifyContent: 'center'}}>
-                    <PayBtn>Pay</PayBtn>
-                </div>
+                </OrderTable>              
             </OrderInfoWrap> 
+            <div style={{width:'100%', display: 'inline-flex', justifyContent: 'center'}}>
+                    <PayBtn>Pay</PayBtn>
+            </div>
             <Footer/>
         </div>
     )

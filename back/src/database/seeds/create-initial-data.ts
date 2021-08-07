@@ -20,7 +20,7 @@ export class CreateInitialData implements Seeder {
             hashTag:'#HelloWorld',
             content:'신세계에 오신걸 환영합니다.',
             author:'ingenie',
-            srcPath:'/dist/images/resource/',
+            srcPath:'/public/resource/',
             thumbnail:'/public/castle.jpg',
             discount: 50
             },
@@ -32,7 +32,7 @@ export class CreateInitialData implements Seeder {
             hashTag:'#UYUNI DESERT',
             content:'신세계에 오신걸 환영합니다.',
             author:'ingenie',
-            srcPath:'/dist/images/resource/',
+            srcPath:'/public/resource/',
             thumbnail:'/public/uyuni.jpg',
             discount: 40
             },
@@ -44,7 +44,7 @@ export class CreateInitialData implements Seeder {
             hashTag:'#AWESOME CLOUD',
             content:'신세계에 오신걸 환영합니다.',
             author:'ingenie',
-            srcPath:'/dist/images/resource/',
+            srcPath:'/public/resource/',
             thumbnail:'/public/cloud.jpg',
             discount: 20
             },
@@ -56,7 +56,7 @@ export class CreateInitialData implements Seeder {
             hashTag:'#BRAND NEW',
             content:'신세계에 오신걸 환영합니다.',
             author:'ingenie',
-            srcPath:'/dist/images/resource/',
+            srcPath:'/public/resource/',
             thumbnail:'/public/new.jpg',
             discount: 10
             }

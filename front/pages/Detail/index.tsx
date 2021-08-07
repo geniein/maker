@@ -3,6 +3,7 @@ import Header from '@components/Header'
 import Review from '@components/Review'
 import TopMenu from '@components/TopMenu'
 import fetcher from '@utils/fetcher'
+import axios from 'axios'
 import React, { FC } from 'react'
 import { useHistory, useParams } from 'react-router'
 import useSWR from 'swr'
@@ -21,6 +22,19 @@ const Detail:FC<Props> = () => {
     
     const {category, title, content, hashTag, price,srcPath, thumbnail, uk, discount} = data[0];
 
+    const onClickAddCart = () =>{
+        axios.post('/api/item-carts/addItemCart',{
+            ...data[0],
+            userId:'ingenie',
+            itemCount: 1,
+            options:"optipns",
+            contentId:uk
+        }).then((res)=>{
+            if(res.data) alert('추가되었습니다.');
+        }).catch((err)=>{
+            console.log(err);
+        });
+    }
     return (
         <div>
             <Header/>
@@ -69,7 +83,7 @@ const Detail:FC<Props> = () => {
                         <p className='detail_price'>20,000</p>
                         <DetailBtnWrap>
                             <div className='detail_btn' onClick={()=>history.push('/order',{contentId: uk})}>Order</div>
-                            <div className='detail_btn'>Cancel</div>                                                
+                            <div className='detail_btn' onClick={onClickAddCart}>Add Cart</div>                                                
                         </DetailBtnWrap>
                     </div>                
             </DetailTop> 

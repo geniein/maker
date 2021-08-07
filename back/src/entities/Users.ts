@@ -37,6 +37,9 @@ import {
   
     @DeleteDateColumn()
     deletedAt: Date | null;
+
+    @Column('varchar', { name: 'cartList', length: 1000 })
+    cartList: string;
     
   }
   
