@@ -143,7 +143,7 @@ export const GoListBtn = styled.div`
     color: #fff;
     cursor: pointer;
     background: #eac684;
-    margin: 50px 20px 0px 20px;
+    margin: 50px 20px 30px 20px;
     border: 0px;
     width: 250px;
     height: 60px;            

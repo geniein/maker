@@ -3,16 +3,14 @@ import styled from '@emotion/styled';
 export const OrderInfoWrap = styled.div`
     display: inline-flex;
     flex-flow: column wrap;
-    width: 80%;
+    width: 90%;
     .title{
         text-align: left;
-        font-size: 17px;
+        font-size: 22px;
         color: #525252;
-        margin-bottom: 30px;
+        margin: 30px 0px 10px 20px;        
         font-weight: bold;
-        width: 100%;
-        margin: 30px auto;
-        border-bottom: 1px solid #cccc;
+        width: 100%;        
         span{
             font-size: 12px;
             margin-left: 10px;
@@ -22,13 +20,11 @@ export const OrderInfoWrap = styled.div`
         }
     }   
 `;
-
 export const OrderTable = styled.table`
-    width: 100%;
-    margin-bottom: 50px;
+    width: 100%;    
     border-spacing: 0px;
     margin: 0 auto;
-    border-top: 1px solid #cccc;
+    border-top: 1px solid #cccc;        
     tbody{
         display: table-row-group;
         vertical-align: middle;
@@ -46,16 +42,86 @@ export const OrderTable = styled.table`
         border-bottom: 1px solid #dadada;
     }
     td{
-        border-bottom: 1px solid #dadada;
+        border-bottom: 1px solid #dadada;        
+        font-size: 15px;
+        color: #565656;     
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }   
+    }
+    .order_src{        
+        padding: 25px 0px 25px 20px;
+        width:30%        
+    }
+    .order_title{
+        text-align:center;
+        width:30%
         padding: 25px 0px;
+    }
+    .order_options{        
+        width:40%
+        padding: 25px 0px;
+    }
+    .pay_title{
+        vertical-align: top;
+        text-align: right;
+        border-right: 1px solid #e4e4e4;
+        background: #f4f4f4;
+        width:15%;
+        font-weight:bold;
+        padding: 25px 15px 25px 0px;
+    }
+    .pay_info{
+        padding: 25px 0px 25px 15px;
+    }
+    .pay_type{
+        display:flex;
+        flex-direction:column;
+        padding: 0 15px;
+    }
+    .pay_content{
+        font-weight:bolder;
+        margin-top: -2px;
+        padding: 10px;
+        border: 2px solid #c5c7cd;
+        background-color: #f4f6fa;
+    }
+    .pay_desc{
+        padding: 10px 0;
+        font-size: 11px;
+    }
+`;
+
+export const PaySelector = styled.div`
+    width:100%
+    ul{
+        width: 100%;
+        position: relative;        
+    }
+    li{
+        display: block;
+        float: left;
+        margin-right: 9px;
+        padding: 0 0 0 2px;
         font-size: 12px;
-        color: #565656;
-        text-align: center;
+        line-height: 39px;
+        letter-spacing: -1px;
     }
-    .notice_row{
-        cursor: pointer;
-    }
-    .notice_row:hover{
-        background-color: #FFF0F5;
-    }        
+    
+`;
+
+export const PayBtn = styled.div`
+    color: #fff;
+    cursor: pointer;
+    background: #eac684;
+    margin: 50px 20px 30px 20px;
+    border: 0px;
+    width: 250px;
+    height: 60px;            
+    border-radius: 2px;
+    display: inline-flex;
+    justify-content: center;    
+    align-items: center;
 `;
