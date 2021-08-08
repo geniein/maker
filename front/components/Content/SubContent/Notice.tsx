@@ -22,9 +22,7 @@ const Notice = ()=> {
                     + {val.title}
                     </Link>
                     </NoticeContent>
-            })}            
-            <NoticeTip>Tip!</NoticeTip>
-            <NoticeTip>노하우!</NoticeTip>            
+            })}                        
         </NoticeCon>
     )
 }

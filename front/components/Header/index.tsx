@@ -4,10 +4,10 @@ import React, { useCallback, useState } from 'react'
 import { useHistory } from 'react-router';
 import useSWR from 'swr';
 import {Container, HeaderLogo} from './styles';
-import * as gi from 'react-icons/gi'
 import Modal from '@components/Modal';
 import { Link } from 'react-router-dom';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { Badge } from '@material-ui/core';
+import { ShoppingCart,Menu } from '@material-ui/icons';
 
 const Header = () => {
     const history = useHistory();
@@ -35,6 +35,13 @@ const Header = () => {
         setDisplay(!display);
     }
 
+    const onClickPage = (pagePath:string) =>{
+        history.push({
+            pathname:'/customservice',
+            state:{currPage:pagePath}
+        })
+    }
+
     return (        
         <Container>            
             <HeaderLogo src="/public/logo.gif" onClick={onClickLogo} style={{cursor:'pointer'}}/>
@@ -44,9 +51,17 @@ const Header = () => {
                 {!userData && <li onClick={onClickSignup}>회원가입</li>}
                 {userData && <li onClick={onClickLogOut}>로그아웃</li>}                
                 <li>쿠폰등록</li>                
-                <li><Link to={'/customservice'} style={{textDecoration:'none', color: 'inherit'}}>고객지원</Link></li>                
-                {userData && <li><AiOutlineShoppingCart onClick={()=>history.push('/user/cart')}/></li>}
-                <li><gi.GiHamburgerMenu onClick={onClickHamburger}></gi.GiHamburgerMenu></li>
+                <li onClick={()=>onClickPage('FAQ')}>
+                    {/* <Link to={'/customservice'} style={{textDecoration:'none', color: 'inherit'}}>고객지원</Link> */}
+                    고객지원
+                </li>                
+                {userData && <li>
+                    <Badge badgeContent={4} color="secondary">
+                        <ShoppingCart onClick={()=>history.push('/user/cart')}/>
+                    </Badge>
+                    </li>}
+                <li>
+                <Badge><Menu onClick={onClickHamburger}></Menu></Badge></li>
             </ul>
             <Modal isDisplay={display} setIsDisplay={setDisplay}></Modal>
         </Container>        

@@ -1,14 +1,15 @@
 
-import React, { CSSProperties, FC, useCallback, useState } from 'react'
-import * as FaIcons from 'react-icons/fa';
+import { ChevronLeft, ChevronRight } from '@material-ui/icons';
+import React, { CSSProperties, FC, useCallback, useEffect, useState } from 'react'
 import { ImageSlide, NavBox, SlideBox, SlideContent, SlideList, ButtonPrev, ButtonNext } from './styles';
 
 interface Props {
     images: string[];
     stlyes: CSSProperties;
+    autoplay?: boolean;
 }
 
-const Carousel:FC<Props> = ({images , stlyes}) => {
+const Carousel:FC<Props> = ({images , stlyes, autoplay}) => {
     const [currNo, setCurrNo] = useState(0);
     
     const onChangeImage = useCallback((index:any) => {        
@@ -17,6 +18,26 @@ const Carousel:FC<Props> = ({images , stlyes}) => {
         setCurrNo(index);
       },[currNo]);
       
+        
+    let carouselCount = 1;    
+    const autoPlay = setInterval(()=>{            
+            if(carouselCount>3){
+                carouselCount = 0;
+            }
+            let carousel = document.getElementById('radio'+carouselCount) as HTMLInputElement;
+            carousel.checked = true;
+            carouselCount++;        
+        },5000);    
+    
+
+     useEffect(() => {         
+         return () => {
+            clearInterval(autoPlay);
+         }
+     }, []);
+    
+    if(autoplay) autoPlay;
+
     return (         
         <ImageSlide style={stlyes}>
             {/* <NavBox>
@@ -24,33 +45,51 @@ const Carousel:FC<Props> = ({images , stlyes}) => {
             <span>/</span>
             <span>{images && images.length}</span>            
             </NavBox> */}
-            <SlideBox>
-                <SlideList style= {{                    
-                        transform: `translate3d(
-                          $1048px, 0px, 0px`,                      
-                }}>
-                    {images?.map((image, no) => {
-                        if(no === currNo){
-                            return (<SlideContent key={no}>
-                            <picture>
-                                <img src={image} style={stlyes}></img>
-                                <div className='circle_wrap'>
-                                    {images?.map((image, no)=>{
-                                        return(
-                                            <div className='circle' key={no} onClick={()=>onChangeImage(no)}></div>                                    
-                                        )
-                                    })}                                    
-                                </div>
-                            </picture>
-                            </SlideContent>)
-                        }                        
+            <SlideBox> 
+                {/* slider */}
+                <SlideList > 
+                    {/* slides */}
+                    {images?.map((image, idx) => {
+                        if(idx === 0){
+                            return (
+                                <input key={idx} type='radio' id={`radio${idx}`}  name='radio' style={{display:'none'}}/>
+                            )                                                        
+                        } else {
+                            return (
+                                <input key={idx} type='radio' id={`radio${idx}`}  name='radio' style={{display:'none'}}/>
+                            )                                                            
+                        }                       
+                    })}
+                    
+                    {images?.map((image, idx) => {
+                         if(idx === 0){
+                            return (                                                           
+                                <SlideContent key={idx} className='first'> 
+                                    <img src={image}></img>                                                                                               
+                                </SlideContent>
+                                )
+                            } else {
+                                return (<SlideContent key={idx}>                                                                    
+                                            <img src={image}></img>                                                                   
+                                    </SlideContent>)
+                            }                       
                     })}                    
+                    <div className='navigation-auto'>
+                    {images?.map((image, idx) => {
+                        return (<label key={idx} className={`auto-btn${idx}`}></label>)
+                    })}
+                    </div>                   
                 </SlideList>
+                <div className='navigation-manual'>
+                    {images?.map((image, idx) => {
+                        return (<label key={idx} htmlFor={`radio${idx}`} className='manual-btn'></label>)
+                    })}
+                </div>
                 <ButtonPrev onClick={() => onChangeImage(currNo-1)}>
-                        <FaIcons.FaChevronLeft/>
-                    </ButtonPrev>
+                        <ChevronLeft fontSize='large' />
+                </ButtonPrev>
                 <ButtonNext onClick={() => onChangeImage(currNo + 1)}>
-                    <FaIcons.FaChevronRight/>
+                    <ChevronRight fontSize='large'/>
                 </ButtonNext>
             </SlideBox>
         </ImageSlide>

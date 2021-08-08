@@ -88,8 +88,7 @@ export const DetailTop = styled.div`
         width: 280px;
         height: 40px;
         border: 1px solid #ccc;
-        font-family: inherit;
-        background: url(/img/arrow.png) no-repeat 95% 50%;
+        font-family: inherit;        
         background-size: 15px;
         -webkit-appearance: none;
         -moz-appearance: none;

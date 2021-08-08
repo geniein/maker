@@ -27,9 +27,9 @@ export class ItemReviewsController {
   // }
 
   @ApiOperation({ summary: '관련 리뷰 리스트 가져오기' })
-  @Get(':ck')
-  async findItemReviewsByCK(@Param('ck') ck: string) {
-    const result = this.itemReviewsService.findItemReviews(ck);
+  @Get(':ci')
+  async findItemReviewsByCK(@Param('ci') ci: string) {
+    const result = this.itemReviewsService.findItemReviews(ci);
     return result || false;
   }
   

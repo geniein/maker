@@ -42,14 +42,19 @@ export const NoticeTip = styled.li`
 
 export const SubTitleCon = styled.ul`
     list-style: none;
-    width: 100%;    
+    width: 100%;
+    height:160px;    
+    padding: 40px 0px;
     text-align: center;
+    display:flex;
+    justify-content:center;
     margin: 1px auto;    
     `;
 
 export const SubTitleList = styled.p`
     font-size: 22px;
-    padding: 60px 0px 70px 0px;
+    width:100%;            
     color: #5d5d5d;
     font-family: 'noto_b';
+    align: center;
     `;

@@ -59,8 +59,7 @@ const Cart = () =>{
                         </tbody>
                     </CartTable>
                 }
-                {!cartList && <div>
-                    No Items in the cart</div>}
+                {!cartList && <div>Processing</div>}
                 <div style={{display:'inline-flex'}}>
                     <div className='title' >Total Amount </div>                                             
                     <div className='title' style={{textAlign:'right'}}>{cartList?.reduce((a:any,b:any)=> a + b.price,0)}</div>

@@ -30,7 +30,7 @@ const Detail:FC<Props> = () => {
             options:"optipns",
             contentId:uk
         }).then((res)=>{
-            if(res.data) alert('추가되었습니다.');
+            if(res.data) alert('Item added in the cart.');
         }).catch((err)=>{
             console.log(err);
         });
@@ -80,7 +80,7 @@ const Detail:FC<Props> = () => {
                             </ul>
                         </div>
                         <p className='detail_sub_info'>[Watch out] Careful yourself</p>
-                        <p className='detail_price'>20,000</p>
+                        <p className='detail_price'>{discount === 0 ? price : price * (discount*0.01)}</p>
                         <DetailBtnWrap>
                             <div className='detail_btn' onClick={()=>history.push('/order',{contentId: uk})}>Order</div>
                             <div className='detail_btn' onClick={onClickAddCart}>Add Cart</div>                                                

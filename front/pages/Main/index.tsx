@@ -1,3 +1,4 @@
+
 import Carousel from '@components/Carousel'
 import Content from '@components/Content'
 import Footer from '@components/Footer'
@@ -10,7 +11,7 @@ const Main = () => {
         <div>
             <Header/>
             <TopMenu/>
-            <Carousel images={["/public/castle.jpg","/public/uyuni.jpg","/public/cloud.jpg","/public/new.jpg"]} stlyes={{width:'100%', height:'500px'}}/>
+            <Carousel images={["/public/new.jpg","/public/castle.jpg","/public/uyuni.jpg","/public/cloud.jpg"]} stlyes={{width:'100%', height:'500px'}} autoplay={true}/>
             <Content/>
             <Footer/>
         </div>

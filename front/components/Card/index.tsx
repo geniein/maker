@@ -7,21 +7,23 @@ interface Props{
   thumbnail:string,
   title:string,
   hashTag:string,
-  price:string,  
+  price:string,
+  from: string  
 }
 
-const Card:FC<Props> = ({ id, thumbnail, title, hashTag, price }) => {
+const Card:FC<Props> = ({ id, thumbnail, title, hashTag, price, from }) => {
 
   const history = useHistory();
   const onClickCard = useCallback(
-      (id:number) => {          
-          history.push(`/detail/${id}`);
+      (from:string, id:number) => {
+        if(from==='content') history.push(`/detail/${id}`);
+        if(from==='review') history.push(`/review/${id}`);
       },
       [],
   )
   return (
     <StyledCard className="card-item">
-      <div className="card-image-wrapper" onClick={()=>onClickCard(id)}>
+      <div className="card-image-wrapper" onClick={()=>onClickCard(from, id)}>
         <img className="card-img" src={thumbnail}></img>
       </div>
       <div className="card-content">

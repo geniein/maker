@@ -4,6 +4,12 @@ import { Container, TopMenuLi, TopMenuUl } from './styles'
 
 const TopMenu = () => {
     const history = useHistory();
+    const onClickPage = (pagePath:string) =>{
+        history.push({
+            pathname:'/customservice',
+            state:{currPage:pagePath}
+        })
+    }
     return (
         <Container>
            <div style={{
@@ -47,9 +53,9 @@ const TopMenu = () => {
                        </ul>
                    </TopMenuLi>
                    <TopMenuLi style={{color:'#cccccc'}}> | </TopMenuLi>
-                   <TopMenuLi onClick={()=>history.push('/customservice')}>이벤트</TopMenuLi>
-                   <TopMenuLi>공지사항</TopMenuLi>
-                   <TopMenuLi>후기</TopMenuLi>
+                   <TopMenuLi>이벤트</TopMenuLi>
+                   <TopMenuLi onClick={()=>onClickPage('NOTICE')}>공지사항</TopMenuLi>
+                   <TopMenuLi onClick={()=>onClickPage('REVIEW')}>후기</TopMenuLi>
                </TopMenuUl>
            </div>
         </Container>       

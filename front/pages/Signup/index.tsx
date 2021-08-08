@@ -1,4 +1,3 @@
-import Carousel from '@components/Carousel'
 import Content from '@components/Content'
 import Footer from '@components/Footer'
 import Header from '@components/Header'
@@ -343,7 +342,7 @@ const Signup = () => {
                                 <tr>
                                     <th/>
                                     <td>
-                                        <InputBox placeholder='Input your Password Again'></InputBox>
+                                        <InputBox type='password' placeholder='Input your Password Again'></InputBox>
                                     </td>                                    
                                 </tr> 
                             </tbody>
