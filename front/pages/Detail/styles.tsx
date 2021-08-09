@@ -130,3 +130,32 @@ export const DetailTop = styled.div`
             border: solid;        
         }
     `;
+
+    export const DetailMenu = styled.div`
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    height: 70px;
+    margin-bottom: 20px;
+    ul{
+        display:inline-flex;
+        justify-content:center;
+        flex-direction:row;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+        list-style: none;
+    }
+    li{
+        float: left;
+        height: 70px;
+        line-height: 70px;
+        width: 150px;
+        cursor: pointer;
+        opacity:1;
+    }
+    pick_line {
+        border-top: 1px solid rgb(255, 200, 99);
+        width: 150px;
+        position: relative;        
+    }   
+`;  

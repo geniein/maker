@@ -39,10 +39,6 @@ export const TopMenuLi = styled.li`
         border: 1px solid #ddd;
         border-radius: 3px;
         padding: 5px;        
-        
-        &:hover {
-            display: inline-block;
-        }
 
         li {
             display: inline-block;
@@ -59,6 +55,12 @@ export const TopMenuLi = styled.li`
                 margin-top:20px;
                 margin-bottom: 10px;
                 margin-left: 10px;
+                cursor:pointer;
+                &:hover {
+                    font-weight: bold;
+                    color: blue;
+                    transition: 0.5s;
+                }
             }
         }
         

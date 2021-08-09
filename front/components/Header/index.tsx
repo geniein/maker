@@ -44,13 +44,13 @@ const Header = () => {
 
     return (        
         <Container>            
-            <HeaderLogo src="/public/logo.gif" onClick={onClickLogo} style={{cursor:'pointer'}}/>
+            <HeaderLogo src="/public/logo.png" onClick={onClickLogo} style={{cursor:'pointer'}}/>
             <ul>
 
                 {!userData && <li onClick={onClickLogin}>로그인</li>}
                 {!userData && <li onClick={onClickSignup}>회원가입</li>}
                 {userData && <li onClick={onClickLogOut}>로그아웃</li>}                
-                <li>쿠폰등록</li>                
+                {userData && <li onClick={onClickLogOut}>마이페이지</li>}                      
                 <li onClick={()=>onClickPage('FAQ')}>
                     {/* <Link to={'/customservice'} style={{textDecoration:'none', color: 'inherit'}}>고객지원</Link> */}
                     고객지원

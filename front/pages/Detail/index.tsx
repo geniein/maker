@@ -7,7 +7,7 @@ import axios from 'axios'
 import React, { FC } from 'react'
 import { useHistory, useParams } from 'react-router'
 import useSWR from 'swr'
-import { DetailBtnWrap, DetailTop } from './styles'
+import { DetailBtnWrap, DetailMenu, DetailTop } from './styles'
 
 interface Props{
     user:string;
@@ -86,8 +86,21 @@ const Detail:FC<Props> = () => {
                             <div className='detail_btn' onClick={onClickAddCart}>Add Cart</div>                                                
                         </DetailBtnWrap>
                     </div>                
-            </DetailTop> 
+            </DetailTop>           
             <Review ck={uk}/>                      
+            <DetailMenu>
+                <ul>
+                    <li >
+                        상품정보                        
+                    </li>
+                    <li >
+                        제작과정
+                    </li>
+                    <li >
+                        환불 및 배송
+                    </li>                    
+                </ul>
+            </DetailMenu> 
             <Footer/>
         </div>
     )

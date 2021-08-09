@@ -41,11 +41,10 @@ export const TableWrap = styled.table`
     `;
 
 export const Paging = styled.ul`
-    width: 100%;
-    margin-top: 10px !important;
+    width: 100%;        
     list-style: none !important;
     text-align: center !important;
-    margin: 0px auto 0px !important;
+    margin: 10px auto !important;
     display: inline-block;
 
     li {
