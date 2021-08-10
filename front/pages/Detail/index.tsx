@@ -15,7 +15,7 @@ interface Props{
 
 const Detail:FC<Props> = () => {
     const { id:cardId } = useParams<{ id: string }>();
-    const {data} = useSWR(`/api/item-contents/${cardId}`,fetcher);    
+    const {data} = useSWR(`/api/item-contents/one/${cardId}`,fetcher);    
     const history = useHistory();
     
     if(data ===undefined) return(<div>Processing</div>); //data loading...

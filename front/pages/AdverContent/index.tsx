@@ -18,12 +18,12 @@ const AdverContent = () => {
         delete location.state;
     }
 
-    useEffect(() => {
-        axios.get(`/api/item-contents`).then((res)=>{
+    useEffect(() => {        
+        axios.get(`/api/item-contents/list/adver/${currPage}`).then((res)=>{
             setAdList(res.data);
-        })
-        
+        })        
     }, [currPage])
+
     if(adList !== undefined) console.log(adList);    
     return (
         <div>
@@ -36,16 +36,16 @@ const AdverContent = () => {
             </ACTop>
             <ACMenu>                
                 <ul>
-                    <li >
+                    <li onClick={() => setCurrPage('ALL')}>
                         전체보기                        
                     </li>
-                    <li >
+                    <li onClick={() => setCurrPage('MARKET')}>
                         매장홍보
                     </li>
-                    <li >
+                    <li onClick={() => setCurrPage('COMPANY')}>
                         기업홍보
                     </li>
-                    <li >
+                    <li onClick={() => setCurrPage('SELF')}>
                         자기PR
                     </li>
                     <li >

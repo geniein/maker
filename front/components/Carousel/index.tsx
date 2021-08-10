@@ -35,8 +35,8 @@ const Carousel:FC<Props> = ({images , stlyes, autoplay}) => {
             clearInterval(autoPlay);
          }
      }, []);
-    
-    if(autoplay) autoPlay;
+
+     if(autoplay) autoPlay;
 
     return (         
         <ImageSlide style={stlyes}>
@@ -82,7 +82,7 @@ const Carousel:FC<Props> = ({images , stlyes, autoplay}) => {
                 </SlideList>
                 <div className='navigation-manual'>
                     {images?.map((image, idx) => {
-                        return (<label key={idx} htmlFor={`radio${idx}`} className='manual-btn'></label>)
+                        return (<label key={idx} htmlFor={`radio${idx}`} className='manual-btn' onClick={()=>carouselCount= idx + 1}></label>)
                     })}
                 </div>
                 <ButtonPrev onClick={() => onChangeImage(currNo-1)}>

@@ -14,6 +14,13 @@ import { NotLoggedInGuard } from 'src/auth/not-log-in.guard';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiCookieAuth('connect.sid')
+  @ApiOperation({ summary: '내 정보 가져오기' })
+  @Get()
+  async getUser(@User() user: Users) {    
+    return user || false;
+  }
+
   @ApiOperation({summary: '회원가입'})
   @UseGuards(NotLoggedInGuard)
   @Post()
@@ -27,9 +34,9 @@ export class UsersController {
       data.userId,
       data.userId,
       data.userName,
+      data.userNickname,
       data.password,
-      data.phoneNumber,
-      data.userId
+      data.phoneNumber,      
     );
     if (result) {
       return 'ok';
@@ -38,9 +45,8 @@ export class UsersController {
     }
   }
 
-
   @ApiCookieAuth('connect.sid')
-  @ApiOperation({ summary: '내 정보 가져오기' })
+  @ApiOperation({ summary: '내 정보 가져오기 by ID' })
   @Get(':id')
   async getProfile(@Param('id') id: string) {    
     const result = await this.usersService.findById(id);

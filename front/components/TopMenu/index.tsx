@@ -28,10 +28,10 @@ const TopMenu = () => {
                         </div>                                              
                         <ul>
                             <li>
-                                <p onClick={()=>onClickPage('/contentlist/adver','All')}>전체보기</p>
-                                <p>매장홍보</p>
-                                <p>기업홍보</p>
-                                <p>자기PR</p>
+                                <p onClick={()=>onClickPage('/contentlist/adver','ALL')}>전체보기</p>
+                                <p onClick={()=>onClickPage('/contentlist/adver','MARKET')}>매장홍보</p>
+                                <p onClick={()=>onClickPage('/contentlist/adver','COMPANY')}>기업홍보</p>
+                                <p onClick={()=>onClickPage('/contentlist/adver','SELF')}>자기PR</p>
                                 <p>포트폴리오</p>
                             </li>
                             <li>
@@ -47,9 +47,9 @@ const TopMenu = () => {
                         </div> 
                         <ul>
                             <li>
-                                <p onClick={()=>onClickPage('/contentlist/letter','All')}>전체보기</p>
-                                <p>프로포즈</p>
-                                <p>웨딩스토리</p>
+                                <p onClick={()=>onClickPage('/contentlist/letter','ALL')}>전체보기</p>
+                                <p onClick={()=>onClickPage('/contentlist/letter','PROPOSE')}>프로포즈</p>
+                                <p onClick={()=>onClickPage('/contentlist/letter','WEDDING')}>웨딩스토리</p>
                                 <p>성장스토리</p>
                                 <p>가족스토리</p>
                             </li>
@@ -66,7 +66,7 @@ const TopMenu = () => {
                         </div> 
                         <ul>
                             <li>
-                                <p onClick={()=>onClickPage('/contentlist/invite','All')}>전체보기</p>
+                                <p onClick={()=>onClickPage('/contentlist/invite','ALL')}>전체보기</p>
                                 <p>개업일초대</p>
                                 <p>기념일초대</p>
                                 <p>웨딩초대</p>

@@ -2,6 +2,7 @@ import Content from '@components/Content'
 import Footer from '@components/Footer'
 import Header from '@components/Header'
 import TopMenu from '@components/TopMenu'
+import useInput from '@hooks/useInput'
 import axios from 'axios'
 import React, { useCallback, useRef, useState } from 'react'
 import { BtnValid, BtnWrap, InputBox, SignupAgree, SignupContent, SignupTop } from './styles'
@@ -233,10 +234,15 @@ const Signup = () => {
     const [agreeAll, setAgreeAll] = useState(false);
     const [passAgree, setPassAgree] = useState(false);
 
-    const [emailId, setEmailId] = useState('');    
-    const [userName, setUserName] = useState('');    
-    const [userPassword, setUserPassword] = useState('');    
+    const [userId, onChnageUserId,setUserId] = useInput('');    
+    const [userName,onChnageUserName, setUserName] = useInput('');    
+    const [userNickname,onChnageUserNickname, setUserNickname] = useInput('');        
+    const [userPassword, onChnageUserPassword,setUserPassword] = useInput('');    
+    const [userPasswordChk, onChnageUserPasswordChk,setUserPasswordChk] = useInput('');
     
+    const [dupleIdChk, setDupleIdChk] = useState(false);
+
+
     const onClickAgree = () =>{                
         if(!agreeTerms || !agreePrivate){
             alert('필수약관 동의를 하셔야 회원가입이 가능합니다.')
@@ -260,12 +266,34 @@ const Signup = () => {
 
     const onClickSignup = useCallback((e:any) =>{
         e.preventDefault();
+        if(!dupleIdChk){
+            alert('ID중복체크를 해주십시오');
+            return false;
+        }
+        if(userPassword !== userPasswordChk){
+            alert('비밀번호가 같지 않습니다. 다시 확인해주시기 바랍니다.');
+            return false;
+        }
         axios.post('/api/users',{
-            email:emailId,
-            userName:userName,
+            userId,
+            email:userId,
+            userName,
+            userNickname,
             password:userPassword
         }).then((res)=>console.log(res)).catch((e)=>console.log(e));
-    },[emailId, userName, userPassword]);
+    },[userId, userName, userPassword, userNickname, userPasswordChk]);
+
+    const onClickDupleId = ()=>{
+        axios.get(`/api/user/duple/${userId}`)
+        .then((res)=>{
+            if(res.data){
+                alert('중복된 ID입니다.');
+            }else {                
+                setDupleIdChk(true);
+                alert('사용가능한 ID입니다.');
+            }
+        })
+    }
     return (
         <div>
             <Header/>
@@ -324,25 +352,25 @@ const Signup = () => {
                                         <span>Account Information</span>
                                     </th>
                                     <td>
-                                        <InputBox placeholder='Input your ID' onChange={(e)=>{setEmailId(e.target.value)}}></InputBox>
+                                        <InputBox placeholder='Input your ID' onChange={onChnageUserId}></InputBox>
                                     </td>                                    
                                 </tr>                                
                                 <tr>
                                     <th/>
                                     <td>
-                                        <BtnValid placeholder='Check Duplication'></BtnValid>                                    
+                                        <BtnValid onClick={onClickDupleId}> Check Duplication</BtnValid>                                    
                                     </td>
                                 </tr>
                                 <tr>
                                     <th/>
                                     <td>
-                                        <InputBox type='password' placeholder='Input your Password'onChange={(e)=>{setUserPassword(e.target.value)}}></InputBox>
+                                        <InputBox type='password' placeholder='Input your Password'onChange={onChnageUserPassword}></InputBox>
                                     </td>                                    
                                 </tr> 
                                 <tr>
                                     <th/>
                                     <td>
-                                        <InputBox type='password' placeholder='Input your Password Again'></InputBox>
+                                        <InputBox type='password' placeholder='Input your Password Again' onChange={onChnageUserPasswordChk}></InputBox>
                                     </td>                                    
                                 </tr> 
                             </tbody>
@@ -355,25 +383,25 @@ const Signup = () => {
                                         <span>Account Information</span>
                                     </th>
                                     <td>
-                                        <InputBox placeholder='Input your Name' onChange={(e)=>{setUserName(e.target.value)}}></InputBox>
+                                        <InputBox placeholder='Input your Nickname' onChange={onChnageUserNickname}></InputBox>
                                     </td>                                    
                                 </tr>                                
                                 <tr>
                                     <th/>
                                     <td>
-                                        <BtnValid placeholder='Check Duplication'></BtnValid>                                    
+                                        <BtnValid> Check Duplication </BtnValid>                                    
                                     </td>
                                 </tr>
                                 <tr>
                                     <th/>
                                     <td>
-                                        <InputBox placeholder='Input your Password'></InputBox>
+                                        <InputBox placeholder='Input your Name' onChange={onChnageUserName}></InputBox>
                                     </td>                                    
                                 </tr> 
                                 <tr>
                                     <th/>
                                     <td>
-                                        <InputBox placeholder='Input your Password Again'></InputBox>
+                                        <InputBox placeholder='Input your Phone Number'></InputBox>
                                     </td>                                    
                                 </tr> 
                             </tbody>

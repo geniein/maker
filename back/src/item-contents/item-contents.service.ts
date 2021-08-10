@@ -31,6 +31,13 @@ export class ItemContentsService {
     return result;
   }
 
+  async findItemContentsByCode(code:string, cate?:string){    
+    const result = cate === undefined ?
+      await this.itemcontentsRepository.find({where:{contentCode:code,}}) :
+      await this.itemcontentsRepository.find({where:{contentCode:code, category:cate}});     
+    return result;
+  }
+
   async addItemContent(contentCode: string, category:string, title:string, price:number, hashTag:string, content:string, author:string, srcPath:string, thumbnail:string, discount:number){    
     const uk = uuidRandom();
     const result = await this.itemcontentsRepository.save({

@@ -146,7 +146,7 @@ export const InputBox = styled.input`
     text-indent: 15px;
 `;
 
-export const BtnValid = styled.input`
+export const BtnValid = styled.div`
     background: #888;
     border: 0px;
     width: 400px;

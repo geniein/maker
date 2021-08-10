@@ -23,8 +23,17 @@ export class ItemContentsController {
     return rtn || false;
   }
 
+  @ApiOperation({ summary: '컨텐츠 리스트 가져오기' })
+  @Get('/list/:code/:cate')
+  async findItemContentsByCode(@Param('code') code: string, @Param('cate') cate: string) { 
+    if(cate === 'ALL') cate =undefined;
+    const rtn = await this.itemContentsService.findItemContentsByCode(code, cate);
+    // return itemcontent || false;
+    return rtn || false;
+  }
+
   @ApiOperation({ summary: '컨텐츠 가져오기' })
-  @Get(':id')
+  @Get('/one/:id')
   async findItemContent(@Param('id') id: string) {
     const rtn = await this.itemContentsService.findItemContents(id);
     return rtn || false;
