@@ -11,14 +11,14 @@ export class UsersService {
   @InjectRepository(Users) private usersRepository: Repository<Users>,
   ){}
  
-  async findByEmail(email: string) {
+  async findById(userId: string) {
     return this.usersRepository.findOne({
-      where: { email },
-      select: ['id', 'email', 'password'],
+      where: { userId },
+      select: ['userId', 'email', 'userPassword'],
     });
   }
 
-  async signup(email: string, userName: string, password: string, phoneNumber: string, userId: string) {
+  async signup(userId: string, email: string, userName: string, userNickname: string, password: string, phoneNumber: string) {
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = await this.usersRepository.findOne({ where: { email } });
     if (user) {

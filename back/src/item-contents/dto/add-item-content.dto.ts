@@ -4,6 +4,14 @@ import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class AddItemContentDto {
   @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    example: 'adver:광고, letter:편지, invite:초대',
+    description: '컨텐츠 코드',
+  })
+  public contentCode: string;
+
+  @IsString()
   @ApiProperty({
     example: '전체',
     description: '분류(카테고리)',

@@ -37,6 +37,7 @@ export class ItemContentsController {
     // const itemcontent = this.itemContentsService.findByUk(data.)
 
     const result = await this.itemContentsService.addItemContent(
+      data.contentCode,
       data.category,
       data.title,
       data.price,

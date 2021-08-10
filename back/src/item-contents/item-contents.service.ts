@@ -31,10 +31,11 @@ export class ItemContentsService {
     return result;
   }
 
-  async addItemContent(category:string, title:string, price:number, hashTag:string, content:string, author:string, srcPath:string, thumbnail:string, discount:number){    
+  async addItemContent(contentCode: string, category:string, title:string, price:number, hashTag:string, content:string, author:string, srcPath:string, thumbnail:string, discount:number){    
     const uk = uuidRandom();
     const result = await this.itemcontentsRepository.save({
       uk,
+      contentCode,
       category,
       title,
       price,

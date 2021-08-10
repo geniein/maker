@@ -19,12 +19,13 @@ export class UsersController {
   @Post()
   async signup(@Body() data: SignupRequestDto) {
     console.log(data);
-    const user = this.usersService.findByEmail(data.email);
+    const user = this.usersService.findById(data.email);
     if (!user) {
       throw new NotFoundException();
     }
     const result = await this.usersService.signup(
-      data.email,
+      data.userId,
+      data.userId,
       data.userName,
       data.password,
       data.phoneNumber,
@@ -37,11 +38,28 @@ export class UsersController {
     }
   }
 
+
   @ApiCookieAuth('connect.sid')
   @ApiOperation({ summary: '내 정보 가져오기' })
-  @Get()
-  async getProfile(@User() user: Users) {
-    return user || false;
+  @Get(':id')
+  async getProfile(@Param('id') id: string) {    
+    const result = await this.usersService.findById(id);
+    if (result) {
+      return true;
+    }else {
+      return false;
+    }   
+  }
+  
+  @ApiOperation({ summary: '아이디 중복 체크' })
+  @Get('/duple/:id')
+  async chkDupleId(@Param('id') id: string) {    
+    const result = await this.usersService.findById(id);
+    if (result) {
+      return true;
+    }else {
+      return false;
+    }   
   }
   
   @ApiOperation({ summary: '로그인' })

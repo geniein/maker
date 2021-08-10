@@ -20,6 +20,9 @@ import {
     @Column('varchar', { name: 'uk', length: 100 })
     uk: string;
   
+    @Column('varchar', { name: 'contentCode', length: 50 })
+    contentCode: string;
+
     @Column('varchar', { name: 'category', length: 50 })
     category: string;
   
@@ -32,7 +35,7 @@ import {
     @Column('int', { name: 'discount'})
     discount: number;
 
-    @Column('varchar', { name: 'hashTag', length: 100 })
+    @Column('varchar', { name: 'hashTag', length: 300 })
     hashTag: string;
 
     @Column('varchar', { name: 'content', length: 4000})
