@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { responsiveCustom } from '@utils/responsive';
 
 export const Container = styled.div`
     padding-top:70px;
@@ -25,7 +26,7 @@ export const TopMenuUl = styled.ul`
 
 export const TopMenuLi = styled.li`
     float: left;
-    margin-left: 34px;
+    margin-left: 20px;
     position: relative;
     cursor: pointer;
     ul {

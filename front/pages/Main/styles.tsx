@@ -5,7 +5,7 @@ export const Container = styled.div`
     height: auto;
     border-bottom: 1px solid #ececec;
     border-top: 1px solid #ececec;    
-    margin-top: 1px;    
+    margin-top: 1px;     
 `;
 
 export const Img = styled.img`
@@ -36,6 +36,7 @@ export const Ptag = styled.li`
 export const CardList = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-wrap:wrap;
     width: 100%;
     padding: 20px;

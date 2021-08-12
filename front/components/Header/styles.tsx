@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import {responsiveWidth} from '@utils/responsive'
 
 export const Container = styled.div`
     margin: 0 auto;
@@ -9,6 +10,8 @@ export const Container = styled.div`
     z-index: 1000;
     background-color: #ffffff;
 
+    ${responsiveWidth};
+    
     ul {
         float: right;    
         margin: 30px 0px 0px 20px;
