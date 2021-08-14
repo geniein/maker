@@ -35,7 +35,7 @@ export class UsersController {
       data.userId,
       data.userName,
       data.userNickname,
-      data.password,
+      data.userPassword,
       data.phoneNumber,      
     );
     if (result) {
@@ -58,7 +58,7 @@ export class UsersController {
   }
   
   @ApiOperation({ summary: '아이디 중복 체크' })
-  @Get('/duple/:id')
+  @Get('duple/:id')
   async chkDupleId(@Param('id') id: string) {    
     const result = await this.usersService.findById(id);
     if (result) {

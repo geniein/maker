@@ -34,7 +34,7 @@ const Modal:FC<Props> = ({isDisplay, setIsDisplay})=> {
                                             width: '185px',
                                             height: '30px',
                                             marginBottom: '7px'}}
-                                            onClick={()=>history.push('/addcontent')}>
+                                            onClick={()=>history.push('/workspace/addcontent')}>
                                 NewPost</li>
                                 <li style={{float: 'left',
                                             width: '185px',

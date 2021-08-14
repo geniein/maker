@@ -3,11 +3,12 @@ import axios from 'axios';
 import React, { useCallback, useState } from 'react'
 import { useHistory } from 'react-router';
 import useSWR from 'swr';
-import {Container, HeaderLogo} from './styles';
+import {HeaderContainer, HeaderLogo, HeaderWrap} from './styles';
 import Modal from '@components/Modal';
 import { Link } from 'react-router-dom';
 import { Badge } from '@material-ui/core';
 import { ShoppingCart,Menu } from '@material-ui/icons';
+import { Li } from '@components/Content/styles';
 
 const Header = () => {
     const history = useHistory();
@@ -21,10 +22,10 @@ const Header = () => {
         history.push('/');
     }
     const onClickLogin = () => {
-        history.push('/login');
+        history.push('/workspace/login');
     };
     const onClickSignup = () => {
-        history.push('/signup');
+        history.push('/workspace/signup');
     };
 
     const onClickLogOut = (e:any) => {
@@ -33,38 +34,65 @@ const Header = () => {
     };
     const onClickHamburger = () =>{        
         setDisplay(!display);
-    }
-
-    const onClickPage = (pagePath:string) =>{
+    }    
+    const onClickPage = (pagePath:string,pageState?:string) =>{
         history.push({
-            pathname:'/customservice',
-            state:{currPage:pagePath}
+            pathname: `/workspace/${pagePath}`,
+            state:{currPage:pageState}
         })
-    }
+    }    
 
-    return (        
-        <Container>            
-            <HeaderLogo src="/public/logo.png" onClick={onClickLogo} style={{cursor:'pointer'}}/>
-            <ul>
+    return (
+        <div>
+        <HeaderWrap>
+            <HeaderContainer>            
+                <HeaderLogo src="/public/logo.png" onClick={onClickLogo} style={{cursor:'pointer'}}/>
+                <ul>
 
-                {!userData && <li onClick={onClickLogin}>로그인</li>}
-                {!userData && <li onClick={onClickSignup}>회원가입</li>}
-                {userData && <li onClick={onClickLogOut}>로그아웃</li>}                
-                {userData && <li onClick={onClickLogOut}>마이페이지</li>}                      
-                <li onClick={()=>onClickPage('FAQ')}>
-                    {/* <Link to={'/customservice'} style={{textDecoration:'none', color: 'inherit'}}>고객지원</Link> */}
-                    고객지원
-                </li>                
-                {userData && <li>
-                    <Badge badgeContent={4} color="secondary">
-                        <ShoppingCart onClick={()=>history.push('/user/cart')}/>
-                    </Badge>
-                    </li>}
-                <li>
-                <Badge><Menu onClick={onClickHamburger}></Menu></Badge></li>
-            </ul>
-            <Modal isDisplay={display} setIsDisplay={setDisplay}></Modal>
-        </Container>        
+                    {!userData && <li onClick={onClickLogin}>로그인</li>}
+                    {!userData && <li onClick={onClickSignup}>회원가입</li>}
+                    {userData && <li onClick={onClickLogOut}>로그아웃</li>}                
+                    {userData && <li onClick={()=>onClickPage('mypage','MYCONTENT')}>마이페이지</li>}                      
+                    <li onClick={()=>onClickPage('customservice','FAQ')}>
+                        <Link to={'customservice'} style={{textDecoration:'none', color: 'inherit'}}>고객지원</Link>                        
+                    </li>                
+                    {userData && <li>
+                        <Badge badgeContent={4} color="secondary">
+                            <ShoppingCart onClick={()=>onClickPage('mypage','MYCART')}/>
+                        </Badge>
+                        </li>}
+                    <li>
+                    <Badge><Menu onClick={onClickHamburger}></Menu></Badge></li>
+                </ul>
+                <Modal isDisplay={display} setIsDisplay={setDisplay}></Modal>
+            </HeaderContainer>                                    
+        </HeaderWrap>
+        <div style={{paddingTop:'70px'}}/>        
+        </div>
+        // <HeaderWrapNew>
+        //     <Link to=''>logo</Link>
+        //     <NavigationContainer>
+        //         <ul className='menu'>
+        //             <MenuItem>Home
+        //                 <ul className='submenu'>                            
+        //                     <SubMenuItem>
+        //                         <Link to= '' className='sublink'>SubMenu</Link>
+        //                     </SubMenuItem>
+        //                     <SubMenuItem>
+        //                         <Link to= '' className='sublink'>SubMenu</Link>
+        //                     </SubMenuItem>
+        //                     <SubMenuItem>
+        //                         <Link to= '' className='sublink'>SubMenu</Link>
+        //                     </SubMenuItem>
+        //                 </ul>
+        //             </MenuItem>
+        //             <MenuItem>Home1</MenuItem>
+        //             <MenuItem>Home2</MenuItem>
+        //             <MenuItem>Home3</MenuItem>
+        //             <MenuItem>Home4</MenuItem>
+        //         </ul>
+        //     </NavigationContainer>
+        // </HeaderWrapNew>
     )
 }
 

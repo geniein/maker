@@ -37,8 +37,6 @@ const Detail:FC<Props> = () => {
     }
     return (
         <div>
-            <Header/>
-            <TopMenu/> 
             <DetailTop>                
                     <div className='detail_src'>
                         <img src={thumbnail} />
@@ -82,7 +80,7 @@ const Detail:FC<Props> = () => {
                         <p className='detail_sub_info'>[Watch out] Careful yourself</p>
                         <p className='detail_price'>{discount === 0 ? price : price * (discount*0.01)}</p>
                         <DetailBtnWrap>
-                            <div className='detail_btn' onClick={()=>history.push('/order',{contentId: uk})}>Order</div>
+                            <div className='detail_btn' onClick={()=>history.push('/workspace/order',{contentId: uk})}>Order</div>
                             <div className='detail_btn' onClick={onClickAddCart}>Add Cart</div>                                                
                         </DetailBtnWrap>
                     </div>                
@@ -100,8 +98,7 @@ const Detail:FC<Props> = () => {
                         환불 및 배송
                     </li>                    
                 </ul>
-            </DetailMenu> 
-            <Footer/>
+            </DetailMenu>             
         </div>
     )
 }

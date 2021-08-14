@@ -5,17 +5,21 @@ import Footer from '@components/Footer'
 import Header from '@components/Header'
 import TopMenu from '@components/TopMenu'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { CardList, Container } from './styles'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useCallback } from 'react'
+import { useHistory } from 'react-router'
+import {MainWrap, CardList, MainContainer, MainMenu } from './styles'
 import { Notice, SubTitle } from './SubContent'
+import SubContents from './SubContent/SubContents'
 
 const Main = () => {
-
+    const history = useHistory();
     const [contentList,setContentList] =useState<any>(undefined);
     const [reviewList,setReviewList] =useState<any>(undefined);
-
-    useEffect( () => {
-        axios.get('/api/item-contents')
+    // const [menuState, setMenuState] = useState<string>('adver'); //adver, letter, invite
+    
+    useEffect(() => {
+        axios.get(`/api/item-contents/list/adver/ALL`)
         .then((res)=>{            
             setContentList(res.data)
         }); 
@@ -25,16 +29,34 @@ const Main = () => {
             setReviewList(res.data)
         }); 
     }, []);
-    
+
+    const memoCarousel = useMemo(()=>{
+    return <Carousel images={["/public/new.jpg","/public/castle.jpg","/public/uyuni.jpg","/public/cloud.jpg"]} stlyes={{width:'100%', height:'500px'}} autoplay={true}/>
+    },[])
+    const onClickPage = (pagePath:string,pageState:string) =>{
+        history.push({
+            pathname: `/workspace${pagePath}`,
+            state:{currPage:pageState}
+        })
+    }
+    const onClickMainMenu = useCallback((menuState : string) =>{
+        axios.get(`/api/item-contents/list/${menuState}/ALL`)
+        .then((res)=>{            
+            setContentList(res.data)
+        }); 
+    },[]); 
+    // useEffect(() => {        
+    //     axios.get(`/api/item-contents/list/adver/${currPage}`).then((res)=>{
+    //         setAdList(res.data);
+    //     })        
+    // }, [currPage])
+
     if(contentList == undefined || reviewList == undefined) return(<div>Processing...</div>)
 
-
     return (
-        <div>
-            <Header/>
-            <TopMenu/>
-            <Carousel images={["/public/new.jpg","/public/castle.jpg","/public/uyuni.jpg","/public/cloud.jpg"]} stlyes={{width:'100%', height:'500px'}} autoplay={true}/>            
-            <Container>            
+        <div>            
+            <MainWrap>
+                {memoCarousel}
                 <Notice/>
                 <SubTitle text={['CUSTOME SERVICE', 'MAKER is for CUSTOMER']}/>                        
                 <SubTitle text={['BEST SERVICE', 'BEST SERVICE LIST']} style={{                
@@ -42,23 +64,32 @@ const Main = () => {
                     // background: '-webkit-linear-gradient(to right, #ffd194, #70e1f5)',  
                     background: 'linear-gradient(to right, #ffd194, #70e1f5)'
                 }}/> 
-                <CardList>
-                    {contentList?.map((val:any, i:number) =>{                    
-                        return <Card key={val.id} id={val.uk} thumbnail={val.thumbnail} title={val.title} hashTag={val.hashTag} price={val.price} from={'content'}/>
-                    })} 
-                </CardList>
+                <MainContainer>
+                    <MainMenu>
+                        <li onClick={()=>onClickMainMenu('adver')}>광고영상</li>
+                        <li onClick={()=>onClickMainMenu('letter')}>영상편지</li>
+                        <li onClick={()=>onClickMainMenu('invite')}>모바일초대장</li>                    
+                    </MainMenu>
+                    <CardList>
+                        {contentList?.map((val:any, i:number) =>{                    
+                            return <Card key={val.id} id={val.uk} thumbnail={val.thumbnail} title={val.title} hashTag={val.hashTag} price={val.price} from={'content'}/>
+                        })} 
+                    </CardList>
+                    {/* <SubContents contentCode={'adver'}/> */}
+                </MainContainer>
                 <SubTitle text={['BEST REVIEW']} style={{                
-                    // background: '#70e1f5',
-                    // background: '-webkit-linear-gradient(to right, #ffd194, #70e1f5)',  
-                    background: 'linear-gradient(to right, #ffd194, #70e1f5)'
-                }}/>
-                <CardList>
-                    {reviewList?.map((val:any, i:number) =>{                    
-                        return <Card key={val.id} id={val.uk} thumbnail={val.thumbnail} title={val.title} hashTag={val.hashTag} price={val.price} from={'review'}/>
-                    })} 
-                </CardList>                    
-            </Container>
-            <Footer/>
+                        // background: '#70e1f5',
+                        // background: '-webkit-linear-gradient(to right, #ffd194, #70e1f5)',  
+                        background: 'linear-gradient(to right, #ffd194, #70e1f5)'
+                    }}/>
+                <MainContainer>                    
+                    <CardList>
+                        {reviewList?.map((val:any, i:number) =>{                    
+                            return <Card key={val.id} id={val.uk} thumbnail={val.thumbnail} title={val.title} hashTag={val.hashTag} price={val.price} from={'review'}/>
+                        })} 
+                    </CardList>                    
+                </MainContainer> 
+            </MainWrap>            
         </div>
     )
 }

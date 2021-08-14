@@ -1,25 +1,26 @@
 import styled from '@emotion/styled';
-import { responsiveCustom } from '@utils/responsive';
+import { responsiveWidth } from '@utils/responsive';
 
-export const Container = styled.div`
-    padding-top:70px;
+export const TopWrap = styled.nav`        
+    width: 100%;
+    height: 40px;  
+    border-bottom: 1px solid;
+    position: relative;   
+`;
+
+export const TopContainer = styled.div`    
     margin: 0 auto;
     width: 100%;
-    height: 110px;  
+    height: 40px;  
     border-bottom: 1px solid;
-    position: relative;
-    .top_menu {
-        width: 1200px;
-        margin: 0 auto;
-        height: 60px;
-        list-style: none;
-        line-height: 60px;
-    }
+    position: relative;  
+    ${responsiveWidth};    
 `;
 
 export const TopMenuUl = styled.ul`
     float: left;    
     margin: 10px 0px 0px 10px;
+    padding: 0px;
     color: #848484;
     list-style:none; 
 `;
@@ -34,7 +35,7 @@ export const TopMenuLi = styled.li`
         top: 20px;
         left: 0;
         width: 476px;
-        z-index: 1001;
+        z-index: 1;
         background-color: #fff;
         display: none;
         border: 1px solid #ddd;
@@ -81,17 +82,3 @@ export const TopMenuLi = styled.li`
         }
     }
     `;
-
-export const TopMenuWrap = styled.div`
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    height: 400px;
-
-    .top_menu {
-        width: 1200px;
-        margin: 0 auto;
-        height: 60px;
-        list-style: none;
-        line-height: 60px;
-    }
-`;

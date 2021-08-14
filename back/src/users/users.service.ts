@@ -25,9 +25,10 @@ export class UsersService {
       return false;
     }
     const returned = await this.usersRepository.save({
-      email,
+      email,      
       userName,
-      password: hashedPassword,
+      userNickname,
+      userPassword: hashedPassword,
       userId,      
       phoneNumber,
       createdAt: new Date()

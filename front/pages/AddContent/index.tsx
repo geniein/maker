@@ -8,13 +8,10 @@ import React from 'react'
 const AddContent = () => {
 
     return (
-        <div>
-            <Header/>
-            <TopMenu/>
+        <div>            
             <div>                
                 <NewPost des={"item-contents"}/>                     
-            </div>   
-            <Footer/>
+            </div>               
         </div>
     )
 }

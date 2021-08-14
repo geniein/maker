@@ -41,9 +41,7 @@ const CustomService = () => {
 
 
     return (
-        <div>
-            <Header/>
-            <TopMenu/> 
+        <div>            
             <CSTop>
                 <p>
                     고객지원 <br/>
@@ -65,8 +63,7 @@ const CustomService = () => {
             </CSMenu>
             {currPage ==='NOTICE'&& <SubNotice ref={noticeRef}/> }
             {currPage ==='REVIEW'&& <SubReview ref={reviewRef}/> }
-            {currPage ==='FAQ'&& <SubFAQ ref={faqRef}/> }
-            <Footer/>
+            {currPage ==='FAQ'&& <SubFAQ ref={faqRef}/> }            
         </div>
     )
 }

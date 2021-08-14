@@ -17,7 +17,7 @@ const Order:FC<Props> = ({contentId, options}) => {
     contentId = contentId ?? location.state.contentId;
     
     useEffect(() => {
-        axios.get(`/api/item-contents/${contentId}`).then((res)=>{                        
+        axios.get(`/api/item-contents/one/${contentId}`).then((res)=>{                        
             setDetailInfo(res.data[0]);
         })               
     }, []);
@@ -25,9 +25,7 @@ const Order:FC<Props> = ({contentId, options}) => {
     if(detailInfo===undefined) return (<div> Processing</div>);
 
     return (
-        <div>
-            <Header/>
-            <TopMenu/>
+        <div>            
             <OrderInfoWrap>
                 <div className='title'>Order</div>
                 <OrderTable>
@@ -107,8 +105,7 @@ const Order:FC<Props> = ({contentId, options}) => {
             </OrderInfoWrap> 
             <div style={{width:'100%', display: 'inline-flex', justifyContent: 'center'}}>
                     <PayBtn>Pay</PayBtn>
-            </div>
-            <Footer/>
+            </div>            
         </div>
     )
 }

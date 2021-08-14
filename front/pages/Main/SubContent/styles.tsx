@@ -1,12 +1,20 @@
 import styled from '@emotion/styled';
+import { responsiveWidth } from '@utils/responsive';
 
-export const NoticeCon = styled.ul`
+export const NoticeWrap = styled.ul`
+    width: 100%;
+    height: 54px;        
+    margin: 0 auto;
+    border-bottom: 1px solid #ececec;
+    border-top: 1px solid #ececec;   
+    `;
+
+export const NoticeContainer = styled.ul`
     width: 100%;
     height: 54px;
     list-style: none;    
     margin: 0 auto;
-    border-bottom: 1px solid #ececec;
-    border-top: 1px solid #ececec;   
+    ${responsiveWidth};
     `;
 export const NoticeSub = styled.li`
     color: #eac784;
@@ -58,3 +66,38 @@ export const SubTitleList = styled.p`
     font-family: 'noto_b';
     align: center;
     `;
+
+export const CardList = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap:wrap;
+    width: 100%;
+    padding: 20px;
+    overflow-x: auto; // 👈 중요
+    scroll-behavior: smooth; // 중요. 부드럽게 움직이게 하려고.
+
+  .card-item {
+    flex-shrink: 0; // 👈 중요
+    margin: 0 10px 0 0; // 각 아이템간의 간격
+  }
+  /* 스크롤바 속성 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+
+  button {
+    position: absolute;
+    z-index: 10;
+  }
+
+  .left-button {
+    left: 35px;
+  }
+
+  .right-button {
+    right: 35px;
+  }
+`;

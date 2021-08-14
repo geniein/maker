@@ -279,12 +279,12 @@ const Signup = () => {
             email:userId,
             userName,
             userNickname,
-            password:userPassword
+            userPassword
         }).then((res)=>console.log(res)).catch((e)=>console.log(e));
     },[userId, userName, userPassword, userNickname, userPasswordChk]);
 
     const onClickDupleId = ()=>{
-        axios.get(`/api/user/duple/${userId}`)
+        axios.get(`/api/users/duple/${userId}`)
         .then((res)=>{
             if(res.data){
                 alert('중복된 ID입니다.');
@@ -295,9 +295,7 @@ const Signup = () => {
         })
     }
     return (
-        <div>
-            <Header/>
-            <TopMenu/>
+        <div>            
             <SignupTop>
                 <p>
                     회원가입 <br/>
@@ -412,8 +410,7 @@ const Signup = () => {
                     <input type='submit' className='btn_submit_kakao' value='취소' onClick={()=>history.go(-1)}/>                    
                 </BtnWrap>                
             </SignupContent>
-            }
-            <Footer/>
+            }            
         </div>
     )
 }

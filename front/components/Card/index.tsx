@@ -16,8 +16,8 @@ const Card:FC<Props> = ({ id, thumbnail, title, hashTag, price, from }) => {
   const history = useHistory();
   const onClickCard = useCallback(
       (from:string, id:number) => {
-        if(from==='content') history.push(`/detail/${id}`);
-        if(from==='review') history.push(`/review/${id}`);
+        if(from==='content') history.push(`/workspace/detail/${id}`);
+        if(from==='review') history.push(`/workspace/review/${id}`);
       },
       [],
   )

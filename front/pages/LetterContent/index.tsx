@@ -2,13 +2,11 @@ import Footer from '@components/Footer'
 import Header from '@components/Header'
 import TopMenu from '@components/TopMenu'
 import React from 'react'
-import { LCMenu, LCTop } from './styles'
+import { LCContainer, LCMenu, LCTop } from './styles'
 
 const LetterContent = () => {
     return (
-        <div>
-            <Header/>
-            <TopMenu/> 
+        <div>            
             <LCTop>
                 <p>
                     설렘 순간을 영상으로 보여주세요                
@@ -32,8 +30,7 @@ const LetterContent = () => {
                         가족스토리
                     </li>
                 </ul>
-            </LCMenu>            
-            <Footer/>
+            </LCMenu>                        
         </div>
     )
 }

@@ -40,7 +40,7 @@ export class SignupRequestDto {
     example: '1234',
     description: '비밀번호',
   })
-  public password: string;
+  public userPassword: string;
 
   @IsString()
   @IsNotEmpty()

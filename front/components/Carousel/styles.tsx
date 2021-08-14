@@ -86,7 +86,7 @@ export const SlideContent = styled.div`
 
 export const ButtonNext = styled.div`
   position: absolute;
-  top: 225px;
+  top: 345px;
   width: 40px;
   height: 45px;
   padding-top: 5px;
@@ -105,7 +105,7 @@ export const ButtonNext = styled.div`
 
 export const ButtonPrev = styled.div`
   position: absolute;
-  top: 225px;
+  top: 345px;
   width: 40px;
   height: 45px;
   padding-top: 5px;

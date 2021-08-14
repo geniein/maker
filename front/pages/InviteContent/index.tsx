@@ -5,7 +5,7 @@ import TopMenu from '@components/TopMenu'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
-import { ACContainer, ICMenu, ICTop } from './styles'
+import { ICContainer, ICMenu, ICTop } from './styles'
 
 const InviteContent = () => {
     const [currPage, setCurrPage] = useState('ALL');
@@ -27,8 +27,6 @@ const InviteContent = () => {
     if(icList !== undefined) console.log(icList);    
     return (
         <div>
-            <Header/>
-            <TopMenu/> 
             <ICTop>
                 <p>
                     초대장 제작하기
@@ -52,8 +50,7 @@ const InviteContent = () => {
                         감사인사장
                     </li>                    
                 </ul>
-            </ICMenu>                                
-            <Footer/>
+            </ICMenu>                                            
         </div>
     )
 }

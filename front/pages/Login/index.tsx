@@ -30,8 +30,6 @@ const Login = () => {
     )
     return (
         <div>
-            <Header/>
-            <TopMenu/>
             <LoginTop>
                 <p>
                     로그인 <br/>
@@ -86,12 +84,11 @@ const Login = () => {
                         <div className='sns_info'>
                             <span>SNS를 통한 로그인 시,<br/></span>
                             회원만이 누릴 수 있는 혜택에서 제외될 수 있습니다. <br/>
-                             간단한 회원가입으로 회원혜택을 누려보세요!                            
+                            간단한 회원가입으로 회원혜택을 누려보세요!                            
                         </div>
                     </LoginLayoutRight>
                 </ul>
-            </LoginContent>
-            <Footer/>
+            </LoginContent>            
         </div>
     )
 }

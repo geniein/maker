@@ -1,12 +1,17 @@
 import styled from '@emotion/styled';
+import { responsiveWidth } from '@utils/responsive';
 
-export const Container = styled.div`
-    list-style: none;
-    text-align: left;    
-    margin: 0;
+export const FooterWrap = styled.footer`           
     width: 100%;
     background-color: #3a3a3a;    
     color: #dadada;
+`;
+
+export const FooterContainer = styled.div`    
+    text-align: left;    
+    margin: 0 auto;
+    width: 100%;
+    ${responsiveWidth};
 `;
 
 export const FooterTop = styled.ul`

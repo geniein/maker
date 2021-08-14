@@ -20,23 +20,27 @@ const Carousel:FC<Props> = ({images , stlyes, autoplay}) => {
       
         
     let carouselCount = 1;    
-    const autoPlay = setInterval(()=>{            
+    const autoPlay = setInterval(()=>{                 
             if(carouselCount>3){
                 carouselCount = 0;
             }
             let carousel = document.getElementById('radio'+carouselCount) as HTMLInputElement;
             carousel.checked = true;
             carouselCount++;        
-        },5000);    
-    
-
-     useEffect(() => {         
+        },5000);        
+     
+    useEffect(() => {         
          return () => {
+             console.log('autoclear');
             clearInterval(autoPlay);
          }
      }, []);
 
-     if(autoplay) autoPlay;
+
+    if(autoplay) {
+        console.log('autostart');      
+        autoPlay;
+    }
 
     return (         
         <ImageSlide style={stlyes}>
@@ -96,4 +100,4 @@ const Carousel:FC<Props> = ({images , stlyes, autoplay}) => {
     )
 }
 
-export default Carousel
+export default React.memo(Carousel);
