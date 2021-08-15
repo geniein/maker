@@ -18,10 +18,10 @@ export class ItemCartsService {
     return `This action returns a #${id} itemCart`;
   }
 
-  async removeCart(id: number) {
+  async removeCart(contentId: string, userId: string) {
     return await this.itemcartsRepository.delete({
-      id,
-      userId:'ingenie'
+      contentId,      
+      userId
     })
   }
 
@@ -32,7 +32,7 @@ export class ItemCartsService {
   }
 
   async addItemCart(data : AddItemCartDto) {
-    const {userId,contentId, category, title, price, discount, thumbnail, itemCount, options} = data;
+    const {userId,contentId, category, title, price, discount, thumbnail, itemCount, dvdService, usbService } = data;
     const cartList = await this.itemcartsRepository.find({
       where: {userId}      
     }) ?? [];  
@@ -42,15 +42,16 @@ export class ItemCartsService {
       let chkCount = false;
       cartList.forEach((val)=>{
         if(val.contentId === contentId){          
-          this.itemcartsRepository.save({
-            ...val,
-            itemCount: Number(val.itemCount) + itemCount            
-          });
+          // this.itemcartsRepository.save({
+          //   ...val,
+          //   itemCount: Number(val.itemCount) + itemCount            
+          // });
           chkCount = true;
         }
       })
       if(chkCount){
-        return true;
+        //return 'This Item is Already in the cart';
+        return false;
       }
       //return false;
       return await this.itemcartsRepository.save({        

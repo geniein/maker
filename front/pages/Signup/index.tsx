@@ -1,11 +1,7 @@
-import Content from '@components/Content'
-import Footer from '@components/Footer'
-import Header from '@components/Header'
-import TopMenu from '@components/TopMenu'
 import useInput from '@hooks/useInput'
 import axios from 'axios'
 import React, { useCallback, useRef, useState } from 'react'
-import { BtnValid, BtnWrap, InputBox, SignupAgree, SignupContent, SignupTop } from './styles'
+import { InputBtn, BtnWrap, InputBox, InputWrap, SignupAgree, SignupContent, SignupTop, SignupWrap, InputTitle } from './styles'
 
 const Signup = () => {
 
@@ -302,7 +298,7 @@ const Signup = () => {
                     Sign Up
                 </p>
             </SignupTop>
-
+            <SignupWrap>
             {!passAgree && <SignupContent>
                 <ul className='signup_ul'>
                     <SignupAgree>
@@ -341,76 +337,51 @@ const Signup = () => {
             </SignupContent>
             }
             {passAgree && <SignupContent>                
-                    <form className='signup_table'>
-                        <table style={{marginBottom:'auto'}}>
-                            <tbody>
-                                <tr>
-                                    <th>
-                                        계정 정보 <br/>
-                                        <span>Account Information</span>
-                                    </th>
-                                    <td>
-                                        <InputBox placeholder='Input your ID' onChange={onChnageUserId}></InputBox>
-                                    </td>                                    
-                                </tr>                                
-                                <tr>
-                                    <th/>
-                                    <td>
-                                        <BtnValid onClick={onClickDupleId}> Check Duplication</BtnValid>                                    
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th/>
-                                    <td>
-                                        <InputBox type='password' placeholder='Input your Password'onChange={onChnageUserPassword}></InputBox>
-                                    </td>                                    
-                                </tr> 
-                                <tr>
-                                    <th/>
-                                    <td>
-                                        <InputBox type='password' placeholder='Input your Password Again' onChange={onChnageUserPasswordChk}></InputBox>
-                                    </td>                                    
-                                </tr> 
-                            </tbody>
-                        </table>
-                        <table style={{marginBottom:'auto'}}>
-                            <tbody>
-                                <tr>
-                                    <th>
-                                        계정 정보 <br/>
-                                        <span>Account Information</span>
-                                    </th>
-                                    <td>
-                                        <InputBox placeholder='Input your Nickname' onChange={onChnageUserNickname}></InputBox>
-                                    </td>                                    
-                                </tr>                                
-                                <tr>
-                                    <th/>
-                                    <td>
-                                        <BtnValid> Check Duplication </BtnValid>                                    
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th/>
-                                    <td>
-                                        <InputBox placeholder='Input your Name' onChange={onChnageUserName}></InputBox>
-                                    </td>                                    
-                                </tr> 
-                                <tr>
-                                    <th/>
-                                    <td>
-                                        <InputBox placeholder='Input your Phone Number'></InputBox>
-                                    </td>                                    
-                                </tr> 
-                            </tbody>
-                        </table>
-                    </form>
-                    <BtnWrap>
+                    <div className='signup_container'>
+                        <InputWrap>
+                            <InputTitle>아이디</InputTitle>                            
+                            <InputBox placeholder='Input your ID' onChange={onChnageUserId}></InputBox>                        
+                        </InputWrap>
+                        <InputWrap>                                                    
+                            <InputBtn onClick={onClickDupleId}> Check Duplication</InputBtn>                                                                      
+                        </InputWrap>                        
+                        <InputWrap>         
+                            <InputTitle>비밀번호</InputTitle>                                               
+                            <InputBox type='password' placeholder='Input your Password'onChange={onChnageUserPassword}></InputBox>                                    
+                        </InputWrap>                            
+                        <InputWrap> 
+                            <InputTitle>비밀번호 재확인</InputTitle>                                                       
+                            <InputBox type='password' placeholder='Input your Password Again' onChange={onChnageUserPasswordChk}></InputBox>                               
+                        </InputWrap>
+                        <InputWrap>    
+                            <InputTitle>닉네임</InputTitle>                                                    
+                            <InputBox placeholder='Input your Nickname' onChange={onChnageUserNickname}></InputBox>                              
+                        </InputWrap>
+                        <InputWrap>                                                                           
+                            <InputBtn> Check Duplication </InputBtn>                                                                   
+                        </InputWrap>
+                        <InputWrap>
+                            <InputTitle>이름</InputTitle>
+                            <InputBox placeholder='Input your Name' onChange={onChnageUserName}></InputBox>                                  
+                        </InputWrap>
+                        <InputWrap>
+                            <InputTitle>휴대전화</InputTitle>                            
+                            <InputBox placeholder='Input your Phone Number'></InputBox>                           
+                        </InputWrap>
+                        <InputWrap>
+                            <InputBtn style={{backgroundColor:'#eac684'}} onClick={onClickDupleId}> 회원가입</InputBtn>                                                                                                  
+                        </InputWrap>
+                        <InputWrap>                            
+                            <InputBtn style={{backgroundColor:'#f5dc00'}} onClick={onClickDupleId}> 카카오 회원가입</InputBtn>                                                                      
+                        </InputWrap>
+                    </div>
+                    {/* <BtnWrap>
                     <input type='submit' className='btn_submit' value='회원가입' onClick={onClickSignup}></input>
                     <input type='submit' className='btn_submit_kakao' value='취소' onClick={()=>history.go(-1)}/>                    
-                </BtnWrap>                
+                    </BtnWrap>                 */}
             </SignupContent>
-            }            
+            }
+            </SignupWrap>            
         </div>
     )
 }

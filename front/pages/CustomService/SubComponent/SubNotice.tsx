@@ -86,7 +86,7 @@ const SubNotice = forwardRef((props, ref) => {
                                     <td className='notice_title'>{innerValue?.title}</td>                         
                                 </tr>
                                 <tr>
-                                    <td className='notice_sub'>제목</td>
+                                    <td className='notice_sub'>작성자</td>
                                     <td className='notice_title'>{innerValue?.author}</td>                         
                                 </tr>
                             </tbody>                        
@@ -99,7 +99,7 @@ const SubNotice = forwardRef((props, ref) => {
                     </NoticeInner>                    
                 }
                 {
-                    newState && !innerState && <NewPost des="notices"/>
+                    newState && !innerState && <NewPost postStatus='notice' des="notices"/>
                 }               
             </Container> 
     )

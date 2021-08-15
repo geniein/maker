@@ -12,14 +12,14 @@ const Cart = () =>{
         getCartList();     
     }, [])    
     const getCartList = () =>{
-        axios.get('/api/item-carts/ingenie').then((res)=>{
+        axios.get('/api/item-carts').then((res)=>{
             setCartList(res.data);
         }).catch((err)=>{
             console.log(err);
         })  
     }
-    const onClickRemoveCart = (id:string) =>{
-        axios.delete(`/api/item-carts/remove/${id}`)
+    const onClickRemoveCart = (contentId:string) =>{
+        axios.delete(`/api/item-carts/remove/${contentId}`)
         .then((res)=>{
             console.log(res);
             getCartList();
@@ -51,7 +51,7 @@ const Cart = () =>{
                                         {val.price}
                                     </td>
                                     <td className='cart_remove'>
-                                        <RemoveBtn onClick={()=>onClickRemoveCart(val.id)}>Remove</RemoveBtn>
+                                        <RemoveBtn onClick={()=>onClickRemoveCart(val.contentId)}>Remove</RemoveBtn>
                                     </td>
                                 </tr>
                                 )

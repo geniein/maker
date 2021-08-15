@@ -41,7 +41,7 @@ export class ItemContentsController {
 
   @ApiOperation({ summary: '컨텐츠 추가' })
   @UseGuards(LoggedInGuard)  
-  @Post('newPost')
+  @Post('newpost')
   async addItemContent(@Body() data: AddItemContentDto) {
     // const itemcontent = this.itemContentsService.findByUk(data.)
 

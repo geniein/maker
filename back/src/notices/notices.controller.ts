@@ -27,7 +27,7 @@ export class NoticesController {
 
 
   @ApiOperation({ summary: '공지사항 추가' })
-  @Post('newPost')
+  @Post('newpost')
   addNotices(@Body() data: AddNoticesDto) {
     return this.noticesService.addNotice(
       data.category,

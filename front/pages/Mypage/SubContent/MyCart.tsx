@@ -12,14 +12,14 @@ const MyCart = () => {
         getCartList();     
     }, [])    
     const getCartList = () =>{
-        axios.get('/api/item-carts/ingenie').then((res)=>{
+        axios.get('/api/item-carts').then((res)=>{
             setCartList(res.data);
         }).catch((err)=>{
             console.log(err);
         })  
     }
-    const onClickRemoveCart = (id:string) =>{
-        axios.delete(`/api/item-carts/remove/${id}`)
+    const onClickRemoveCart = (contentId:string) =>{
+        axios.delete(`/api/item-carts/remove/${contentId}`)
         .then((res)=>{
             console.log(res);
             getCartList();
@@ -28,9 +28,9 @@ const MyCart = () => {
         })
     }    
     const onClickCartItem = useCallback((id:number) => {
-              history.push(`/workspace/detail/${id}`);              
-            },[])
-            console.log(cartList);    
+        history.push(`/workspace/detail/${id}`);              
+    },[])
+
     return (
         <MyWrap>
             <p className='title'>장바구니 <span>helloworld</span></p>                               
@@ -48,13 +48,15 @@ const MyCart = () => {
                                         {val.title}
                                     </td>
                                     <td className='cart_options'>
-                                        {val.options}
+                                        {(val.dvdService == '0' && val.dvdService == '0') && <p>DVD 서비스</p>}
+                                        {val.dvdService == '1' && <p>DVD 서비스</p>}
+                                        {val.usbService == '1' && <p>USB 서비스</p>}                                        
                                     </td>
                                     <td className='cart_price'>
                                         {val.price}
                                     </td>
                                     <td className='cart_remove'>
-                                        <RemoveBtn onClick={()=>onClickRemoveCart(val.id)}>Remove</RemoveBtn>
+                                        <RemoveBtn onClick={()=>onClickRemoveCart(val.contentId)}>Remove</RemoveBtn>
                                     </td>
                                 </tr>
                                 )
@@ -63,7 +65,7 @@ const MyCart = () => {
                     </CartTable>                             
                 <div style={{display:'inline-flex'}}>
                     <div className='title' >Total Amount </div>                                             
-                    <div className='title' style={{textAlign:'right'}}>{cartList?.reduce((a:any,b:any)=> a + b.price,0)}</div>
+                    <div className='title' style={{textAlign:'right'}}>{cartList?.reduce((a:any,b:any)=> a + (b.price + b.dvdService * 20000 + b.usbService*20000),0)}</div>
                 </div> 
                 <div style={{width:'100%', display: 'inline-flex', justifyContent: 'center'}}>
                     <PayBtn>Pay</PayBtn>

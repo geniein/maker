@@ -74,8 +74,8 @@ const TopMenu = () => {
                     </TopMenuLi>
                     <TopMenuLi style={{color:'#cccccc'}}> | </TopMenuLi>
                     <TopMenuLi>이벤트</TopMenuLi>
-                    <TopMenuLi onClick={()=>onClickPage('/customservice','NOTICE')}>공지사항</TopMenuLi>
-                    <TopMenuLi onClick={()=>onClickPage('/customservice','REVIEW')}>후기</TopMenuLi>
+                    <TopMenuLi onClick={()=>onClickPage('customservice','NOTICE')}>공지사항</TopMenuLi>
+                    <TopMenuLi onClick={()=>onClickPage('customservice','REVIEW')}>후기</TopMenuLi>
                 </TopMenuUl>                
             </TopContainer>
         </TopWrap>       

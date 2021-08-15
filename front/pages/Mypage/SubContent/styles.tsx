@@ -108,6 +108,7 @@ export const MyItem = styled.div`
             float: left;
             margin-top: 10px;
             border: 1px solid #808080;
+            cursor:pointer;
         }
     }
 `;

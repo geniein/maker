@@ -7,18 +7,20 @@ import {
     JoinTable,
     ManyToMany,
     OneToMany,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
   } from 'typeorm';  
+import { ItemOrders } from './ItemOrders';
   
-  @Index('uk', ['uk'], { unique: true })
+  @Index('contentId', ['contentId'], { unique: true })
   @Entity({ schema: 'slack', name: 'itemcontents' })
   export class ItemContents {
-    @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
-    id: number;
+    // @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
+    // id: number;
     
-    @Column('varchar', { name: 'uk', length: 100 })
-    uk: string;
+    @PrimaryGeneratedColumn('uuid')
+    contentId: string;
   
     @Column('varchar', { name: 'contentCode', length: 50 })
     contentCode: string;
@@ -59,5 +61,7 @@ import {
     @DeleteDateColumn()
     deletedAt: Date | null;
     
+    @OneToOne(type=>ItemOrders, itemorders => itemorders.contentId)    
+    itemOrders: ItemOrders;
   }
   

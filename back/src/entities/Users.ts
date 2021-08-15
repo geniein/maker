@@ -7,17 +7,20 @@ import {
     JoinTable,
     ManyToMany,
     OneToMany,
+    PrimaryColumn,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
   } from 'typeorm';  
+import { ItemOrders } from './ItemOrders';
   
-  @Index('userId', ['userId'], { unique: true })
+  @Index('userId', ['userId'], {})
   @Entity({ schema: 'slack', name: 'users' })
   export class Users {
-    @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
+    
+    @PrimaryGeneratedColumn({ type: 'int', name: 'id' })    
     id: number;
 
-    @Column('varchar', { name: 'userId', unique: true, length: 30 })
+    @PrimaryColumn('varchar', { name: 'userId', length: 100 })    
     userId: string;
   
     @Column('varchar', { name: 'userPassword', length: 100, select: false })
@@ -46,6 +49,9 @@ import {
 
     @Column('varchar', { name: 'cartList', length: 1000, nullable:true })
     cartList: string;
+
+    @OneToMany(type=>ItemOrders, itemorders => itemorders.orderOwner)    
+    myContents: ItemOrders[];
     
   }
   

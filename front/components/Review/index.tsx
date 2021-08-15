@@ -3,14 +3,14 @@ import React, { FC, useEffect, useState } from 'react'
 import axios from 'axios'
 
 interface Props{
-    ck: string
+    contentId: string
 }
 
-const Review:FC<Props> = ({ck}) =>{
+const Review:FC<Props> = ({contentId}) =>{
     const [reviewList, setReviewList] = useState<any>(undefined);
     const [currPage,setCurrPage] =useState(0);
     useEffect(()=>{
-        axios.get(`/api/item-reviews/${ck}`).then((res)=>{
+        axios.get(`/api/item-reviews/${contentId}`).then((res)=>{
             console.log(res.data);
             setReviewList(res.data);
         })

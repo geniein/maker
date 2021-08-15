@@ -14,7 +14,7 @@ export class AddCartRequestDto {
   @IsNotEmpty()
   @ApiProperty({
     example: 'Shaco',
-    description: '별명',
+    description: '사용자ID',
   })
   public userId: string;
   

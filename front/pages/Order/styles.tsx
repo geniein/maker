@@ -1,4 +1,13 @@
 import styled from '@emotion/styled';
+import { responsiveWidth } from '@utils/responsive';
+
+export const OrderWrap = styled.div`
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-bottom: 1px solid #ececec;    
+    ${responsiveWidth};
+`;
 
 export const OrderInfoWrap = styled.div`
     display: inline-flex;

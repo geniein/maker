@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const ReviewWrap = styled.div`    
-    width: 60%;
+    width: 80%;
     margin: 0 auto;
 
     h2{

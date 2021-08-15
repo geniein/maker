@@ -29,11 +29,11 @@ const SubNotice = forwardRef((props, ref) => {
         })
     },[]);
 
-    const onClickNotice = useCallback((id:number)=>{
-        axios.get(`/api/item-reviews/${id+1}`).then((res)=>{
+    const onClickReview = useCallback((reviewId:string)=>{
+        axios.get(`/api/item-reviews/one/${reviewId}`).then((res)=>{
             console.log(res);
             setInnerState(true);
-            setInnerValue(res.data[0]);            
+            setInnerValue(res.data);            
         })
     },[innerState, innerValue]);
     
@@ -47,7 +47,7 @@ const SubNotice = forwardRef((props, ref) => {
       }));
 
     if(location?.state !== undefined){                
-        onClickNotice(location.state.notice);
+        onClickReview(location.state.notice);
         delete location.state;
     }
 
@@ -66,7 +66,7 @@ const SubNotice = forwardRef((props, ref) => {
                             {reviewList?.map((val:any,idx:number)=>{
                                 if(idx >= currPage*10 && idx < (currPage+1)*10)
                                 return(
-                                <tr className='notice_row' key={idx} onClick={()=>onClickNotice(idx)}>
+                                <tr className='notice_row' key={idx} onClick={()=>onClickReview(val.reviewId)}>
                                     <td>리뷰</td>
                                     <td>{val.title}</td>
                                     <td>{val.author}</td>
@@ -82,8 +82,7 @@ const SubNotice = forwardRef((props, ref) => {
                         })}                                               
                         <li>&gt;</li>
                     </Paging>
-                    <div style={{height:'50px'}}>
-                        <button onClick={()=>setNewState(!newState)}>NewPost</button>
+                    <div style={{height:'50px'}}>                        
                     </div> 
                 </NoticeWrap>
                 }             
@@ -96,7 +95,7 @@ const SubNotice = forwardRef((props, ref) => {
                                     <td className='notice_title'>{innerValue?.title}</td>                         
                                 </tr>
                                 <tr>
-                                    <td className='notice_sub'>제목</td>
+                                    <td className='notice_sub'>작성자</td>
                                     <td className='notice_title'>{innerValue?.author}</td>                         
                                 </tr>
                             </tbody>                        
@@ -107,10 +106,7 @@ const SubNotice = forwardRef((props, ref) => {
                             <GoListBtn onClick={onClickMenu}>목록</GoListBtn>
                         </div>                        
                     </NoticeInner>                    
-                }
-                {
-                    newState && !innerState && <NewPost des="notices"/>
-                }               
+                }                          
             </Container> 
     )
 });

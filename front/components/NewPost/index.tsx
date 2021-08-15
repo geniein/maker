@@ -7,10 +7,13 @@ import EditorComponent from './SubComponents/EditorComponent'
 import UploadFiles from './SubComponents/UploadFiles'
 
 interface Props{
+    postStatus: string; //'Screen Status 'notices', 'item-contents','item-reviews'
     des: string;//API DESTINATION
+    orderId?: string; // condi : 'item-reviews'
+    contentId?: string; // condi : 'item-reviews'
 }
 
-const NewPost:VFC<Props> = ({des}) =>{
+const NewPost:VFC<Props> = ({postStatus, des, orderId, contentId}) =>{
     //temp
     const categoryList = [{value:1, text:"Notice"},{value:2, text:"Update"}]    
 
@@ -31,20 +34,19 @@ const NewPost:VFC<Props> = ({des}) =>{
         }
         if (content.trim() == '') {
             alert('내용을 입력해주세요'); return;
-        }
-        if(uploadReferenece !== null){
+        }        
+        if( postStatus==='item-contents' && uploadReferenece !== null){
             await uploadReferenece?.current?.upload().then( (result:any) => {
                 const files = result;
-                console.log(result);
+                console.log('file',result);
 
-                axios.post(`/api/${des}/newPost`,{
+                axios.post(`/api/${postStatus}/newpost`,{
                     title,
                     content,
                     category,
                     price,
                     discount,
-                    hashTag,
-                    author: 'ingenie',
+                    hashTag,                    
                     srcPath:'test',
                     thumbnail: files
                 }).then((res:any)=>{
@@ -55,6 +57,19 @@ const NewPost:VFC<Props> = ({des}) =>{
             }).catch( (err:any) =>{
                 console.log(err);
             });            
+        } else {
+            axios.post(`/api/${postStatus}/newpost`,{
+                title,
+                content,
+                category,                
+                hashTag,
+                orderId,
+                contentId
+            }).then((res:any)=>{
+                alert('Sucess Post');
+            }).catch((err:any)=>{
+                console.log(err);
+            }) 
         }
     }
     const onEditorChange = (val:any) =>{
@@ -73,12 +88,12 @@ const NewPost:VFC<Props> = ({des}) =>{
                                 <th>HashTag</th>
                                 <td><input type="text" onChange={onChangeHashTag}/></td>
                             </tr>
-                            <tr>
+                            {postStatus == 'item-contents' && <tr>
                                 <th>Price</th>
                                 <td><input type="number" onChange={onChangePrice}/></td>
                                 <th>Discount</th>
                                 <td><input type="number" onChange={onChangeDiscount}/></td>
-                            </tr>
+                            </tr>}
                         </tbody>
                     </ItemContentWrap>
                     <UploadFiles ref={uploadReferenece} /> 

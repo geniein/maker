@@ -7,7 +7,7 @@ import axios from 'axios'
 import React, { FC, useCallback, useRef, useState } from 'react'
 import { useLocation } from 'react-router'
 import useSWR from 'swr'
-import { Container, CSMenu, CSTop, NoticeInner, NoticeTable, Paging, GoListBtn, NoticeWrap } from './styles'
+import { Container, CSMenu, CSTop, NoticeInner, NoticeTable, Paging, GoListBtn, NoticeWrap, CSWrap } from './styles'
 import SubFAQ from './SubComponent/SubFAQ'
 import SubNotice from './SubComponent/SubNotice'
 import SubReview from './SubComponent/SubReview'
@@ -41,7 +41,7 @@ const CustomService = () => {
 
 
     return (
-        <div>            
+        <div>
             <CSTop>
                 <p>
                     고객지원 <br/>
@@ -49,21 +49,23 @@ const CustomService = () => {
                 </p>
             </CSTop>
             <CSMenu>
-                <ul>
-                    <li onClick={onClickMenuNotice}>
-                        공지사항                        
-                    </li>
-                    <li onClick={onClickMenuReview}>
-                        후기게시판
-                    </li>
-                    <li onClick={onClickMenuFAQ}>
-                        FAQ
-                    </li>
-                </ul>
-            </CSMenu>
-            {currPage ==='NOTICE'&& <SubNotice ref={noticeRef}/> }
-            {currPage ==='REVIEW'&& <SubReview ref={reviewRef}/> }
-            {currPage ==='FAQ'&& <SubFAQ ref={faqRef}/> }            
+                    <ul>
+                        <li onClick={onClickMenuNotice}>
+                            공지사항                        
+                        </li>
+                        <li onClick={onClickMenuReview}>
+                            후기게시판
+                        </li>
+                        <li onClick={onClickMenuFAQ}>
+                            FAQ
+                        </li>
+                    </ul>
+                </CSMenu>        
+            <CSWrap>                                           
+                {currPage ==='NOTICE'&& <SubNotice ref={noticeRef}/> }
+                {currPage ==='REVIEW'&& <SubReview ref={reviewRef}/> }
+                {currPage ==='FAQ'&& <SubFAQ ref={faqRef}/> }            
+            </CSWrap>
         </div>
     )
 }

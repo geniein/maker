@@ -32,7 +32,7 @@ export class UsersController {
     }
     const result = await this.usersService.signup(
       data.userId,
-      data.userId,
+      data.email,
       data.userName,
       data.userNickname,
       data.userPassword,
@@ -66,6 +66,18 @@ export class UsersController {
     }else {
       return false;
     }   
+  }
+  
+  @ApiOperation({ summary: '내 영상/사진 가져오기' })
+  @UseGuards(LoggedInGuard)
+  @Post('mycontents')
+  async getMyContents(@User() user: Users) {
+    const result = await this.usersService.findMycontentsById(user);    
+    if (result) {
+      return result;
+    }else {
+      return false;
+    }          
   }
   
   @ApiOperation({ summary: '로그인' })
