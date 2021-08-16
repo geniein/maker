@@ -32,11 +32,25 @@ export const TableWrap = styled.table`
         font-weight: 600;
         color: #626262;
     }
+    td{
+        text-align: center;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        padding: 15px 0px;
+        font-size: 11px;
+        color: #434343;
+        cursor: pointer;
+    }
     .review_row{
         cursor: pointer;
     }
     .review_row:hover{
         background-color: #FFF0F5;
+    }
+    .review_content{
+        background: #eee;
+        padding: 20px;
+        textAlign: left;
     }        
     `;
 

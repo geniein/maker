@@ -9,13 +9,14 @@ const Notice = ()=> {
     return (
         <NoticeWrap>
             <NoticeContainer>
-                <NoticeSub> <Link to='/customservice' style={{textDecoration:'none', color:'inherit'}}>NOTICE</Link></NoticeSub>
+                <NoticeSub> <Link to='/workspace/customservice' style={{textDecoration:'none', color:'inherit'}}>NOTICE</Link></NoticeSub>
                 {noticeList?.map((val:any, idx:number)=>{
                     if(idx != 0) return null;
                     return <NoticeContent key={idx}>
                         <Link to={{
-                            pathname: `/customservice`,
+                            pathname: `/workspace/customservice`,
                             state: {
+                                currPage: 'NOTICE',
                                 notice: idx                            
                             }
                         }} 

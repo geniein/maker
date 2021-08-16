@@ -5,6 +5,7 @@ export const ModalWrap = styled.div<{isDisplay:boolean;}>`
     height: 100%;
     background: rgba(0, 0, 0, 0.93);
     top: 0px;
+    padding: 0;
     display: ${(props)=> (props.isDisplay === true ? 'block':' none')};
     z-index: 10000;    
     position: fixed;

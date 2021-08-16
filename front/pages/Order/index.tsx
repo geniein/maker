@@ -58,8 +58,8 @@ const Order:FC<Props> = ({contentId, dvdService, usbService}) => {
                             </td>
                             <td className='order_options'>
                                 {!(dvdService || usbService) && <p>없음</p>}
-                                {dvdService=='1' && <p>DVD 서비스</p>}                                
-                                {usbService=='1' && <p>USB 서비스</p>}
+                                {dvdService=='1' && <p>DVD 서비스(20,000)</p>}                                
+                                {usbService=='1' && <p>USB 서비스(20,000)</p>}
                             </td>
                         </tr>
                     </tbody>

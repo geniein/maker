@@ -16,9 +16,7 @@ const SubNotice = forwardRef((props, ref) => {
     const [innerState, setInnerState] = useState(false);
     const [innerValue, setInnerValue] = useState<any>(undefined);
     const [currPage, setCurrPage] =useState(0);
-    
-    const location = useLocation<any>(); //location    
-    
+
     const {data:noticeList} = useSWR(`/api/notices`,fetcher);
     const onClickNotice = useCallback((id:number)=>{
         axios.get(`/api/notices/${id+1}`).then((res)=>{            
@@ -33,13 +31,9 @@ const SubNotice = forwardRef((props, ref) => {
     }
 
     useImperativeHandle(ref, () => ({
-        onClickMenu,                
-      }));
-
-    if(location?.state !== undefined){                
-        onClickNotice(location.state.notice);
-        delete location.state;
-    }
+        onClickMenu,
+        onClickNotice                
+      }));   
 
     return (
         <Container>

@@ -5,6 +5,7 @@ import TopMenu from '@components/TopMenu'
 import fetcher from '@utils/fetcher'
 import axios from 'axios'
 import React, { FC, useCallback, useRef, useState } from 'react'
+import { useEffect } from 'react'
 import { useLocation } from 'react-router'
 import useSWR from 'swr'
 import { Container, CSMenu, CSTop, NoticeInner, NoticeTable, Paging, GoListBtn, NoticeWrap, CSWrap } from './styles'
@@ -14,6 +15,7 @@ import SubReview from './SubComponent/SubReview'
 
 const CustomService = () => {  
     const [currPage, setCurrPage] = useState('NOTICE');
+    const [notice, setNotice] = useState(undefined);
     const noticeRef = useRef<any>();
     const reviewRef = useRef<any>();
     const faqRef = useRef<any>();
@@ -34,8 +36,16 @@ const CustomService = () => {
         setCurrPage('FAQ');
     }
 
+    useEffect(()=>{
+        if(notice !== undefined){            
+            noticeRef.current?.onClickNotice(notice);
+            setNotice(undefined);
+        }
+    },[currPage])
+
     if(location?.state !== undefined){                
-        setCurrPage(location.state.currPage);
+        setCurrPage(location.state.currPage);        
+        setNotice(location.state.notice);               
         delete location.state;
     }
 
