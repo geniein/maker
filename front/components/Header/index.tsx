@@ -63,9 +63,9 @@ const Header = () => {
                         </li>}
                     <li>
                     <Badge><Menu onClick={onClickHamburger}></Menu></Badge></li>
-                </ul>
-                <Modal isDisplay={display} setIsDisplay={setDisplay}></Modal>
+                </ul>                
             </HeaderContainer>                                    
+            <Modal isDisplay={display} setIsDisplay={setDisplay}></Modal>
         </HeaderWrap>
         <div style={{paddingTop:'70px'}}/>        
         </div>

@@ -19,10 +19,23 @@ export const ModalCenter = styled.div`
     
     .menu_list{
         width: 100%;
-        margin: 0 auto;
-        height: 295px;
-    }
+        margin: auto auto;
+        height: 295px;        
+        margin: 0 100px;
+        display:inline-flex;
+    }  
+`;
+
+export const ModalMenuItem = styled.div`
+    color: #fff;
+    width: 150px;  
     ul{
-        list-style: none;
-    }
+        list-style:none;
+    }  
+`;
+
+export const ModalMenuItemList = styled.li`
+    color: #fff;
+    width: 150px;
+    height: 30px;
 `;

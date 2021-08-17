@@ -369,10 +369,10 @@ const Signup = () => {
                             <InputBox placeholder='Input your Phone Number'></InputBox>                           
                         </InputWrap>
                         <InputWrap>
-                            <InputBtn style={{backgroundColor:'#eac684'}} onClick={onClickDupleId}> 회원가입</InputBtn>                                                                                                  
+                            <InputBtn style={{backgroundColor:'#eac684'}} onClick={onClickSignup}> 회원가입</InputBtn>                                                                                                  
                         </InputWrap>
                         <InputWrap>                            
-                            <InputBtn style={{backgroundColor:'#f5dc00'}} onClick={onClickDupleId}> 카카오 회원가입</InputBtn>                                                                      
+                            <InputBtn style={{backgroundColor:'#f5dc00'}} > 카카오 회원가입</InputBtn>                                                                      
                         </InputWrap>
                     </div>
                     {/* <BtnWrap>
