@@ -8,10 +8,16 @@ import React, { FC } from 'react'
 import { useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import useSWR from 'swr'
-import { DetailBtnWrap, DetailMenu, DetailTop, DetailWrap } from './styles'
+import { DetailBtnWrap, DetailMenu, DetailTop, DetailWrap, VideoWrap } from './styles'
+import VideoJS from '@components/VideoJS'
+
+// declare global{
+//     Plyr:any; //Kakao Authentication API        
+//   }
 
 interface Props{
     user:string;
+    Plyr:any;
 }
 
 const Detail:FC<Props> = () => {
@@ -40,21 +46,35 @@ const Detail:FC<Props> = () => {
         }).catch((err)=>{
             console.log(err);
         });
-    }
+    }    
+    const videoJsOptions = { // lookup the options in the docs for more options
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        fluid: true,
+        poster:thumbnail,
+        sources: [{
+          src: srcPath,
+          type: 'video/mp4'
+        }]
+      }
+    
     return (
         <DetailWrap>
             <DetailTop>                
                 <div className='detail_src'>
                     {/* <img src={thumbnail} /> */}
                     {/* <video src={srcPath} controls /> */}
-                    <iframe width="560" 
+                    {/* <iframe width="560" 
                     height="315"
                     src={"https://www.youtube.com/embed/52wNPhtanSU"}
                     title="YouTube video player" 
                     frameBorder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen>                        
-                    </iframe>
+                    </iframe> */}
+                    <VideoJS options={videoJsOptions}>
+                    </VideoJS>                   
                 </div>              
                 <div className='detail_info'>
                     <div className='detail_title'>{title}</div>

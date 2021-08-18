@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import loadable from "@loadable/component";
 declare global{
   interface Window{
-    Kakao:any; //Kakao Authentication API
+    Kakao:any; //Kakao Authentication API    
   }
 }
 

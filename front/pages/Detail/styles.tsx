@@ -179,18 +179,5 @@ export const DetailTop = styled.div`
 
 
 export const VideoWrap = styled.div`
-    position: relative;
-    max-height: 100%;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: auto;
-    color: #fff;
-    line-height: normal;
-    font-family: "Helvetica Neue",Helvetica,Arial!important;
-    font-size: 10px;
-    overflow: visible;
-    border-collapse: separate;
+    
 `;
