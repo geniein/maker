@@ -4,7 +4,7 @@ import React, { useCallback, useState } from 'react'
 import { useHistory } from 'react-router';
 import useSWR from 'swr';
 import {HeaderContainer, HeaderLogo, HeaderWrap} from './styles';
-import Modal from '@components/Modal';
+import Hamburger from '@components/Hamburger';
 import { Link } from 'react-router-dom';
 import { Badge } from '@material-ui/core';
 import { ShoppingCart,Menu } from '@material-ui/icons';
@@ -65,7 +65,7 @@ const Header = () => {
                     <Badge><Menu onClick={onClickHamburger}></Menu></Badge></li>
                 </ul>                
             </HeaderContainer>                                    
-            <Modal isDisplay={display} setIsDisplay={setDisplay}></Modal>
+            <Hamburger isDisplay={display} setIsDisplay={setDisplay}></Hamburger>
         </HeaderWrap>
         <div style={{paddingTop:'70px'}}/>        
         </div>
