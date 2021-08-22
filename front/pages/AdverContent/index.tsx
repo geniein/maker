@@ -63,7 +63,7 @@ const AdverContent = () => {
                 {adList && <ACContainer>
                     {adList?.map((val:any, idx:number) =>{                    
                             return ( 
-                                <Card key={val.id} id={val.uk} thumbnail={val.thumbnail} title={val.title} hashTag={val.hashTag} price={val.price} from={'content'}/>                            
+                                <Card key={idx} id={val.contentId} thumbnail={val.thumbnail} title={val.title} hashTag={val.hashTag} price={val.price} from={'content'}/>                            
                             )
                         })} 
                 </ACContainer>            

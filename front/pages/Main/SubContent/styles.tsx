@@ -101,3 +101,58 @@ export const CardList = styled.div`
     right: 35px;
   }
 `;
+
+export const EventMainWrap = styled.div`
+    width: 100%;
+    padding: 50px 0;
+    background: #add7e9;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;    
+    h2{
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 22px;
+      color: #fff;
+    }
+    span{
+      font-size: 15px;
+      font-family: 'noto_b';
+    }
+`;
+
+export const EventMainList = styled.div`
+  display: inline-flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width:100%;
+  height:300px;  
+`;
+
+export const EventMainItem = styled.div`
+  display: flex;
+  flex-flow: column wrap;
+  width:200px;
+  margin: 0 10px; 
+  .round-item{
+    width:200px;
+    height:200px;    
+    border-radius:50%;
+    background-color:#fff; 
+    &:hover{
+      background-color:#add7e9;
+      opacity: 0.33;
+      transition: 0.2s;
+    }
+  }
+  p{
+    font-size: 14px;
+    color: #212121;
+    margin-top: 20px;
+    span{
+      font-size: 15px;
+      font-family: 'noto_b';
+      font-weight:bold;
+    }
+  }
+`;

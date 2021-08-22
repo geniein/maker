@@ -11,22 +11,30 @@ export class NoticesService {
     @InjectRepository(Notices) private noticesRepository: Repository<Notices>,
   ){}   
 
-    async findNotices(id?){
+    async findNotices(category, id?){
       const result = id === undefined ?
-      await this.noticesRepository.find() :
-      await this.noticesRepository.find({where:{id:id}});      
+      await this.noticesRepository.find({where:{category:category.toUpperCase()}}) :
+      await this.noticesRepository.find({where:{id:id, category:category.toUpperCase()}});      
     // const result =await this.itemcontentsRepository.find({where:{id:id}});
     return result;
     }
 
+    async findEvents(id?){
+      const result = id === undefined ?
+      await this.noticesRepository.find({where:{category:"EVENT"}}) :
+      await this.noticesRepository.find({where:{id:id,category:"EVENT"}});      
+    // const result =await this.itemcontentsRepository.find({where:{id:id}});
+    return result;
+    }
 
-  async addNotice(category:string, title: string, content: string, author: string, srcPath: string) {
+  async addNotice(category:string, title: string, content: string,srcPath: string, author: string, thumbnail:string) {
     const result = await this.noticesRepository.save({      
       category,
       title,      
       content,
       author,
-      srcPath
+      srcPath,
+      thumbnail
     });
     return result;
   }

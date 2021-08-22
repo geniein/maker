@@ -8,7 +8,7 @@ import React, { FC } from 'react'
 import { useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import useSWR from 'swr'
-import { DetailBtnWrap, DetailMenu, DetailTop, DetailWrap, VideoWrap } from './styles'
+import { AdBanner, DetailBtnWrap, DetailMenu, DetailTop, DetailWrap, VideoWrap } from './styles'
 import VideoJS from '@components/VideoJS'
 
 // declare global{
@@ -73,8 +73,10 @@ const Detail:FC<Props> = () => {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen>                        
                     </iframe> */}
-                    <VideoJS options={videoJsOptions}>
-                    </VideoJS>                   
+                    <VideoJS options={videoJsOptions}/>
+                    <AdBanner>
+                        AD Banner
+                    </AdBanner>
                 </div>              
                 <div className='detail_info'>
                     <div className='detail_title'>{title}</div>

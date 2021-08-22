@@ -18,6 +18,7 @@ interface Props{
 const AddContent:FC<Props> = ({postStatus,orderId,thumnailSrc}) => {
 
     const [postData, setPostData] = useState<any>(undefined);
+    const [postDes,setPostDes]  = useState<any>('');
     const history = useHistory();
 
     const location = useLocation<any>(); //location    
@@ -41,36 +42,23 @@ const AddContent:FC<Props> = ({postStatus,orderId,thumnailSrc}) => {
     //     }).catch((err)=>{
     //         console.log(err);
     //     })  
-    // },[]);
-    if(postData===undefined) return (<div>Processing</div>)
+    // },[]);    
+    if(postData===undefined) return (<div>Processing</div>)    
     return (        
         <div>
-            <AddContentWrap>                                        
-                {postData &&<MyContentList>                
+            <AddContentWrap>                                                       
+                <MyContentList>
                     <MyItem>
-                        {/* <div className='list_title'>
-                            <p>주문번호</p>
-                            <p>상품명</p>
-                        </div>
                         <div className='list_title'>
-                            <p>val.orderId</p>
-                            <p>val.title</p>
-                        </div> */}
-                        <div className='item_wrap'>
-                            <div className='item_src'>                           
-                                <img src={postData.thumbnail}/>
-                            </div>
-                            <div className='item_box'>
-                                <div>
-                                    <p>주문번호</p>
-                                    <p>{postData.orderId}</p>                                                                                                                                  
-                                </div>
-                            </div>
+                            <select onChange={(e:any)=>setPostDes(e.target.value)}>
+                                <option value="item-contents">컨텐츠추가</option>
+                                <option value="notices">공지추가</option>
+                                <option value="notices">이벤트추가</option>                    
+                            </select>
                         </div>
-                    </MyItem>                                      
-                </MyContentList>}                       
-                
-                <NewPost postStatus={postData.postStatus}des={"item-contents"} orderId={postData.orderId} contentId={postData.contentId}/>                     
+                    </MyItem>
+                </MyContentList>               
+                <NewPost postStatus={postDes} des={postDes}/>                     
             </AddContentWrap>
         </div>                   
     )

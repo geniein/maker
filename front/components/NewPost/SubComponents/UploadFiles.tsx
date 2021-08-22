@@ -17,7 +17,7 @@ const UploadFiles = forwardRef((props, ref) => {
             return new Promise((resolve, reject) => {
                 console.log(selectedFiles);
                 if (selectedFiles) {
-                    let result = fileUpload(selectedFiles)
+                    let result = fileUpload(`/api/item-contents/files`,selectedFiles)
                         .then((response:any) => {
                             setMessage(response.data);
                             resolve(response.data);

@@ -18,8 +18,9 @@ export const DetailTop = styled.div`
 
     .detail_src{        
         width:50%;        
-        display: inline-flex;
-        justify-content:center;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content:center;        
         align-items:center; 
         text-align:center;
         margin:0 20px;    
@@ -180,4 +181,12 @@ export const DetailTop = styled.div`
 
 export const VideoWrap = styled.div`
     
+`;
+
+export const AdBanner = styled.div`
+    margin: 20px 0;
+    width: 100%;
+    height: 100px;
+    background-color: #000;
+    color:#fff
 `;

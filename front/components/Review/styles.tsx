@@ -51,6 +51,9 @@ export const TableWrap = styled.table`
         background: #eee;
         padding: 20px;
         textAlign: left;
+        img{
+            width:100%;
+        }
     }        
     `;
 

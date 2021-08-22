@@ -6,9 +6,10 @@ import { HamburgerCenter, HamburgerMenuItem,HamburgerMenuItemList, HamburgerWrap
 interface Props{
     isDisplay:boolean;
     setIsDisplay:Dispatch<SetStateAction<boolean>>;
+    userLevel?:string;
 }
 
-const Hamburger:FC<Props> = ({isDisplay, setIsDisplay})=> {
+const Hamburger:FC<Props> = ({isDisplay, setIsDisplay,userLevel})=> {
     const history = useHistory();
     const clickRef = useRef<any>(null);    
 
@@ -89,7 +90,16 @@ const Hamburger:FC<Props> = ({isDisplay, setIsDisplay})=> {
                                 감사인사
                             </HamburgerMenuItemList>
                         </ul>
-                    </HamburgerMenuItem>                          
+                    </HamburgerMenuItem>
+                    {userLevel ==="1" && <HamburgerMenuItem>
+                        관리자
+                        <ul>
+                            <HamburgerMenuItemList onClick={()=>onClickPage('addcontent','ALL')}>
+                                새글쓰기
+                            </HamburgerMenuItemList>                            
+                        </ul>
+                    </HamburgerMenuItem>        
+                    }                    
                 </div>
             </HamburgerCenter>
         </HamburgerWrap>        

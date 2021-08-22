@@ -17,9 +17,9 @@ const SubNotice = forwardRef((props, ref) => {
     const [innerValue, setInnerValue] = useState<any>(undefined);
     const [currPage, setCurrPage] =useState(0);
 
-    const {data:noticeList} = useSWR(`/api/notices`,fetcher);
+    const {data:noticeList} = useSWR(`/api/notices/notice`,fetcher);
     const onClickNotice = useCallback((id:number)=>{
-        axios.get(`/api/notices/${id+1}`).then((res)=>{            
+        axios.get(`/api/notices/notice/${id}`).then((res)=>{            
             setInnerState(true);
             setInnerValue(res.data[0]);            
         })
@@ -50,7 +50,7 @@ const SubNotice = forwardRef((props, ref) => {
                             {noticeList?.map((val:any,idx:number)=>{
                                 if(idx >= currPage*10 && idx < (currPage+1)*10)
                                 return(
-                                <tr className='notice_row' key={idx} onClick={()=>onClickNotice(idx)}>
+                                <tr className='notice_row' key={idx} onClick={()=>onClickNotice(val.id)}>
                                     <td>공지</td>
                                     <td>{val.title}</td>
                                     <td>{val.author}</td>
@@ -66,9 +66,9 @@ const SubNotice = forwardRef((props, ref) => {
                         })}                                               
                         <li>&gt;</li>
                     </Paging>
-                    <div style={{height:'50px'}}>
+                    {/* <div style={{height:'50px'}}>
                         <button onClick={()=>setNewState(!newState)}>NewPost</button>
-                    </div> 
+                    </div>  */}
                 </NoticeWrap>
                 }             
                 {
@@ -93,7 +93,7 @@ const SubNotice = forwardRef((props, ref) => {
                     </NoticeInner>                    
                 }
                 {
-                    newState && !innerState && <NewPost postStatus='notice' des="notices"/>
+                    newState && !innerState && <NewPost postStatus='notices' des="notices"/>
                 }               
             </Container> 
     )

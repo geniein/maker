@@ -4,6 +4,7 @@ import loadable from "@loadable/component";
 declare global{
   interface Window{
     Kakao:any; //Kakao Authentication API    
+    clipboardData:any //clipboard
   }
 }
 

@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import {NoticeContainer, NoticeContent, NoticeSub, NoticeTip, NoticeWrap} from './styles';
 
 const Notice = ()=> {
-    const {data:noticeList} = useSWR(`/api/notices`,fetcher);
+    const {data:noticeList} = useSWR(`/api/notices/notice`,fetcher);
     return (
         <NoticeWrap>
             <NoticeContainer>
@@ -17,7 +17,7 @@ const Notice = ()=> {
                             pathname: `/workspace/customservice`,
                             state: {
                                 currPage: 'NOTICE',
-                                notice: idx                            
+                                notice: val.id                            
                             }
                         }} 
                         style={{textDecoration:'none', color:'inherit'}}>

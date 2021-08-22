@@ -89,12 +89,12 @@ const Carousel:FC<Props> = ({images , stlyes, autoplay}) => {
                         return (<label key={idx} htmlFor={`radio${idx}`} className='manual-btn' onClick={()=>carouselCount= idx + 1}></label>)
                     })}
                 </div>
-                <ButtonPrev onClick={() => onChangeImage(currNo-1)}>
+                {/* <ButtonPrev onClick={() => onChangeImage(currNo-1)}>
                         <ChevronLeft fontSize='large' />
                 </ButtonPrev>
                 <ButtonNext onClick={() => onChangeImage(currNo + 1)}>
                     <ChevronRight fontSize='large'/>
-                </ButtonNext>
+                </ButtonNext> */}
             </SlideBox>
         </ImageSlide>
     )

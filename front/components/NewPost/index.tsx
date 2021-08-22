@@ -35,7 +35,7 @@ const NewPost:VFC<Props> = ({postStatus, des, orderId, contentId}) =>{
         if (content.trim() == '') {
             alert('내용을 입력해주세요'); return;
         }        
-        if( postStatus==='item-contents' && uploadReferenece !== null){
+        if( postStatus==='item-contents'){
             await uploadReferenece?.current?.upload().then( (result:any) => {
                 const files = result;
                 console.log('file',result);
@@ -56,7 +56,41 @@ const NewPost:VFC<Props> = ({postStatus, des, orderId, contentId}) =>{
                 })                
             }).catch( (err:any) =>{
                 console.log(err);
-            });            
+            });
+            // axios.post(`/api/${postStatus}/newpost`,{
+            //     title,
+            //     content,
+            //     category,
+            //     price,
+            //     discount,
+            //     hashTag,                    
+            //     srcPath:'test',
+            //     thumbnail: "temp"
+            // }).then((res:any)=>{
+            //     alert('Sucess Post');
+            // }).catch((err:any)=>{
+            //     console.log(err);
+            // })              
+        } else if( postStatus==='notices'){
+            await uploadReferenece?.current?.upload().then( (result:any) => {
+                const files = result;
+                console.log('file',result);
+
+                axios.post(`/api/${postStatus}/newpost`,{
+                    title,
+                    content,
+                    category,                                        
+                    hashTag,                    
+                    srcPath:'test',
+                    thumbnail: files
+                }).then((res:any)=>{
+                    alert('Sucess Post');
+                }).catch((err:any)=>{
+                    console.log(err);
+                })                
+            }).catch( (err:any) =>{
+                console.log(err);
+            });                        
         } else {
             axios.post(`/api/${postStatus}/newpost`,{
                 title,
@@ -84,7 +118,14 @@ const NewPost:VFC<Props> = ({postStatus, des, orderId, contentId}) =>{
                         <tbody>
                             <tr>
                                 <th>Category</th>
-                                <td><input type="text" onChange={onChangeCategory}/></td>
+                                <td>
+                                    {/* <input type="text" onChange={onChangeCategory}/> */}
+                                    <select onClick={(e:any)=>setCategory(e.target.value)}>
+                                        <option value="NOTICE">공지</option>
+                                        <option value="EVENT">이벤트</option>
+                                        <option value="REVIEW">리뷰</option>
+                                    </select>
+                                </td>
                                 <th>HashTag</th>
                                 <td><input type="text" onChange={onChangeHashTag}/></td>
                             </tr>
@@ -96,7 +137,7 @@ const NewPost:VFC<Props> = ({postStatus, des, orderId, contentId}) =>{
                             </tr>}
                         </tbody>
                     </ItemContentWrap>
-                    <UploadFiles ref={uploadReferenece} /> 
+                    {postStatus!=='item-reviews'&&<UploadFiles ref={uploadReferenece} /> }
                     <EditorComponent value={content} onChange={onEditorChange}/>                    
                     {/* <div className="text-center pd12">
                         <button className="lf-button primary" onClick={onClickSearch}>저장</button>

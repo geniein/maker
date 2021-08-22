@@ -69,7 +69,7 @@ const Mycontent = () => {
                             <div className='item_btn'>
                                 다운로드
                             </div>
-                            {val.reviewStatus ==='N' && <div className='item_btn' onClick={()=>onClickPage('addcontent',val.orderId,val.contentId,val.thumbnail)}>
+                            {val.reviewStatus ==='N' && <div className='item_btn' onClick={()=>onClickPage('addreview',val.orderId,val.contentId,val.thumbnail)}>
                                 리뷰쓰기
                             </div>}
                         </div>

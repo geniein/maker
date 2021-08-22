@@ -10,6 +10,7 @@ import { useCallback } from 'react'
 import { useHistory } from 'react-router'
 import {MainWrap, CardList, MainContainer, MainMenu } from './styles'
 import { Notice, SubTitle } from './SubContent'
+import EventMain from './SubContent/EventMain'
 import SubContents from './SubContent/SubContents'
 
 const Main = () => {
@@ -88,7 +89,8 @@ const Main = () => {
                             return <Card key={idx} id={val.reviewId} thumbnail={val.thumbnail} title={val.title} hashTag={val.hashTag} price={val.price} from={'review'}/>
                         })} 
                     </CardList>                    
-                </MainContainer> 
+                </MainContainer>
+                <EventMain/>
             </MainWrap>            
         </div>
     )

@@ -12,12 +12,15 @@ import { Container, CSMenu, CSTop, NoticeInner, NoticeTable, Paging, GoListBtn, 
 import SubFAQ from './SubComponent/SubFAQ'
 import SubNotice from './SubComponent/SubNotice'
 import SubReview from './SubComponent/SubReview'
+import SubEvent from './SubComponent/SubEvent'
 
 const CustomService = () => {  
     const [currPage, setCurrPage] = useState('NOTICE');
     const [notice, setNotice] = useState(undefined);
+    const [event, setEvent] = useState(undefined);
     const noticeRef = useRef<any>();
     const reviewRef = useRef<any>();
+    const eventRef = useRef<any>();
     const faqRef = useRef<any>();
 
     const location = useLocation<any>(); //location    
@@ -36,16 +39,25 @@ const CustomService = () => {
         setCurrPage('FAQ');
     }
 
+    const onClickMenuEvent = () =>{
+        eventRef.current?.onClickMenu();                
+        setCurrPage('EVENT');
+    }
+
     useEffect(()=>{
         if(notice !== undefined){            
             noticeRef.current?.onClickNotice(notice);
             setNotice(undefined);
+        }else if(event !== undefined){
+            eventRef.current?.onClickEvent(event);
+            setEvent(undefined);
         }
     },[currPage])
 
     if(location?.state !== undefined){                
         setCurrPage(location.state.currPage);        
         setNotice(location.state.notice);               
+        setEvent(location.state.event);
         delete location.state;
     }
 
@@ -66,14 +78,18 @@ const CustomService = () => {
                         <li onClick={onClickMenuReview}>
                             후기게시판
                         </li>
+                        {/* <li onClick={onClickMenuEvent}>
+                            이벤트
+                        </li> */}
                         <li onClick={onClickMenuFAQ}>
                             FAQ
                         </li>
                     </ul>
                 </CSMenu>        
-            <CSWrap>                                           
+            <CSWrap>
                 {currPage ==='NOTICE'&& <SubNotice ref={noticeRef}/> }
                 {currPage ==='REVIEW'&& <SubReview ref={reviewRef}/> }
+                {currPage ==='EVENT'&& <SubEvent ref={eventRef}/> }
                 {currPage ==='FAQ'&& <SubFAQ ref={faqRef}/> }            
             </CSWrap>
         </div>

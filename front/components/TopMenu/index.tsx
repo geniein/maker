@@ -4,7 +4,7 @@ import { TopWrap, TopContainer, TopMenuLi, TopMenuUl } from './styles'
 
 const TopMenu = () => {
     const history = useHistory();
-    const onClickPage = (pagePath:string,pageState:string) =>{
+    const onClickPage = (pagePath:string,pageState?:string) =>{
         history.push({
             pathname: `/workspace/${pagePath}`,
             state:{currPage:pageState}
@@ -73,7 +73,7 @@ const TopMenu = () => {
                         </ul>
                     </TopMenuLi>
                     <TopMenuLi style={{color:'#cccccc'}}> | </TopMenuLi>
-                    <TopMenuLi>이벤트</TopMenuLi>
+                    <TopMenuLi onClick={()=>onClickPage('event','ALL')}>이벤트</TopMenuLi>
                     <TopMenuLi onClick={()=>onClickPage('customservice','NOTICE')}>공지사항</TopMenuLi>
                     <TopMenuLi onClick={()=>onClickPage('customservice','REVIEW')}>후기</TopMenuLi>
                 </TopMenuUl>                

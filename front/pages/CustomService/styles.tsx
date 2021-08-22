@@ -145,6 +145,9 @@ export const NoticeInner = styled.div`
         border-bottom: 1px solid #dadada;
         width: 100%;
         margin: 0 auto;
+        img{
+            width:100%;
+        }
     }
 `;
 

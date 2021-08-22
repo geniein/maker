@@ -41,7 +41,7 @@ const Header = () => {
             state:{currPage:pageState}
         })
     }    
-
+    const userLevel = userData !== undefined ? userData.level : undefined;
     return (
         <div>
         <HeaderWrap>
@@ -65,7 +65,7 @@ const Header = () => {
                     <Badge><Menu onClick={onClickHamburger}></Menu></Badge></li>
                 </ul>                
             </HeaderContainer>                                    
-            <Hamburger isDisplay={display} setIsDisplay={setDisplay}></Hamburger>
+            <Hamburger isDisplay={display} setIsDisplay={setDisplay} userLevel={userLevel}></Hamburger>
         </HeaderWrap>
         <div style={{paddingTop:'70px'}}/>        
         </div>

@@ -2,8 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { NoticesService } from './notices.service';
 import { AddNoticesDto } from './dto/add-notices';
 import { ApiOperation } from '@nestjs/swagger';
-import { Notice } from '../decorators/user.decorator';
+import { Notice, User } from '../decorators/user.decorator';
 import { Notices } from 'src/entities/Notices';
+import { Users } from 'src/entities/Users';
 
 @Controller('api/notices')
 export class NoticesController {
@@ -11,31 +12,47 @@ export class NoticesController {
 
 
   @ApiOperation({ summary: '공지사항 리스트 가져오기' })
-  @Get()
-  async findNotices(@Notice() notices: Notices) {    
-    const rtn = await this.noticesService.findNotices();
+  @Get(':category')
+  async findNotices(@Param('category') category: string) {    
+    const rtn = await this.noticesService.findNotices(category);
     // return itemcontent || false;
     return rtn || false;
   }
 
   @ApiOperation({ summary: '공지사항 가져오기' })
-  @Get(':id')
-  async findNotice(@Param('id') id: string) {
-    const rtn = await this.noticesService.findNotices(id);
+  @Get(':category/:id')
+  async findNotice(@Param('category') category: string, @Param('id') id: string) {
+    const rtn = await this.noticesService.findNotices(category,id);
     return rtn || false;
   }
 
 
   @ApiOperation({ summary: '공지사항 추가' })
   @Post('newpost')
-  addNotices(@Body() data: AddNoticesDto) {
+  addNotices(@User() user: Users,@Body() data: AddNoticesDto) {
     return this.noticesService.addNotice(
       data.category,
       data.title,
-      data.content,
-      data.author,
-      data.srcPath
+      data.content,       
+      data.srcPath,
+      user.userNickname,
+      data.thumbnail
       );
+  }
+
+  @ApiOperation({ summary: '이벤트 리스트 가져오기' })
+  @Get('event')
+  async findEvents(@Notice() notices: Notices) {    
+    const rtn = await this.noticesService.findEvents();
+    // return itemcontent || false;
+    return rtn || false;
+  }
+
+  @ApiOperation({ summary: '이벤트 가져오기' })
+  @Get('event/:id')
+  async findEvent(@Param('id') id: string) {
+    const rtn = await this.noticesService.findEvents(id);
+    return rtn || false;
   }
 
   @Get()
