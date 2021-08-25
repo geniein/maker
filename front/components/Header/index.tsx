@@ -3,16 +3,17 @@ import axios from 'axios';
 import React, { useCallback, useState } from 'react'
 import { useHistory } from 'react-router';
 import useSWR from 'swr';
-import {HeaderContainer, HeaderLogo, HeaderWrap} from './styles';
+import {AvatarRound, HeaderContainer, HeaderLogo, HeaderWrap} from './styles';
 import Hamburger from '@components/Hamburger';
 import { Link } from 'react-router-dom';
-import { Badge } from '@material-ui/core';
+import { Avatar, Badge} from '@material-ui/core';
 import { ShoppingCart,Menu } from '@material-ui/icons';
 import { Li } from '@components/Content/styles';
+import { useMediaQuery } from 'react-responsive';
 
 const Header = () => {
     const history = useHistory();
-
+    const isMobile = useMediaQuery({query:"(max-width: 576px)"})
     const { data: userData, error, revalidate, mutate } = useSWR('/api/users', fetcher, {
         dedupingInterval: 2000, // 2초
       });
@@ -47,15 +48,17 @@ const Header = () => {
         <HeaderWrap>
             <HeaderContainer>            
                 <HeaderLogo src="/public/logo.png" onClick={onClickLogo} style={{cursor:'pointer'}}/>
-                <ul>
-
-                    {!userData && <li onClick={onClickLogin}>로그인</li>}
-                    {!userData && <li onClick={onClickSignup}>회원가입</li>}
-                    {userData && <li onClick={onClickLogOut}>로그아웃</li>}                
-                    {userData && <li onClick={()=>onClickPage('mypage','MYCONTENT')}>마이페이지</li>}                      
-                    <li onClick={()=>onClickPage('customservice','FAQ')}>
+                <ul>                    
+                    {!userData && !isMobile &&<li onClick={onClickLogin}>로그인</li>}
+                    {!userData && !isMobile &&<li onClick={onClickSignup}>회원가입</li>}
+                    {userData && !isMobile &&<li onClick={onClickLogOut}>로그아웃</li>}                
+                    {userData && !isMobile &&<li onClick={()=>onClickPage('mypage','MYCONTENT')}>마이페이지</li>}                      
+                    {!isMobile &&<li onClick={()=>onClickPage('customservice','FAQ')}>
                         <Link to={'customservice'} style={{textDecoration:'none', color: 'inherit'}}>고객지원</Link>                        
-                    </li>                
+                    </li>
+                    }
+                    {!userData && isMobile && <li onClick={onClickLogin}>Login</li>}              
+                    {userData && isMobile && <li onClick={()=>onClickPage('mypage','MYCONTENT')}><AvatarRound>My</AvatarRound></li>}              
                     {userData && <li>
                         <Badge badgeContent={4} color="secondary">
                             <ShoppingCart onClick={()=>onClickPage('mypage','MYCART')}/>

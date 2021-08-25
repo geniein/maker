@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import loadable from "@loadable/component";
+import Editorspace from '@layouts/Editorspace';
 declare global{
   interface Window{
     Kakao:any; //Kakao Authentication API    
@@ -15,6 +16,7 @@ const App = () => {
         <Switch>
           <Redirect exact path="/" to="/workspace/main" />                    
           <Route path="/workspace/:workspace" component={Workspace} /> 
+          <Route path="/editorspace" component={Editorspace} /> 
           {/* <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} /> 
           <Route path="/main" component={Main} />

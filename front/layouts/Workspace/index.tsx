@@ -16,13 +16,15 @@ import Mypage from '@pages/Mypage'
 import Order from '@pages/Order'
 import Signup from '@pages/Signup'
 import React from 'react'
+import { useMediaQuery } from 'react-responsive'
 import { Route, Switch } from 'react-router'
 
-const Workspace =() => {    
+const Workspace =() => {
+    const isMobile = useMediaQuery({query:"(max-width: 576px)"})    
     return (
         <div>
             <Header/>
-            <TopMenu/>
+            {!isMobile&&<TopMenu/>}
                 <Switch>
                     <Route path="/workspace/login" component={Login} />
                     <Route path="/workspace/signup" component={Signup} />

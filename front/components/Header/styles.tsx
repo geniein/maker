@@ -18,7 +18,8 @@ export const HeaderContainer = styled.div`
     border-bottom: 1px solid;
     position: relative;    
     ul {
-        float: right;    
+        float: right;
+        height: 30px;    
         margin: 30px 0px 0px 20px;
         color: #848484;
     }
@@ -39,6 +40,16 @@ export const HeaderContainer = styled.div`
 export const HeaderLogo = styled.img`
     margin: 0 auto;    
     height: 70px;    
+`;
+export const AvatarRound = styled.div`    
+    width: 1.5em;
+    height: 1.5em;
+    display: inline-block;
+    border-radius: 50%;    
+    background-color: gray;
+    flex-shrink: 0;
+    user-select: none;
+    color:#fff;       
 `;
 
 // export const HeaderWrapNew = styled.header`

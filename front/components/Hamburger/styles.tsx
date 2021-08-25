@@ -16,13 +16,13 @@ export const HamburgerCenter = styled.div`
     width: 100%;
     top: 280px;
     position: absolute;
-    z-index: 10001;    
+    z-index: 10001;
+    margin: 0 100px;    
     ${responsiveWidth};
     .menu_list{
         width: 100%;
         margin: auto auto;
-        height: 295px;        
-        margin: 0 100px;
+        height: 295px;                
         display:inline-flex;
         flex-flow: row wrap;
     }  

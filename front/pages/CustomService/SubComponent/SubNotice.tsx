@@ -17,6 +17,8 @@ const SubNotice = forwardRef((props, ref) => {
     const [innerValue, setInnerValue] = useState<any>(undefined);
     const [currPage, setCurrPage] =useState(0);
 
+    const maxRow = 5; //Max Row
+
     const {data:noticeList} = useSWR(`/api/notices/notice`,fetcher);
     const onClickNotice = useCallback((id:number)=>{
         axios.get(`/api/notices/notice/${id}`).then((res)=>{            
@@ -48,7 +50,7 @@ const SubNotice = forwardRef((props, ref) => {
                                 <th>작성일</th>
                             </tr>                       
                             {noticeList?.map((val:any,idx:number)=>{
-                                if(idx >= currPage*10 && idx < (currPage+1)*10)
+                                if(idx >= currPage*maxRow && idx < (currPage+1)*maxRow)
                                 return(
                                 <tr className='notice_row' key={idx} onClick={()=>onClickNotice(val.id)}>
                                     <td>공지</td>
@@ -61,7 +63,7 @@ const SubNotice = forwardRef((props, ref) => {
                     </NoticeTable>
                     <Paging>
                         <li>&lt;</li>
-                        {noticeList && [...Array(Math.ceil(noticeList.length/10))].map((val:any,idx:number)=>{                            
+                        {noticeList && [...Array(Math.ceil(noticeList.length/maxRow))].map((val:any,idx:number)=>{                            
                             return <li key={idx} onClick={()=>setCurrPage(idx)}>{idx+1}</li> 
                         })}                                               
                         <li>&gt;</li>

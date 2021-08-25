@@ -18,7 +18,7 @@ const SubNotice = forwardRef((props, ref) => {
     const [innerState, setInnerState] = useState(false);
     const [innerValue, setInnerValue] = useState<any>(undefined);
     const [currPage, setCurrPage] =useState(0);
-    
+    const maxRow = 5; //Max Row
     const location = useLocation<any>(); //location    
     
     // const {data:noticeList} = useSWR(`/api/notices`,fetcher);
@@ -64,7 +64,7 @@ const SubNotice = forwardRef((props, ref) => {
                                 <th>작성일</th>
                             </tr>                       
                             {reviewList?.map((val:any,idx:number)=>{
-                                if(idx >= currPage*10 && idx < (currPage+1)*10)
+                                if(idx >= currPage*maxRow && idx < (currPage+1)*maxRow)
                                 return(
                                 <tr className='notice_row' key={idx} onClick={()=>onClickReview(val.reviewId)}>
                                     <td>리뷰</td>
@@ -77,7 +77,7 @@ const SubNotice = forwardRef((props, ref) => {
                     </NoticeTable>
                     <Paging>
                         <li>&lt;</li>
-                        {reviewList && [...Array(Math.ceil(reviewList.length/10))].map((val:any,idx:number)=>{                            
+                        {reviewList && [...Array(Math.ceil(reviewList.length/maxRow))].map((val:any,idx:number)=>{                            
                             return <li key={idx} onClick={()=>setCurrPage(idx)}>{idx+1}</li> 
                         })}                                               
                         <li>&gt;</li>

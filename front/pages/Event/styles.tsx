@@ -5,7 +5,10 @@ export const EventWrap = styled.div`
     width: 100%;
     height: auto;
     margin: 0 auto;
-    border-bottom: 1px solid #ececec;        
+    border-bottom: 1px solid #ececec;
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content:center;        
 `;
 
 
@@ -62,7 +65,7 @@ export const EventMenu = styled.div`
     
 `;
 
-export const EventItemList = styled.ul`
+export const EventItemList = styled.div`
     width: 100%;
     margin-bottom: 50px;
     list-style: none;
@@ -70,6 +73,14 @@ export const EventItemList = styled.ul`
     display: inline-block;    
     margin-top: -4px;    
     ${responsiveWidth};
+    ul{
+        width: 100%;
+        margin-bottom: 50px;
+        list-style: none;
+        margin: 0 auto;
+        display: inline-block;    
+        margin-top: -4px;    
+    }
 `;
 
 export const EventItem = styled.li`

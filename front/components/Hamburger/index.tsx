@@ -1,5 +1,7 @@
+import axios from 'axios';
 import React, { CSSProperties, Dispatch, FC, SetStateAction, useEffect, useRef, useState } from 'react'
 import { render } from 'react-dom';
+import { useMediaQuery } from 'react-responsive';
 import { useHistory } from 'react-router'
 import { HamburgerCenter, HamburgerMenuItem,HamburgerMenuItemList, HamburgerWrap } from './styles'
 
@@ -12,6 +14,7 @@ interface Props{
 const Hamburger:FC<Props> = ({isDisplay, setIsDisplay,userLevel})=> {
     const history = useHistory();
     const clickRef = useRef<any>(null);    
+    const isMobile = useMediaQuery({query:"(max-width: 576px)"})
 
     const handleCloseHamburger = (e:any) =>{        
         if(clickRef.current && !clickRef?.current?.contains(e.target)){                                    
@@ -27,9 +30,14 @@ const Hamburger:FC<Props> = ({isDisplay, setIsDisplay,userLevel})=> {
         })        
     }
 
+    const onClickLogOut = (e:any) => {
+        e.preventDefault();
+        axios.post('/api/users/logout').then((res)=>history.push('/'));
+    };
+
     return (
         <HamburgerWrap isDisplay={isDisplay} onClick={handleCloseHamburger} >
-            <HamburgerCenter >
+            <HamburgerCenter style={isMobile===true? {top:'20px', margin:'0 20px'}: {}}>
                 <div className='menu_list' ref={clickRef}>
                     <HamburgerMenuItem>
                         광고영상
@@ -91,6 +99,18 @@ const Hamburger:FC<Props> = ({isDisplay, setIsDisplay,userLevel})=> {
                             </HamburgerMenuItemList>
                         </ul>
                     </HamburgerMenuItem>
+                    {userLevel && <HamburgerMenuItem>
+                        사용자메뉴
+                        <ul>
+                            <HamburgerMenuItemList onClick={onClickLogOut}>
+                                로그아웃
+                            </HamburgerMenuItemList>
+                            <HamburgerMenuItemList onClick={()=>onClickPage('mypage','MYCONTENT')}>
+                                마이페이지
+                            </HamburgerMenuItemList>                            
+                        </ul>
+                    </HamburgerMenuItem>
+                    }
                     {userLevel ==="1" && <HamburgerMenuItem>
                         관리자
                         <ul>

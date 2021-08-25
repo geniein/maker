@@ -54,34 +54,37 @@ const Event =()=>{
                 </ul>
             </EventMenu>
             <EventItemList>
-                <EventItem>
-                    <div className='event_img'>
-                        box
-                    </div> 
-                    <div className='event_text'>
-                        <span className='onOff'>진행중</span>
-                        <div className='event_sub1'>메이커서비스 할인 이벤트!</div>
-                        <div className='event_sub2'>makerservice sale event</div>
-                        <div className='event_period'> 2021-04-09 ~ 당사일정</div>
-                        <div className='event_info'>주문부터 제작까지 스마트하게, 언제 어디서나 간편하게!</div>
-                        <div className='event_btn'>View</div>
-                    </div>                   
-                </EventItem>
-                {eventList.map((val:any,idx:number)=>{
-                    return(<EventItem key={idx}>
-                        <div className='event_img' onClick={()=>onClickEventList(val.id)}>
-                            <img src={val.thumbnail}></img>
+                <ul>
+                    {/* mock data
+                    <EventItem>
+                        <div className='event_img'>
+                            box
                         </div> 
                         <div className='event_text'>
                             <span className='onOff'>진행중</span>
-                            <div className='event_sub1'>{val.title}</div>
+                            <div className='event_sub1'>메이커서비스 할인 이벤트!</div>
                             <div className='event_sub2'>makerservice sale event</div>
                             <div className='event_period'> 2021-04-09 ~ 당사일정</div>
-                            <div className='event_info'>{val.content}</div>
-                            <div className='event_btn' onClick={()=>onClickEventList(val.id)}>View</div>
+                            <div className='event_info'>주문부터 제작까지 스마트하게, 언제 어디서나 간편하게!</div>
+                            <div className='event_btn'>View</div>
                         </div>                   
-                    </EventItem>)
-                })}
+                    </EventItem> */}
+                    {eventList.map((val:any,idx:number)=>{
+                        return(<EventItem key={idx}>
+                            <div className='event_img' onClick={()=>onClickEventList(val.id)}>
+                                <img src={val.thumbnail}></img>
+                            </div> 
+                            <div className='event_text'>
+                                <span className='onOff'>진행중</span>
+                                <div className='event_sub1'>{val.title}</div>
+                                <div className='event_sub2'>makerservice sale event</div>
+                                <div className='event_period'> 2021-04-09 ~ 당사일정</div>
+                                <div className='event_info'>{val.content}</div>
+                                <div className='event_btn' onClick={()=>onClickEventList(val.id)}>View</div>
+                            </div>                   
+                        </EventItem>)
+                    })}
+                </ul>
             </EventItemList>
             <div style={{height:'50px'}}/>
         </EventWrap>
