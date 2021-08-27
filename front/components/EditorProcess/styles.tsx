@@ -7,7 +7,7 @@ export const EditorTop = styled.div`
     z-index: 1;
     background: #fdd47a;
     width: 100%;
-    height: 300px;
+    height: 330px;
     color: #3e3e3e;
     text-align: center;
     padding-top: 30px;
@@ -30,6 +30,7 @@ export const EditorTop = styled.div`
         width: 100%;
         margin-top: 80px;
         list-style: none;
+        padding: 0 0;
     }
 `;
 
@@ -50,6 +51,10 @@ export const EditorProcessItem =styled.li`
             border-radius: 100%;
             overflow: hidden;
             background-color: #fff;
+            img{
+                width:100%;
+                hegiht:100%;
+            }
         }
         .post{
             text-align: left;
