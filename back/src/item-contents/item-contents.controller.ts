@@ -69,7 +69,7 @@ export class ItemContentsController {
 
   @ApiOperation({ summary: '파일 추가' })
   @UseGuards(LoggedInGuard)
-  @UseInterceptors(FileInterceptor('file',multerOptions))
+  @UseInterceptors(FileInterceptor('file',multerOptions('')))
   @Post('files')
   async addItemContentFileUpload(@UploadedFile() file: Express.Multer.File) {
     // const itemcontent = this.itemContentsService.findByUk(data.)

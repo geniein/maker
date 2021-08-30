@@ -19,15 +19,12 @@ import { Users } from './Users';
   @Index('orderId', ['orderId'])
   @Index('userId', ['userId'])
   @Entity({ schema: 'slack', name: 'itemorders' })
-  export class ItemOrders {
-    // @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
-    // id: number;
-    
+  export class ItemOrders {    
     @PrimaryGeneratedColumn('uuid')
     orderId: string;
 
     //@Column('varchar', { name: 'paidId',unique: true, length: 100 })
-    @PrimaryGeneratedColumn('uuid')
+    @Column('varchar', { name: 'paymentId', length: 100,  nullable: true  })
     paymentId: string;
     
     @Column('varchar', { name: 'userId', length: 100,  nullable: true  })

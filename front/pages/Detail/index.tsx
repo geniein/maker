@@ -11,13 +11,8 @@ import useSWR from 'swr'
 import { AdBanner, DetailBtnWrap, DetailMenu, DetailTop, DetailWrap, VideoWrap } from './styles'
 import VideoJS from '@components/VideoJS'
 
-// declare global{
-//     Plyr:any; //Kakao Authentication API        
-//   }
-
 interface Props{
-    user:string;
-    Plyr:any;
+    user:string;    
 }
 
 const Detail:FC<Props> = () => {
@@ -32,6 +27,18 @@ const Detail:FC<Props> = () => {
     
     const {category, title, content, hashTag, price,srcPath, thumbnail, contentId, discount} = data[0];
 
+    const onClickOrder = () =>{
+        axios.get('/api/users')
+        .then(res=>{
+            if(res.data !== false){
+                history.push('/workspace/order',{contentId,dvdService,usbService})
+            }else {
+                alert('로그인해 주시기 바랍니다.');
+            }
+        }).catch(err=>{
+            console.log(err);
+        })        
+    }
     const onClickAddCart = () =>{
         axios.post('/api/item-carts/addItemCart',{
             ...data[0],
@@ -45,6 +52,7 @@ const Detail:FC<Props> = () => {
             else alert('This Item is Already in the cart.');
         }).catch((err)=>{
             console.log(err);
+            alert('로그인 해주시기 바랍니다.');
         });
     }    
     const videoJsOptions = { // lookup the options in the docs for more options
@@ -114,7 +122,7 @@ const Detail:FC<Props> = () => {
                     <p className='detail_sub_info'>[Watch out] Careful yourself</p>
                     <p className='detail_price'>{discount === 0 ? price : price * (discount*0.01)}</p>
                     <DetailBtnWrap>
-                        <div className='detail_btn' onClick={()=>history.push('/workspace/order',{contentId,dvdService,usbService})}>Order</div>
+                        <div className='detail_btn' onClick={onClickOrder}>Order</div>
                         <div className='detail_btn' onClick={onClickAddCart}>Add Cart</div>                                                
                     </DetailBtnWrap>
                 </div>                

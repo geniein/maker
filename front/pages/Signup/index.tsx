@@ -1,6 +1,7 @@
 import useInput from '@hooks/useInput'
 import axios from 'axios'
 import React, { useCallback, useRef, useState } from 'react'
+import { useMediaQuery } from 'react-responsive';
 import { InputBtn, BtnWrap, InputBox, InputWrap, SignupAgree, SignupContent, SignupTop, SignupWrap, InputTitle } from './styles'
 
 const Signup = () => {
@@ -237,7 +238,8 @@ const Signup = () => {
     const [userPasswordChk, onChnageUserPasswordChk,setUserPasswordChk] = useInput('');
     
     const [dupleIdChk, setDupleIdChk] = useState(false);
-
+    
+    const isMobile = useMediaQuery({query:"(max-width: 768px)"})
 
     const onClickAgree = () =>{                
         if(!agreeTerms || !agreePrivate){
@@ -300,8 +302,8 @@ const Signup = () => {
             </SignupTop>
             <SignupWrap>
             {!passAgree && <SignupContent>
-                <ul className='signup_ul'>
-                    <SignupAgree>
+                <ul className='signup_ul' style={isMobile ==true ? {flexDirection:'column'} : undefined}>
+                    <SignupAgree style={isMobile ==true ? {width:'100%'} : undefined}>
                         <h2>이용약관</h2>
                         <span>Terms Of Use</span>
                         <div className='text_box'>
@@ -310,7 +312,7 @@ const Signup = () => {
                         </div>
                         <span><input type='checkbox' onChange={() => setAgreeTerms(!agreeTerms)} checked={agreeTerms}/>이용약관에 동의합니다.</span>
                     </SignupAgree>
-                    <SignupAgree>
+                    <SignupAgree style={isMobile ==true ? {width:'100%'} : undefined}>
                         <h2>개인정보취급방침</h2>
                         <span>Private Policy</span>
                         <div className='text_box'>
@@ -319,14 +321,15 @@ const Signup = () => {
                         </div>
                         <span><input type='checkbox' onChange={() => setAgreePrivate(!agreePrivate)} checked={agreePrivate}/>개인정보취급방침에 동의합니다.</span>
                     </SignupAgree>
-                    <SignupAgree>
+                    <SignupAgree style={isMobile ==true ? {width:'100%'} : undefined}>
                         <h2></h2>
-                        <span><input type='checkbox' id='agreeAll' onClick={onClickAgreeAll}/>전체동의</span>
+                        {isMobile== false && <span><input type='checkbox' id='agreeAll' onClick={onClickAgreeAll}/>전체동의</span>}
                         <div className='text_box'>
                             <textarea value={termsUse} readOnly>                                                        
                             </textarea>                                                        
                         </div>
                         <span><input type='checkbox' onChange={() => setAgreeMarket(!agreeMarket)} checked={agreeMarket}/>마케팅 선택 동의에 대한 수집 및 이용(선택)</span>
+                        {isMobile== true && <span><input type='checkbox' id='agreeAll' onClick={onClickAgreeAll}/>전체동의</span>}
                     </SignupAgree>                   
                 </ul>
                 <BtnWrap>
@@ -370,10 +373,7 @@ const Signup = () => {
                         </InputWrap>
                         <InputWrap>
                             <InputBtn style={{backgroundColor:'#eac684'}} onClick={onClickSignup}> 회원가입</InputBtn>                                                                                                  
-                        </InputWrap>
-                        <InputWrap>                            
-                            <InputBtn style={{backgroundColor:'#f5dc00'}} > 카카오 회원가입</InputBtn>                                                                      
-                        </InputWrap>
+                        </InputWrap>                        
                     </div>
                     {/* <BtnWrap>
                     <input type='submit' className='btn_submit' value='회원가입' onClick={onClickSignup}></input>

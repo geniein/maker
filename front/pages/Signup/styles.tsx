@@ -109,7 +109,7 @@ export const BtnWrap = styled.div`
     .btn_submit{
         border: 0px;
         width: 300px;
-        margin: 0 30px 0 30px;
+        margin: 0 30px 20px 30px;
         height: 60px;
         color: #fff;
         cursor: pointer;
@@ -119,7 +119,7 @@ export const BtnWrap = styled.div`
     .btn_submit_naver{
         border: 0px;
         width: 300px;
-        margin: 0 30px 0 30px;
+        margin: 0 30px 20px 30px;
         height: 60px;
         color: #fff;
         cursor: pointer;
@@ -132,7 +132,7 @@ export const BtnWrap = styled.div`
     .btn_submit_kakao{
         border: 0px;
         width: 300px;
-        margin: 0 30px 0 30px;
+        margin: 0 30px 20px 30px;
         height: 60px;
         color: #fff;
         cursor: pointer;

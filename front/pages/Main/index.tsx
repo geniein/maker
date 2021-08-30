@@ -72,7 +72,8 @@ const Main = () => {
                         <li onClick={()=>onClickMainMenu('invite')}>모바일초대장</li>                    
                     </MainMenu>
                     <CardList>
-                        {contentList?.map((val:any, idx:number) =>{                    
+                        {contentList?.map((val:any, idx:number) =>{  
+                            if(idx>7) return null;                  
                             return <Card key={idx} id={val.contentId} thumbnail={val.thumbnail} title={val.title} hashTag={val.hashTag} price={val.price} from={'content'}/>
                         })} 
                     </CardList>
@@ -85,7 +86,8 @@ const Main = () => {
                     }}/>
                 <MainContainer>                    
                     <CardList>
-                        {reviewList?.map((val:any, idx:number) =>{                    
+                        {reviewList?.map((val:any, idx:number) =>{
+                            if(idx>7) return null;                    
                             return <Card key={idx} id={val.reviewId} thumbnail={val.thumbnail} title={val.title} hashTag={val.hashTag} price={val.price} from={'review'}/>
                         })} 
                     </CardList>                    
