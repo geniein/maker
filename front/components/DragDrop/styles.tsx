@@ -1,29 +1,42 @@
 import styled from '@emotion/styled';
 
-const filledStyle = `
-    background-color: black;
-    color: white;
-`;
-
 const alignCenter = `
     display: flex;
     display: -webkit-flex;
-    flex-direction: column;
+    flex-flow: row wrap;
     -ms-flex-direction: column;
     justify-content: center;
     align-items: center;
 `;
 
+const dropBox = `
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: right;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
+    color: #000;
+    border: 4px dashed #009578;
+    border-radius: 10px;
+`
+const filledStyle = `
+    background-color: white;
+    color: red;    
+    ${alignCenter};
+    ${dropBox};
+`;
+
 export const DragDropWrap = styled.div`
     width: 100%;
-    height: 100vh;    
+    height: 100%;    
     ${alignCenter};
-    .File {
-        width: 400px;
-        height: 200px;
-        border: 2px solid black;
-        border-radius: 10px;
-
+    .File {        
+        ${dropBox};
         ${alignCenter};
         cursor: pointer;
         transition: 0.12s ease-in;
@@ -50,19 +63,51 @@ export const DragDropWrap = styled.div`
             }
         }
     }
+
+    .drop-zone__thumb {
+        width: 150px;
+        height: 150px;
+        margin: 0 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #cccccc;
+        background-size: cover;
+        position: relative;
+    }
+    drop-zone__thumb::after {
+        content: attr(data-label);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 5px 10px;
+        color: #ffffff;
+        background: rgba(0, 0, 0, 0.75);
+        font-size: 14px;
+        text-align: center;
+    }
 `;
 
-// DragDrop.scss
-// const @mixin filledStyle() {
-//     background-color: black;
-//     color: white;
-//   }
-  
-//   @mixin alignCenter() {
-//     display: flex;
-//     display: -webkit-flex;
-//     flex-direction: column;
-//     -ms-flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//   }
+export const DropThumb = (element:any) => styled(element)`
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #cccccc;
+    background-size: cover;
+    position: relative;
+    
+    &:after {
+        content: attr(data-label);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 5px 0;
+        color: #ffffff;
+        background: rgba(0, 0, 0, 0.75);
+        font-size: 14px;
+        text-align: center;
+    }
+`

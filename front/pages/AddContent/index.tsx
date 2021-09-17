@@ -1,4 +1,3 @@
-import DragDrop from '@components/DragDrop'
 import Footer from '@components/Footer'
 import Header from '@components/Header'
 import NewPost from '@components/NewPost'
@@ -59,8 +58,7 @@ const AddContent:FC<Props> = ({postStatus,orderId,thumnailSrc}) => {
                         </div>
                     </MyItem>
                 </MyContentList> 
-                <DragDrop></DragDrop>              
-                {/* <NewPost postStatus={postDes} des={postDes}/>                      */}
+                <NewPost postStatus={postDes} des={postDes}/>                     
             </AddContentWrap>
         </div>                   
     )

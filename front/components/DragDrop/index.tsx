@@ -3,66 +3,79 @@ import React, {
     useCallback,
     useEffect,
     ChangeEvent,
-    useRef
+    useRef,
+    FC,
+    Dispatch,
+    SetStateAction
 } from 'react';
-import  {DragDropWrap} from './styles';
+import  {DragDropWrap, DropThumb} from './styles';
 
 interface IFileTypes {
     id: number;
     object: File;
 }
 
-const DragDrop = (): JSX.Element => {
+interface Props {
+    setImgCount: Dispatch<SetStateAction<number>>;
+}
+
+const DragDrop:FC<Props> = ({setImgCount}): JSX.Element => {
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const [files, setFiles] = useState<IFileTypes[]>([]);
     const fileId = useRef<number>(0);
-    
-    const dragRef = useRef<HTMLLabelElement | null>(null);
-    
+    const thumbRef = useRef<HTMLDivElement>(null);
+    const dragRef = useRef<HTMLLabelElement>(null);
+    let dragCounter = 0;
     const onChangeFiles = useCallback((e: ChangeEvent<HTMLInputElement> | any): void => {
         let selectFiles: File[] = [];
         let tempFiles: IFileTypes[] = files;
         // temp 변수를 이용하여 선택했던 파일들을 담습니다.
         // 드래그 했을 때와 안했을 때 가리키는 파일 배열을 다르게 해줍니다.
         if (e.type === "drop") {
-          // 드래그 앤 드롭 했을때
-        selectFiles = e.dataTransfer.files;
+            selectFiles = e.dataTransfer.files;
         } else {
-          // "파일 첨부" 버튼을 눌러서 이미지를 선택했을때
-        selectFiles = e.target.files;
+            selectFiles = e.target.files;
         }
         for (const file of selectFiles) {
-          // 스프레드 연산자를 이용하여 기존에 있던 파일들을 복사하고, 선택했던 파일들을 append 해줍니다.
-        tempFiles = [
-            ...tempFiles,
-            {
-              id: fileId.current++, // fileId의 값을 1씩 늘려주면서 각 파일의 고유값으로 사용합니다.
-              object: file // object 객체안에 선택했던 파일들의 정보가 담겨있습니다.
-            }
-        ];
-        }
+            fileId.current++;
+            updateThumbnail(fileId.current,file);
+            tempFiles = [
+                ...tempFiles,
+                {
+                id: fileId.current, 
+                object: file
+                }
+            ];
+        }        
+        setImgCount(tempFiles.length);
         setFiles(tempFiles);
+        console.log(files);
+        console.log(tempFiles);        
     }, [files]);
 
     const handleDragIn = useCallback((e: DragEvent): void => {
         e.preventDefault();
         e.stopPropagation();
+        dragCounter++;
+        if (e.dataTransfer!.items && e.dataTransfer!.items.length > 0) {
+            setIsDragging(true);
+        }        
     }, []);
     
     const handleDragOut = useCallback((e: DragEvent): void => {
         e.preventDefault();
         e.stopPropagation();
-    
+        dragCounter--;
+        if (dragCounter > 0) return
         setIsDragging(false);
     }, []);
     
     const handleDragOver = useCallback((e: DragEvent): void => {
         e.preventDefault();
         e.stopPropagation();
-    
-        if (e.dataTransfer!.files) {
-        setIsDragging(true);
-        }
+        // if (e.dataTransfer!.files) {
+        //     setIsDragging(true);
+        // }
     }, []);
     
     const handleDrop = useCallback((e: DragEvent): void => {
@@ -70,12 +83,10 @@ const DragDrop = (): JSX.Element => {
         e.stopPropagation();
     
         onChangeFiles(e);
-        setIsDragging(false);
+        setIsDragging(false);      
     },[onChangeFiles]);
     
     const initDragEvents = useCallback((): void => {
-        // 앞서 말했던 4개의 이벤트에 Listener를 등록합니다. (마운트 될때)
-        
         if (dragRef.current !== null) {
         dragRef.current.addEventListener("dragenter", handleDragIn);
         dragRef.current.addEventListener("dragleave", handleDragOut);
@@ -85,8 +96,6 @@ const DragDrop = (): JSX.Element => {
     }, [handleDragIn, handleDragOut, handleDragOver, handleDrop]);
     
     const resetDragEvents = useCallback((): void => {
-        // 앞서 말했던 4개의 이벤트에 Listener를 삭제합니다. (언마운트 될때)
-        
         if (dragRef.current !== null) {
         dragRef.current.removeEventListener("dragenter", handleDragIn);
         dragRef.current.removeEventListener("dragleave", handleDragOut);
@@ -95,11 +104,44 @@ const DragDrop = (): JSX.Element => {
         }
     }, [handleDragIn, handleDragOut, handleDragOver, handleDrop]);
 
-    const handleFilterFile = useCallback((id: number): void => {
-        // 매개변수로 받은 id와 일치하지 않는지에 따라서 filter 해줍니다.
+    const handleFilterFile = useCallback((id: number, dropElement:any, thumbElement:any, e:any): void => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropElement.removeChild(thumbElement);
         setFiles(files.filter((file:IFileTypes) => file.id !== id));
-      }, [files]);
+        setImgCount(files.length);
+    }, [files]);
 
+
+    const updateThumbnail = (fileId:number,file:any) => {
+        const dropZoneElement = dragRef.current
+        if(dropZoneElement){        
+            let thumbnailElement = dropZoneElement.querySelector<HTMLDivElement>(".drop-zone__thumb");
+            let introElement = dropZoneElement.querySelector<HTMLSpanElement>(".drop-box-intro");
+            if (introElement) {
+                introElement.remove();
+            }
+            thumbnailElement = document.createElement("div");
+            thumbnailElement.classList.add("drop-zone__thumb");
+            let filterElement = document.createElement("div");
+            filterElement.classList.add("Files-Filter");
+            filterElement.onclick = (e) => handleFilterFile(fileId, dropZoneElement, thumbnailElement, e)            
+            filterElement.append("X");
+            thumbnailElement.setAttribute("fileId",`${fileId}`);
+            thumbnailElement.appendChild(filterElement);            
+            dropZoneElement.appendChild(thumbnailElement);                
+            // Show thumbnail for image files
+            if (file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                if(thumbnailElement) thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+            };
+            } else {
+                thumbnailElement.style.backgroundImage = `null`;
+            }
+        }
+    }
     useEffect(() => {
         initDragEvents();
     
@@ -109,32 +151,30 @@ const DragDrop = (): JSX.Element => {
     return (
         <div>
         <DragDropWrap>
+        
         <input
             type="file"
             id="fileUpload"
             style={{ display: "none" }} // label을 이용하여 구현하기에 없애줌
-            multiple={true} // 파일 다중선택 허용
+            multiple={true} // 파일 다중선택 허용            
         />
 
         <label
-        className={isDragging ? "File-Dragging" : "File"}
-          // 드래그 중일때와 아닐때의 클래스 이름을 다르게 주어 스타일 차이
-        htmlFor="fileUpload"
-        ref={dragRef}
+            className={isDragging ? "File-Dragging" : "File"}
+            htmlFor="fileUpload"
+            ref={dragRef}
         >
-        <div>파일 첨부</div>
+        <span className="drop-box-intro">Drop file here or click to upload</span>
         </label>
-        <div className="Files">
+        {/* <div className="Files">
             {files.length > 0 &&
             files.map((file, idx) => {                
-                const {id,object } = file;
+                const {id,object } = file;                
                 const preview:any = document.querySelector('#preview');
-                let fileValue = '';
                 const reader = new FileReader();  
                 reader.onload = (() =>{
-                    return (e:any)=>{console.log(e.target.result)
-                        // preview.src = '123';
-                        fileValue = e.target.result;
+                    return (e:any)=>{
+                        document.querySelector(`#preview_${id}`)?.setAttribute('src',e.target.result);
                     };
                 })()
                 if(object){
@@ -142,8 +182,7 @@ const DragDrop = (): JSX.Element => {
                 }              
                 return (
                 <div key={id}>
-                    {/* <div>{name}</div> */}
-                    <img id='preview' src={fileValue}/>
+                    <img id={`preview_${id}`} width='150px' height='150px'/>
                     <div
                     className="Files-Filter"
                     onClick={() => handleFilterFile(id)}
@@ -153,7 +192,7 @@ const DragDrop = (): JSX.Element => {
                 </div>
                 );
             })}
-            </div>
+            </div> */}
         </DragDropWrap>
         
         </div>
