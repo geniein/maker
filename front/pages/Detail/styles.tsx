@@ -1,23 +1,39 @@
 import styled from '@emotion/styled';
+import { responsiveWidth } from '@utils/responsive';
+
+export const DetailWrap = styled.div`
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-bottom: 1px solid #ececec;    
+    ${responsiveWidth};
+`;
 
 export const DetailTop = styled.div`
     display: flex;
-    justify-content: center;    
+    flex-flow: row wrap;
+    justify-content: center;        
     width: 100%;
     margin-top: 70px;
 
     .detail_src{        
-        width:35%;        
-        display: inline-flex;
-        justify-content:center;
+        width:50%;        
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content:center;        
         align-items:center; 
         text-align:center;
-        margin-left:20px;
+        margin:0 20px;    
         img{
             width: 100%;
             height: 100%;
             object-fit: contain;
-        }       
+        }  
+        video{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;            
+        }         
     }
     .detail_src_close{
         width: 20px;
@@ -35,7 +51,7 @@ export const DetailTop = styled.div`
         justify-content: center;
         flex-direction: column;
         margin-right:20px; 
-        width: 25%;
+        width: 35%;
         height: auto;        
         text-align: left;
     }
@@ -48,16 +64,17 @@ export const DetailTop = styled.div`
         float: right;
     }
     .detail_sub_price{
-        font-size: 14px;
+        font-size: 20px;
         .discount_line{
             text-decoration: line-through;
-            font-size: 12px;
+            font-size: 20px;
             margin-left: 12px;
         }
     }
     .detail_tag{
         color: #272727;
         margin-bottom: 10px;
+        font-weight:bold;
     }
     .detail_options{
         list-style: none;        
@@ -73,6 +90,7 @@ export const DetailTop = styled.div`
             flex-direction:row;
             text-align: left;
             margin-top: 10px;
+            width: 90%;
         }
     }
     .detail_sub_title{    
@@ -85,11 +103,10 @@ export const DetailTop = styled.div`
     }
     .detail_sub_select{
         border-radius: 3px;
-        width: 280px;
+        width: 80%;
         height: 40px;
         border: 1px solid #ccc;
-        font-family: inherit;
-        background: url(/img/arrow.png) no-repeat 95% 50%;
+        font-family: inherit;        
         background-size: 15px;
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -110,9 +127,9 @@ export const DetailTop = styled.div`
         padding: 5px 0px;
         margin-bottom: 10px;
         border-bottom: 1px solid #ccc;
-        font-size: 13px;
-        height: 32px;
-        line-height: 32px;
+        font-size: 20px;
+        font-weight: bold;        
+        line-height: 40px;
     }    
     `;
 
@@ -131,3 +148,45 @@ export const DetailTop = styled.div`
             border: solid;        
         }
     `;
+
+    export const DetailMenu = styled.div`
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    height: 70px;
+    margin-bottom: 20px;
+    ul{
+        display:inline-flex;
+        justify-content:center;
+        flex-direction:row;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+        list-style: none;
+    }
+    li{
+        float: left;
+        height: 70px;
+        line-height: 70px;
+        width: 150px;
+        cursor: pointer;
+        opacity:1;
+    }
+    pick_line {
+        border-top: 1px solid rgb(255, 200, 99);
+        width: 150px;
+        position: relative;        
+    }   
+`;  
+
+
+export const VideoWrap = styled.div`
+    
+`;
+
+export const AdBanner = styled.div`
+    margin: 20px 0;
+    width: 100%;
+    height: 100px;
+    background-color: #000;
+    color:#fff
+`;

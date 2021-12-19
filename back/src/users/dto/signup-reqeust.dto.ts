@@ -2,6 +2,15 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class SignupRequestDto {
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    example: 'test@naver.com',
+    description: '아이디',
+  })
+  public userId: string;
+
   @IsEmail()
   @ApiProperty({
     example: 'test@naver.com',
@@ -23,7 +32,7 @@ export class SignupRequestDto {
     example: 'Shaco',
     description: '별명',
   })
-  public userId: string;
+  public userNickname: string;
 
   @IsString()
   @IsNotEmpty()
@@ -31,7 +40,7 @@ export class SignupRequestDto {
     example: '1234',
     description: '비밀번호',
   })
-  public password: string;
+  public userPassword: string;
 
   @IsString()
   @IsNotEmpty()

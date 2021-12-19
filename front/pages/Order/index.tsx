@@ -2,32 +2,49 @@ import Footer from '@components/Footer'
 import Header from '@components/Header'
 import TopMenu from '@components/TopMenu'
 import axios from 'axios'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useCallback, useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
-import { OrderInfoWrap, OrderTable, PayBtn, PaySelector } from './styles'
+import { OrderInfoWrap, OrderTable, OrderWrap, PayBtn, PaySelector } from './styles'
 
 interface Props{
     contentId: string;
-    options: string[];
+    dvdService: string;
+    usbService: string;
 }
 
-const Order:FC<Props> = ({contentId, options}) => {   
+const Order:FC<Props> = ({contentId, dvdService, usbService}) => {   
     const location = useLocation<any>();
     const [detailInfo, setDetailInfo] = useState<any>(undefined);
+    
     contentId = contentId ?? location.state.contentId;
+    dvdService = dvdService ?? location.state.dvdService;
+    usbService = usbService ?? location.state.usbService;
     
     useEffect(() => {
-        axios.get(`/api/item-contents/${contentId}`).then((res)=>{                        
+        axios.get(`/api/item-contents/one/${contentId}`).then((res)=>{              
             setDetailInfo(res.data[0]);
         })               
     }, []);
 
+    const onClickPay = useCallback(
+        () => {
+            axios.post('/api/item-orders',{
+                contentId:detailInfo.contentId,
+                price:detailInfo.price,
+                dvdService,
+                usbService
+            })
+            .then((res)=>{
+                console.log(res)
+            })
+        },
+        [detailInfo],
+    )
+
     if(detailInfo===undefined) return (<div> Processing</div>);
 
     return (
-        <div>
-            <Header/>
-            <TopMenu/>
+        <OrderWrap>            
             <OrderInfoWrap>
                 <div className='title'>Order</div>
                 <OrderTable>
@@ -40,7 +57,9 @@ const Order:FC<Props> = ({contentId, options}) => {
                                 {detailInfo?.title}
                             </td>
                             <td className='order_options'>
-                                options
+                                {!(dvdService || usbService) && <p>없음</p>}
+                                {dvdService=='1' && <p>DVD 서비스(20,000)</p>}                                
+                                {usbService=='1' && <p>USB 서비스(20,000)</p>}
                             </td>
                         </tr>
                     </tbody>
@@ -53,23 +72,15 @@ const Order:FC<Props> = ({contentId, options}) => {
                                 총상품가격 
                             </td>                            
                             <td className='pay_info'>
-                                {detailInfo?.price}
+                                {detailInfo?.price + (dvdService=='1'? 20000 : 0) + (usbService=='1'? 20000 : 0)}
                             </td>
-                        </tr>
-                        <tr>
-                            <td className='pay_title'>
-                                할인쿠폰 
-                            </td>                            
-                            <td className='pay_info'>
-                                List
-                            </td>
-                        </tr>
+                        </tr>                      
                         <tr>
                             <td className='pay_title'>
                                 총결제금액 
                             </td>                            
                             <td className='pay_info'>
-                                {detailInfo?.price}
+                                {detailInfo?.price + (dvdService=='1'? 20000 : 0) + (usbService=='1'? 20000 : 0)}
                             </td>
                         </tr>
                         <tr>
@@ -106,10 +117,9 @@ const Order:FC<Props> = ({contentId, options}) => {
                 </OrderTable>              
             </OrderInfoWrap> 
             <div style={{width:'100%', display: 'inline-flex', justifyContent: 'center'}}>
-                    <PayBtn>Pay</PayBtn>
-            </div>
-            <Footer/>
-        </div>
+                    <PayBtn onClick={onClickPay}>Pay</PayBtn>
+            </div>            
+        </OrderWrap>
     )
 }
 

@@ -11,14 +11,14 @@ import {
     UpdateDateColumn,
   } from 'typeorm';  
   
-  @Index('uk', ['uk'], { unique: true })
+  @Index('reviewId', ['reviewId'], { unique: true })
   @Entity({ schema: 'slack', name: 'reviewcomments' })
   export class ReviewComments {
     @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
     id: number;
         
-    @Column('varchar', { name: 'uk', length: 100, nullable:true })
-    uk: string;
+    @Column('varchar', { name: 'reviewId', length: 100, nullable:true })
+    reviewId: string;
 
     @Column('varchar', { name: 'reviewKey', length: 100, nullable:true })
     reviewKey: string;

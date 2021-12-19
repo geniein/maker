@@ -29,8 +29,17 @@ import {
     @Column('varchar', { name: 'author', length: 30 })
     author: string;
   
-    @Column('varchar', { name: 'srcPath', length: 200 })
+    @Column('varchar', { name: 'thumbnail', length: 200, nullable:true })
+    thumbnail: string;
+
+    @Column('varchar', { name: 'srcPath', length: 200, nullable:true })
     srcPath: string;
+
+    @Column('varchar', { name: 'periodStart', length: 8, nullable:true })
+    periodStart: string;
+    
+    @Column('varchar', { name: 'periodEnd', length: 8, nullable:true })
+    periodEnd: string;
   
     @CreateDateColumn()
     createdAt: Date;

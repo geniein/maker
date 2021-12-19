@@ -7,10 +7,13 @@ import EditorComponent from './SubComponents/EditorComponent'
 import UploadFiles from './SubComponents/UploadFiles'
 
 interface Props{
+    postStatus: string; //'Screen Status 'notices', 'item-contents','item-reviews'
     des: string;//API DESTINATION
+    orderId?: string; // condi : 'item-reviews'
+    contentId?: string; // condi : 'item-reviews'
 }
 
-const NewPost:VFC<Props> = ({des}) =>{
+const NewPost:VFC<Props> = ({postStatus, des, orderId, contentId}) =>{
     //temp
     const categoryList = [{value:1, text:"Notice"},{value:2, text:"Update"}]    
 
@@ -31,20 +34,19 @@ const NewPost:VFC<Props> = ({des}) =>{
         }
         if (content.trim() == '') {
             alert('내용을 입력해주세요'); return;
-        }
-        if(uploadReferenece !== null){
+        }        
+        if( postStatus==='item-contents'){
             await uploadReferenece?.current?.upload().then( (result:any) => {
                 const files = result;
-                console.log(result);
+                console.log('file',result);
 
-                axios.post(`/api/${des}/newPost`,{
+                axios.post(`/api/${postStatus}/newpost`,{
                     title,
                     content,
                     category,
                     price,
                     discount,
-                    hashTag,
-                    author: 'ingenie',
+                    hashTag,                    
                     srcPath:'test',
                     thumbnail: files
                 }).then((res:any)=>{
@@ -54,7 +56,54 @@ const NewPost:VFC<Props> = ({des}) =>{
                 })                
             }).catch( (err:any) =>{
                 console.log(err);
-            });            
+            });
+            // axios.post(`/api/${postStatus}/newpost`,{
+            //     title,
+            //     content,
+            //     category,
+            //     price,
+            //     discount,
+            //     hashTag,                    
+            //     srcPath:'test',
+            //     thumbnail: "temp"
+            // }).then((res:any)=>{
+            //     alert('Sucess Post');
+            // }).catch((err:any)=>{
+            //     console.log(err);
+            // })              
+        } else if( postStatus==='notices'){
+            await uploadReferenece?.current?.upload().then( (result:any) => {
+                const files = result;
+                console.log('file',result);
+
+                axios.post(`/api/${postStatus}/newpost`,{
+                    title,
+                    content,
+                    category,                                        
+                    hashTag,                    
+                    srcPath:'test',
+                    thumbnail: files
+                }).then((res:any)=>{
+                    alert('Sucess Post');
+                }).catch((err:any)=>{
+                    console.log(err);
+                })                
+            }).catch( (err:any) =>{
+                console.log(err);
+            });                        
+        } else {
+            axios.post(`/api/${postStatus}/newpost`,{
+                title,
+                content,
+                category,                
+                hashTag,
+                orderId,
+                contentId
+            }).then((res:any)=>{
+                alert('Sucess Post');
+            }).catch((err:any)=>{
+                console.log(err);
+            }) 
         }
     }
     const onEditorChange = (val:any) =>{
@@ -69,19 +118,26 @@ const NewPost:VFC<Props> = ({des}) =>{
                         <tbody>
                             <tr>
                                 <th>Category</th>
-                                <td><input type="text" onChange={onChangeCategory}/></td>
+                                <td>
+                                    {/* <input type="text" onChange={onChangeCategory}/> */}
+                                    <select onClick={(e:any)=>setCategory(e.target.value)}>
+                                        <option value="NOTICE">공지</option>
+                                        <option value="EVENT">이벤트</option>
+                                        <option value="REVIEW">리뷰</option>
+                                    </select>
+                                </td>
                                 <th>HashTag</th>
                                 <td><input type="text" onChange={onChangeHashTag}/></td>
                             </tr>
-                            <tr>
+                            {postStatus == 'item-contents' && <tr>
                                 <th>Price</th>
                                 <td><input type="number" onChange={onChangePrice}/></td>
                                 <th>Discount</th>
                                 <td><input type="number" onChange={onChangeDiscount}/></td>
-                            </tr>
+                            </tr>}
                         </tbody>
                     </ItemContentWrap>
-                    <UploadFiles ref={uploadReferenece} /> 
+                    {postStatus!=='item-reviews'&&<UploadFiles ref={uploadReferenece} /> }
                     <EditorComponent value={content} onChange={onEditorChange}/>                    
                     {/* <div className="text-center pd12">
                         <button className="lf-button primary" onClick={onClickSearch}>저장</button>

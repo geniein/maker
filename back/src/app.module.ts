@@ -18,6 +18,8 @@ import { ItemContentsModule } from './item-contents/item-contents.module';
 import { ItemReviewsModule } from './item-reviews/item-reviews.module';
 import { NoticesModule } from './notices/notices.module';
 import { ItemCartsModule } from './item-carts/item-carts.module';
+import { ItemOrdersModule } from './item-orders/item-orders.module';
+import { UserContentsModule } from './user-contents/user-contents.module';
 
 @Module({
   imports: [
@@ -30,7 +32,9 @@ import { ItemCartsModule } from './item-carts/item-carts.module';
     ItemContentsModule,
     ItemReviewsModule,
     NoticesModule,
-    ItemCartsModule
+    ItemCartsModule,
+    ItemOrdersModule,
+    UserContentsModule
   ],
   controllers: [AppController],
   providers: [AppService],

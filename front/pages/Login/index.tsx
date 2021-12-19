@@ -6,13 +6,14 @@ import TopMenu from '@components/TopMenu'
 import axios from 'axios'
 import React, { useCallback, useState } from 'react'
 import { useHistory } from 'react-router'
-import { LoginTop, LoginContent, LoginLayoutLeft, LoginLayoutRight } from './styles'
+import { LoginTop, LoginContent, LoginLayoutLeft, LoginLayoutRight, LoginContainer, LoginWrap } from './styles'
+import { useMediaQuery } from 'react-responsive';
 
 const Login = () => {
     const history = useHistory();
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
-
+    const isMobile = useMediaQuery({query:"(max-width: 768px)"});
     const onClickLogin = useCallback(
         (e) => {
             e.preventDefault();
@@ -30,15 +31,13 @@ const Login = () => {
     )
     return (
         <div>
-            <Header/>
-            <TopMenu/>
             <LoginTop>
                 <p>
                     로그인 <br/>
                     Login
                 </p>
             </LoginTop>
-            <LoginContent>
+            {isMobile==false &&<LoginContent>
                 <ul className='login_ul' style={{width:'100%'}}>
                     <LoginLayoutLeft>
                         <form id='logininfo'>
@@ -62,7 +61,7 @@ const Login = () => {
                                     <li>
                                         비밀번호 찾기
                                     </li>                                    
-                                    <li>
+                                    <li onClick={()=>history.push('/workspace/signup')}>
                                         회원가입
                                     </li>
                                 </ul>  
@@ -86,12 +85,53 @@ const Login = () => {
                         <div className='sns_info'>
                             <span>SNS를 통한 로그인 시,<br/></span>
                             회원만이 누릴 수 있는 혜택에서 제외될 수 있습니다. <br/>
-                             간단한 회원가입으로 회원혜택을 누려보세요!                            
+                            간단한 회원가입으로 회원혜택을 누려보세요!                            
                         </div>
                     </LoginLayoutRight>
                 </ul>
-            </LoginContent>
-            <Footer/>
+            </LoginContent>  
+        }
+        {isMobile &&
+        <LoginWrap>
+            <LoginContainer>
+                <form id='logininfo'>
+                    <p className='login_title'>회원로그인</p>                           
+                    <div className='login_box'>
+                        <input type='text' id='userId' className='login_text' placeholder='input your ID' onChange={(e:any)=>{setUserId(e.target.value)}}>
+                        </input>
+                    </div>
+                    <div className='login_box'>
+                        <input type='password' id='userPwd' className='login_text' placeholder='input your Password' onChange={(e:any)=>{setUserPassword(e.target.value)}}>
+                        </input>
+                    </div>
+                    <div className='login_box'>
+                        <input type='submit' className='login_btn' value='로그인' onClick={onClickLogin}></input>                                                  
+                    </div>
+                    <div className='login_box'>
+                        <input type='submit' className='login_naver' value='네이버 로그인' onClick={onClickLogin}></input>                          
+                    </div>
+                    <div className='login_box'>
+                        <input type='submit' className='login_kakao' value='카카오 로그인' onClick={onClickLogin}></input>                          
+                    </div>
+                    
+                    
+                    <div className='btn_wrap'>                                
+                        <ul className='sub_options'>
+                            <li>
+                                아이디 찾기
+                            </li>                                
+                            <li>
+                                비밀번호 찾기
+                            </li>                                    
+                            <li onClick={()=>history.push('/workspace/signup')}>
+                                회원가입
+                            </li>
+                        </ul>  
+                    </div>                     
+                </form>
+            </LoginContainer>
+        </LoginWrap>
+        }         
         </div>
     )
 }

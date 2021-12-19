@@ -60,12 +60,19 @@ export class AddItemCartDto {
   })
   public itemCount: number;
 
-  @IsString()
+  @IsString()    
   @ApiProperty({
-    example: '옵션',
-    description: '옵션',
+      example: '0 : 안함, 1: 신청',
+      description: 'DVD 서비스',
   })
-  public options: string;
+  public dvdService: string;
+
+  @IsString()    
+  @ApiProperty({
+      example: '0 : 안함, 1: 신청',
+      description: 'USB 서비스',
+  })
+  public usbService: string;
 
   @IsString()
   @ApiProperty({

@@ -1,35 +1,35 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Main from '@pages/Main'
-import Login from '@pages/Login'
-import Signup from '@pages/Signup';
-import Detail from '@pages/Detail';
-import AddContent from '@pages/AddContent';
-import CustomService from '@pages/CustomService';
-import Order from '@pages/Order';
-import Cart from '@pages/Cart';
-
+import loadable from "@loadable/component";
+import Editorspace from '@layouts/Editorspace';
 declare global{
   interface Window{
-    Kakao:any; //Kakao Authentication API
+    Kakao:any; //Kakao Authentication API    
+    clipboardData:any //clipboard
   }
 }
 
+const Workspace = loadable(() => import('@layouts/Workspace'));
+
 const App = () => {
-    return(
-      <div>
+    return(      
         <Switch>
-          <Redirect exact path="/" to="main" />          
+          <Redirect exact path="/" to="/workspace/main" />                    
+          <Route path="/workspace/:workspace" component={Workspace} /> 
+          <Route path="/editorspace" component={Editorspace} /> 
+          {/* <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} /> 
           <Route path="/main" component={Main} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
+          <Route path="/mypage" component={Mypage} />
           <Route path="/detail/:id" component={Detail} />
           <Route path="/addcontent" component={AddContent} />
           <Route path="/customservice" component={CustomService} />
           <Route path="/order" component={Order} />
           <Route path="/user/cart" component={Cart} />
-        </Switch>
-      </div>
+          <Route path="/contentlist/adver" component={AdverContent} />
+          <Route path="/contentlist/letter" component={LetterContent} />
+          <Route path="/contentlist/invite" component={InviteContent} /> */}
+        </Switch>           
     );
 }
 

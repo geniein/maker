@@ -11,19 +11,23 @@ import {
     UpdateDateColumn,
   } from 'typeorm';  
   
-  @Index('uk', ['uk'], { unique: true })
+  @Index('reviewId', ['reviewId'], { unique: true })
   @Entity({ schema: 'slack', name: 'itemreviews' })
   export class ItemReviews {
-    @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
-    id: number;
+    // @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
+    // id: number;
     
-    @Column('varchar', { name: 'uk', length: 100})
-    uk: string;
+    // @Column('varchar', { name: 'reviewId', length: 100})
+    @PrimaryGeneratedColumn('uuid')
+    reviewId: string;
 
-    @Column('varchar', { name: 'contentKey', length: 100})
-    contentKey: string;
+    @Column('varchar', { name: 'contentId', length: 100})
+    contentId: string;
 
-    @Column('varchar', { name: 'category', length: 50 })
+    @Column('varchar', { name: 'orderId', length: 100, nullable:true})
+    orderId: string;
+
+    @Column('varchar', { name: 'category', length: 50, nullable:true })
     category: string;
   
     @Column('varchar', { name: 'title', length: 100})
@@ -37,6 +41,9 @@ import {
 
     @Column('varchar', { name: 'author', length: 30 })
     author: string;
+
+    @Column('varchar', { name: 'userId', length: 100 })
+    userId: string;
     
     @CreateDateColumn()
     createdAt: Date;

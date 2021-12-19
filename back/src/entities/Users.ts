@@ -7,24 +7,33 @@ import {
     JoinTable,
     ManyToMany,
     OneToMany,
+    PrimaryColumn,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
   } from 'typeorm';  
+import { ItemOrders } from './ItemOrders';
   
-  @Index('email', ['email'], { unique: true })
+  @Index('userId', ['userId'], {})
   @Entity({ schema: 'slack', name: 'users' })
   export class Users {
-    @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
+    
+    @PrimaryGeneratedColumn({ type: 'int', name: 'id' })    
     id: number;
+
+    @PrimaryColumn('varchar', { name: 'userId', length: 100 })    
+    userId: string;
   
-    @Column('varchar', { name: 'email', unique: true, length: 30 })
+    @Column('varchar', { name: 'userPassword', length: 100, select: false })
+    userPassword: string;
+
+    @Column('varchar', { name: 'email', length: 30 })
     email: string;
   
     @Column('varchar', { name: 'userName', length: 30 })
     userName: string;
   
-    @Column('varchar', { name: 'password', length: 100, select: false })
-    password: string;
+    @Column('varchar', { name: 'userNickname', length: 30 })
+    userNickname: string;
 
     @Column('varchar', { name: 'level', length: 2, default: "1"})
     level: string;
@@ -38,8 +47,11 @@ import {
     @DeleteDateColumn()
     deletedAt: Date | null;
 
-    @Column('varchar', { name: 'cartList', length: 1000 })
+    @Column('varchar', { name: 'cartList', length: 1000, nullable:true })
     cartList: string;
+
+    @OneToMany(type=>ItemOrders, itemorders => itemorders.orderOwner)    
+    myContents: ItemOrders[];
     
   }
   

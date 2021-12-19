@@ -23,8 +23,17 @@ export class ItemContentsController {
     return rtn || false;
   }
 
+  @ApiOperation({ summary: '컨텐츠 리스트 가져오기' })
+  @Get('/list/:code/:cate')
+  async findItemContentsByCode(@Param('code') code: string, @Param('cate') cate: string) { 
+    if(cate === 'ALL') cate =undefined;
+    const rtn = await this.itemContentsService.findItemContentsByCode(code, cate);
+    // return itemcontent || false;
+    return rtn || false;
+  }
+
   @ApiOperation({ summary: '컨텐츠 가져오기' })
-  @Get(':id')
+  @Get('/one/:id')
   async findItemContent(@Param('id') id: string) {
     const rtn = await this.itemContentsService.findItemContents(id);
     return rtn || false;
@@ -32,11 +41,12 @@ export class ItemContentsController {
 
   @ApiOperation({ summary: '컨텐츠 추가' })
   @UseGuards(LoggedInGuard)  
-  @Post('newPost')
+  @Post('newpost')
   async addItemContent(@Body() data: AddItemContentDto) {
     // const itemcontent = this.itemContentsService.findByUk(data.)
 
     const result = await this.itemContentsService.addItemContent(
+      data.contentCode,
       data.category,
       data.title,
       data.price,
@@ -59,7 +69,7 @@ export class ItemContentsController {
 
   @ApiOperation({ summary: '파일 추가' })
   @UseGuards(LoggedInGuard)
-  @UseInterceptors(FileInterceptor('file',multerOptions))
+  @UseInterceptors(FileInterceptor('file',multerOptions('')))
   @Post('files')
   async addItemContentFileUpload(@UploadedFile() file: Express.Multer.File) {
     // const itemcontent = this.itemContentsService.findByUk(data.)

@@ -38,4 +38,11 @@ export class AddNoticesDto {
     description: 'Resource Path',
   })
   public srcPath: string;
+
+  @IsString()
+  @ApiProperty({
+    example: '/home/',
+    description: 'Thumbnail Path',
+  })
+  public thumbnail: string;
 }

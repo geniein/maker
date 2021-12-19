@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import {NoticeCon, NoticeContent, NoticeSub, NoticeTip} from './styles';
 
 const Notice = ()=> {
-    const {data:noticeList} = useSWR(`/api/notices`,fetcher);
+    const {data:noticeList} = useSWR(`/api/notices/notice`,fetcher);
     return (
         <NoticeCon>
             <NoticeSub> <Link to='/customservice' style={{textDecoration:'none', color:'inherit'}}>NOTICE</Link></NoticeSub>
@@ -22,9 +22,7 @@ const Notice = ()=> {
                     + {val.title}
                     </Link>
                     </NoticeContent>
-            })}            
-            <NoticeTip>Tip!</NoticeTip>
-            <NoticeTip>노하우!</NoticeTip>            
+            })}                        
         </NoticeCon>
     )
 }

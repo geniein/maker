@@ -1,5 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ForbiddenException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ForbiddenException, UseGuards } from '@nestjs/common';
 import { response } from 'express';
+import { LoggedInGuard } from 'src/auth/log-in.guard';
+import { User } from 'src/decorators/user.decorator';
+import { Users } from 'src/entities/Users';
 import { AddItemCartDto } from './dto/add-item-carts.dto';
 import { ItemCartsService } from './item-carts.service';
 
@@ -7,24 +10,26 @@ import { ItemCartsService } from './item-carts.service';
 export class ItemCartsController {
   constructor(private readonly itemCartsService: ItemCartsService) {}
 
-  @Get(':id')
-  async findCartList(@Param('id') userId: string){
-    return this.itemCartsService.findCartList(userId);
+  @Get('')
+  async findCartList(@User() user: Users){
+    return this.itemCartsService.findCartList(user.userId);
   }
-
+  @UseGuards(LoggedInGuard)
   @Post('addItemCart')
-  async AddItemCart(@Body() data: AddItemCartDto){
-    const result = await this.itemCartsService.addItemCart(data);    
+  async AddItemCart(@User() user: Users,@Body() data: AddItemCartDto){
+    const cartData = {...data,userId:user.userId};
+    const result = await this.itemCartsService.addItemCart(cartData);    
     if(result) {
-      return result;
+      return true;
     }else{
-      return 'exceed quantity of items'
+      //return 'exceed quantity of items'
+      return false;
       //throw new ForbiddenException();
     }
   }
 
-  @Delete('remove/:id')
-  remove(@Param('id') id: string) {
-    return this.itemCartsService.removeCart(+id);
+  @Delete('remove/:contentId')
+  remove(@User() user: Users, @Param('contentId') contentId: string) {
+    return this.itemCartsService.removeCart(contentId,user.userId);
   }
 }

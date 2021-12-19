@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const ReviewWrap = styled.div`    
-    width: 60%;
+    width: 80%;
     margin: 0 auto;
 
     h2{
@@ -32,20 +32,36 @@ export const TableWrap = styled.table`
         font-weight: 600;
         color: #626262;
     }
+    td{
+        text-align: center;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        padding: 15px 0px;
+        font-size: 11px;
+        color: #434343;
+        cursor: pointer;
+    }
     .review_row{
         cursor: pointer;
     }
     .review_row:hover{
         background-color: #FFF0F5;
+    }
+    .review_content{
+        background: #eee;
+        padding: 20px;
+        textAlign: left;
+        img{
+            width:100%;
+        }
     }        
     `;
 
 export const Paging = styled.ul`
-    width: 100%;
-    margin-top: 10px !important;
+    width: 100%;        
     list-style: none !important;
     text-align: center !important;
-    margin: 0px auto 0px !important;
+    margin: 10px auto !important;
     display: inline-block;
 
     li {

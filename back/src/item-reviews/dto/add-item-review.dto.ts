@@ -4,11 +4,26 @@ import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class AddItemReviewDto {
   @IsString()
+  @IsNotEmpty()
   @ApiProperty({
     example: 'A#21sdq',
-    description: '컨텐츠 Key',
+    description: '컨텐츠 Id',
   })
-  public contentKey: string;
+  public contentId: string;
+
+  @IsString()
+  @ApiProperty({
+    example: 'A#21sdq',
+    description: '주문 Id',
+  })
+  public orderId: string;
+
+  @IsString()
+  @ApiProperty({
+    example: 'test@naver.com',
+    description: '작성자ID',
+  })
+  public userId: string;
   
   @IsString()
   @ApiProperty({

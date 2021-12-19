@@ -40,8 +40,14 @@ import {
 
     @Column('varchar', { name: 'itemCount', length: 100 })
     itemCount: number;
+    
+    @Column('varchar', { name: 'dvdServ', length: 1,  default:'0' })
+    dvdService: string;
 
-    @Column('varchar', { name: 'options', length: 100 })
+    @Column('varchar', { name: 'usbServ', length: 1, default:'0' })
+    usbService: string;
+
+    @Column('varchar', { name: 'options', length: 100, nullable: true })
     options: string;
   
     @CreateDateColumn()

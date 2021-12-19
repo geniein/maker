@@ -1,4 +1,13 @@
 import styled from '@emotion/styled';
+import { responsiveWidth } from '@utils/responsive';
+
+export const SignupWrap = styled.div`
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-bottom: 1px solid #ececec;    
+    ${responsiveWidth};
+`;    
 
 export const SignupTop = styled.div`    
     width:100%;
@@ -25,13 +34,11 @@ export const SignupContent = styled.div`
         justify-content: center;
         list-style:none; 
     }
-    .signup_table{
-        margin-top:30px;
-        //height:500px;
-        display: inline-flex;        
-        // justify-content: center;        
-        // flex-direction:column;
-        // list-style:none; 
+    .signup_container{
+        margin-top:30px;        
+        display: flex;        
+        justify-content: center;        
+        flex-direction:column;        
     }
 `;
 
@@ -102,7 +109,7 @@ export const BtnWrap = styled.div`
     .btn_submit{
         border: 0px;
         width: 300px;
-        margin: 0 30px 0 30px;
+        margin: 0 30px 20px 30px;
         height: 60px;
         color: #fff;
         cursor: pointer;
@@ -112,7 +119,7 @@ export const BtnWrap = styled.div`
     .btn_submit_naver{
         border: 0px;
         width: 300px;
-        margin: 0 30px 0 30px;
+        margin: 0 30px 20px 30px;
         height: 60px;
         color: #fff;
         cursor: pointer;
@@ -125,7 +132,7 @@ export const BtnWrap = styled.div`
     .btn_submit_kakao{
         border: 0px;
         width: 300px;
-        margin: 0 30px 0 30px;
+        margin: 0 30px 20px 30px;
         height: 60px;
         color: #fff;
         cursor: pointer;
@@ -137,7 +144,22 @@ export const BtnWrap = styled.div`
     }
 `;
 
-export const InputBox = styled.input`
+export const InputWrap = styled.div`
+    display: flex;
+    flex-flow: column wrap;
+    justify-content:center;
+    align-content: space-around;
+    margin-bottom: 10px;    
+`;
+export const InputTitle = styled.div`    
+    height: 30px;
+    width: 400px;    
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;    
+    text-indent: 15px;    
+`;
+export const InputBox = styled.input`    
     border: 1px solid #dadada;
     height: 52px;
     width: 400px;
@@ -146,7 +168,7 @@ export const InputBox = styled.input`
     text-indent: 15px;
 `;
 
-export const BtnValid = styled.input`
+export const InputBtn = styled.div`
     background: #888;
     border: 0px;
     width: 400px;

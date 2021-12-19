@@ -9,7 +9,7 @@ const StyledCard = styled.div`
   transition: 0.2s;
 
   /* 카드의 크기 */
-  width: 300px;
+  width: 270px;
   height: 300px;
 
   .card-image-wrapper {
