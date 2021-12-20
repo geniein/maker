@@ -83,5 +83,5 @@ fabric.properties
 /react-nodebird.pem
 uploads/
 #temp lock ignore
-package-lock.json
+#package-lock.json
 

@@ -11,7 +11,7 @@ declare const module: any;//Hot reload
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  const port = process.env.PORT;  
+  const port = process.env.PORT || 3055;  
 
   app.enableCors({
     origin: true,
