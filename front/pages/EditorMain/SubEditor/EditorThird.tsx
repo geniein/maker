@@ -50,7 +50,7 @@ const EditorThird:FC<Props>=({setEditorStep, orderId})=>{
             </EditorRight>
             <BottomBtn>
                 <div className='btn pre_button' onClick={()=>setEditorStep('second')}>Pre</div>
-                <div className='btn post_button' onClick={()=>setEditorStep('fourth')}>Post</div>
+                <div className='btn post_button' onClick={()=>setEditorStep('fifth')}>Post</div>
             </BottomBtn>
         </div>
     )

@@ -27,7 +27,7 @@ export const EditorTop = styled.div`
         }
     }    
     .process_bar{
-        width: 100%;
+        width: 1160px;
         margin-top: 80px;
         list-style: none;
         padding: 0 0;

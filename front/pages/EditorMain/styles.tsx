@@ -42,6 +42,26 @@ export const EditorLeft = styled.div`
             color: #5e5e5e;
         }
     }
+
+    .detail_src{        
+        width:90%;        
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content:center;        
+        align-items:center; 
+        text-align:center;
+        margin:20px;    
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }  
+        video{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;            
+        }         
+    }
 `;
 
 export const EditorRight = styled.div`
@@ -132,6 +152,20 @@ export const EditorDetailInfo = styled.div`
         border-bottom: 1px solid #ddd;
         background: #fff;
         color: #5e5e5e;
+    }
+    .post_btn{
+        width: 93%;        
+        line-height: 30px;        
+        background-color: #FFC764;
+        box-shadow: 3px 3px 10px -3px rgb(0 0 0 / 30%);
+        margin-right: 8px;    
+        text-align: center;            
+        box-sizing: border-box;
+        color: #fff;
+        border-radius: 4px;    
+        cursor: pointer;
+        font-size: 13px;
+        padding: 10px;
     }
 `;
 
@@ -243,5 +277,14 @@ export const BottomBtn = styled.div`
         float: right;
         background-color: #FFC764;
         box-shadow: 3px 3px 10px -3px rgb(0 0 0 / 30%);
+    }
+    .mid_button{
+        width: 150px;
+        height: 56px;
+        line-height: 56px;
+        text-align: center;
+        background-color: #FFC764;
+        box-shadow: 3px 3px 10px -3px rgb(0 0 0 / 30%);    
+        margin: auto;
     }
 `;
