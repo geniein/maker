@@ -1,5 +1,5 @@
-import EditorMain from '@components/EditorMain'
 import EditorProcess from '@components/EditorProcess'
+import EditorMain from '@pages/EditorMain'
 import React, { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { Route, Switch, useLocation } from 'react-router'

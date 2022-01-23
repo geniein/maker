@@ -68,7 +68,7 @@ export class UsersService {
       })
       const result = orderResult.map((val, idx)=>{
         val.contentInfo
-        return {...val.contentInfo, orderId:val.orderId, reviewStatus: val.reviewStatus};
+        return {...val.contentInfo, orderId:val.orderId, reviewStatus: val.reviewStatus, contentStatus: val.contentStatus};
       })
       return result;      
     }

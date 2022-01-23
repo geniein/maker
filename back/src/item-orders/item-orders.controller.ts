@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ForbiddenException, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ForbiddenException, UseInterceptors, UploadedFile, Response, StreamableFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation } from '@nestjs/swagger';
+import { createReadStream } from 'fs';
 import { LoggedInGuard } from 'src/auth/log-in.guard';
 import { User } from 'src/decorators/user.decorator';
 import { Users } from 'src/entities/Users';
@@ -77,7 +78,19 @@ export class ItemOrdersController {
       throw new ForbiddenException();
     }    
   }
-
+  @ApiOperation({ summary: '사용자 결과 다운로드' })
+  @UseGuards(LoggedInGuard)
+  @Post('result')
+  getFile(@Response({ passthrough: true }) res,@User() user: Users, @Body() data: AddItemOrderDto): StreamableFile {
+    console.log('here')
+    const filePath = `uploads/${user.userId}/${data.orderId}/${data.orderId}`;
+    const file = createReadStream(filePath);
+    res.set({
+      'Content-Type': 'application/json',
+      'Content-Disposition': 'attachment; filename=result.mp4',
+    });
+    return new StreamableFile(file);
+  }
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateItemOrderDto: UpdateItemOrderDto) {
   //   return this.itemOrdersService.update(+id, updateItemOrderDto);

@@ -115,6 +115,7 @@ const NewPost:VFC<Props> = ({postStatus, des, orderId, contentId}) =>{
                 <div style={{width:'60%', marginBottom:'30px'}}>
                     <input style={{width:'100%', height:'30px', marginBottom:'20px'}} onChange={onChangeTitle} placeholder='제목'/>
                     <ItemContentWrap>
+                    {postStatus == 'item-contents' && 
                         <tbody>
                             <tr>
                                 <th>Category</th>
@@ -129,13 +130,13 @@ const NewPost:VFC<Props> = ({postStatus, des, orderId, contentId}) =>{
                                 <th>HashTag</th>
                                 <td><input type="text" onChange={onChangeHashTag}/></td>
                             </tr>
-                            {postStatus == 'item-contents' && <tr>
+                            <tr>
                                 <th>Price</th>
                                 <td><input type="number" onChange={onChangePrice}/></td>
                                 <th>Discount</th>
                                 <td><input type="number" onChange={onChangeDiscount}/></td>
-                            </tr>}
-                        </tbody>
+                            </tr>
+                        </tbody>}
                     </ItemContentWrap>
                     {postStatus!=='item-reviews'&&<UploadFiles ref={uploadReferenece} /> }
                     <EditorComponent value={content} onChange={onEditorChange}/>                    

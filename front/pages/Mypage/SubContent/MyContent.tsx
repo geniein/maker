@@ -36,7 +36,31 @@ const Mycontent = () => {
             pathname: `/editorspace`,
             state:{orderId:orderId}
         })
-    }   
+    }
+    
+    const onClickDownload = (orderId:string) =>{
+        const apiUrl = `/api/item-orders/result`;
+        axios.post(
+            apiUrl,
+            {orderId},
+            {
+                responseType: 'blob'
+            }).then(
+                (res)=>{            
+            const name = res.headers['content-disposition'].split('filename=')[1]                        
+            // if (window.navigator && window.navigator.msSaveOrOpenBlob){
+            //     const blob = res.data window.navigator.msSaveOrOpenBlob(blob, name)
+            // } else { 
+            const url = window.URL.createObjectURL(new Blob([res.data], { type: res.headers['content-type'] }))
+            const link = document.createElement('a')
+            link.href = url
+            link.setAttribute('download', name)
+            document.body.appendChild(link)
+            link.click()
+            link.remove();
+            // }
+        })
+    }
 
     return (
         <MyWrap>
@@ -75,10 +99,10 @@ const Mycontent = () => {
                             </p>
                             <div className='item_btn' onClick={()=>onClickEdit(val.orderId)}>
                                 편집하기
-                            </div>
-                            <div className='item_btn'>
+                            </div>                            
+                            {val.contentStatus !== "N" && <div className='item_btn' onClick={()=>onClickDownload(val.orderId)}>
                                 다운로드
-                            </div>
+                            </div>}
                             {val.reviewStatus ==='N' && <div className='item_btn' onClick={()=>onClickPage('addreview',val.orderId,val.contentId,val.thumbnail)}>
                                 리뷰쓰기
                             </div>}

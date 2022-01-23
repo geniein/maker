@@ -52,6 +52,9 @@ import { Users } from './Users';
     @Column('varchar', { name: 'reviewStatus', length: 1, default:'N' })
     reviewStatus: string;
 
+    @Column('varchar', { name: 'contentStatus', length: 1, default:'N' })
+    contentStatus: string;
+
     @CreateDateColumn()
     createdAt: Date;
   
