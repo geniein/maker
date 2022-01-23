@@ -1,18 +1,29 @@
-import React, { Dispatch, FC, SetStateAction, useState } from 'react'
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
 import { BottomBtn, EditorLeft, EditorRight } from '../styles'
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import axios from 'axios';
 
 interface Props{
     setEditorStep: Dispatch<SetStateAction<string>>;
     orderId: string;
 }
 
-const EditorThird:FC<Props>=({setEditorStep})=>{
+const EditorThird:FC<Props>=({setEditorStep, orderId})=>{
     const [crop, setCrop] = useState<any>({ aspect: 16 / 9 });
-    const [src, setSrc] = useState<any>('/public/SAO.jpg') 
+    const [src, setSrc] = useState<any>('') 
+    const [imageList, setImageList] = useState<any>([])
 
     const mock = ['/public/SAO.jpg','/public/cloud.jpg','/public/castle.jpg','/public/new.jpg','/public/uyuni.jpg']
+    useEffect(() => {
+        axios.post(`/api/item-orders/details`,{orderId})
+        .then((res)=>{
+            console.log(res);
+            let rtnList = res.data || [];
+            rtnList = rtnList.map((val:any, idx:number)=>`${val.filePath}${val.fileName}`)
+            setImageList(rtnList);
+        }); 
+    },[]);
     return (
         <div>
             <EditorLeft>
@@ -20,13 +31,20 @@ const EditorThird:FC<Props>=({setEditorStep})=>{
             </EditorLeft>
             <EditorRight>       
                 <div className='image_list'>
-                    {mock.map((val:any,idx:number)=>{
+                    {/* {mock.map((val:any,idx:number)=>{
                         return(
                             <div key={idx} className='image_item' onClick={()=>setSrc(val)}>
                                 <img src={val}/>
                             </div>
                             )
-                    })}                                    
+                    })}                                     */}
+                    {imageList.map((val:any,idx:number)=>{
+                        return(
+                            <div key={idx} className='image_item' onClick={()=>setSrc(val)}>
+                                <img src={val}/>
+                            </div>
+                            )
+                    })}
                 </div>
             </EditorRight>
             <BottomBtn>

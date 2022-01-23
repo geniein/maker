@@ -24,6 +24,18 @@ export class ItemOrdersController {
     return false;
   }
 
+  @UseGuards(LoggedInGuard)
+  @Post('details')
+  async getItemOrderDetails(@User() user: Users, @Body() data: AddItemOrderDto ) {
+    const result =  this.itemOrdersService.getItemOrderDetail(data.orderId);
+    if (result) {
+      return result;
+    } else {
+      throw new ForbiddenException();
+    }    
+    return false;
+  }
+
   @Get()
   findAll() {
     return this.itemOrdersService.findAll();
