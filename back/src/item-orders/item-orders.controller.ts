@@ -1,7 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ForbiddenException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ForbiddenException, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiOperation } from '@nestjs/swagger';
 import { LoggedInGuard } from 'src/auth/log-in.guard';
 import { User } from 'src/decorators/user.decorator';
 import { Users } from 'src/entities/Users';
+import { multerOptions } from 'src/utils/multerOptions';
 import { AddItemOrderDto } from './dto/add-item-order.dto';
 import { ItemOrdersService } from './item-orders.service';
 
@@ -29,6 +32,38 @@ export class ItemOrdersController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.itemOrdersService.findOne(+id);
+  }
+
+  @ApiOperation({ summary: '사용자 이미지 파일 추가' })
+  @UseGuards(LoggedInGuard)
+  @UseInterceptors(FileInterceptor('file',multerOptions('uploads')))
+  @Post('files')
+  async addItemOrderImageUpload(@UploadedFile() file: Express.Multer.File, @Body() data: AddItemOrderDto) {
+    // const itemcontent = this.itemContentsService.findByUk(data.)
+    const addDetail = await this.itemOrdersService.addItemOrderDetail(data.orderId, file.destination, file.originalname)      
+    const result = await this.itemOrdersService.getItemOrderDetail(data.orderId);
+    // const result = file && `/${file.destination}/${file.originalname}`
+
+    if (result) {
+      return addDetail;
+    } else {
+      throw new ForbiddenException();
+    }    
+  }
+
+  @ApiOperation({ summary: '사용자 이미지 파일 삭제' })
+  @UseGuards(LoggedInGuard)  
+  @Delete('files')
+  async removeItemOrderImageUpload(@UploadedFile() file: Express.Multer.File, @Body() data: AddItemOrderDto) {
+    // const itemcontent = this.itemContentsService.findByUk(data.)    
+    const result = this.itemOrdersService.removeItemOrderDetail(data.orderId, data.fileIdx);
+    // const result = file && `/${file.destination}/${file.originalname}`
+
+    if (result) {
+      return result;
+    } else {
+      throw new ForbiddenException();
+    }    
   }
 
   // @Patch(':id')

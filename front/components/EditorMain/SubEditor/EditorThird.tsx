@@ -5,6 +5,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 
 interface Props{
     setEditorStep: Dispatch<SetStateAction<string>>;
+    orderId: string;
 }
 
 const EditorThird:FC<Props>=({setEditorStep})=>{

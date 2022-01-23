@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, isNumber, IsNumber, IsString } from 'class-validator';
 
 
 export class AddItemOrderDto {
@@ -70,4 +70,11 @@ export class AddItemOrderDto {
         description: 'USB 서비스',
     })
     public usbService: string;
+
+    @IsNumber()
+    @ApiProperty({
+        example: '0',
+        description: '파일 idx',
+    })
+    public fileIdx: number;    
 }

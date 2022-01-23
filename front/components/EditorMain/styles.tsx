@@ -155,21 +155,7 @@ export const EditorCenterWrap = styled.div`
     width: 100%;
     height: 450px;
     text-align: center;
-`;
-
-export const EditorCenter = styled.div`
-    margin-bottom: 10px;
-    width: 100%;
-    height: 450px;
-    border-radius: 8px;
-    background-color: #ffffff;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    box-shadow: 3px 3px 10px rgb(0 0 0 / 6%);
-    
-    .center_title{
+    .center_title{        
         width: 100%;
         margin-bottom: 5px;
         height: 45px;
@@ -197,6 +183,19 @@ export const EditorCenter = styled.div`
             cursor: pointer;
         }
     }
+`;
+
+export const EditorCenter = styled.div`
+    margin-bottom: 10px;
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+    background-color: #ffffff;    
+    top: 0;
+    left: 0;
+    z-index: 1;
+    box-shadow: 3px 3px 10px rgb(0 0 0 / 6%);
+        
     .center_main{
         background-repeat: no-repeat;
         background-position: center;

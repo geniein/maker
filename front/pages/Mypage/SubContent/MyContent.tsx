@@ -31,6 +31,13 @@ const Mycontent = () => {
         })
     }   
 
+    const onClickEdit = (orderId:string) =>{
+        history.push({
+            pathname: `/editorspace`,
+            state:{orderId:orderId}
+        })
+    }   
+
     return (
         <MyWrap>
             <p className='title'>내영상/사진보기 <span>helloworld</span></p>
@@ -66,7 +73,7 @@ const Mycontent = () => {
                                 제작 된 동영상은 제작일로부터 100일 동안 보관되며 업로드 데이터는 한달간 보관 후 폐기됩니다.
                                 무료체험용 영상은 다운로드가 불가합니다. 일반영상주문버튼으로 결제 및 변경을 해주세요!
                             </p>
-                            <div className='item_btn' onClick={()=>history.push('/editorspace')}>
+                            <div className='item_btn' onClick={()=>onClickEdit(val.orderId)}>
                                 편집하기
                             </div>
                             <div className='item_btn'>

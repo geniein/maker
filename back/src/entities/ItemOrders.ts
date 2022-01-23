@@ -14,6 +14,7 @@ import {
     UpdateDateColumn,
   } from 'typeorm';  
 import { ItemContents } from './ItemContents';
+import { ItemOrderDetails } from './ItemOrderDetails';
 import { Users } from './Users';
   
   @Index('orderId', ['orderId'])
@@ -70,5 +71,8 @@ import { Users } from './Users';
     @OneToOne(type=>ItemContents, contentInfo => contentInfo.contentId)
     @JoinColumn({ name: 'contentId', referencedColumnName: 'contentId' })    
     contentInfo: ItemContents;
+
+    @OneToMany(type=>ItemOrderDetails, (itemOrderDetails)=>itemOrderDetails.filePath)
+    itemOrderDetails : ItemOrderDetails[];
   }
   

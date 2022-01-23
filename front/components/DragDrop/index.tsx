@@ -1,3 +1,5 @@
+import fileUpload from '@utils/fileUpload';
+import axios from 'axios';
 import React, {
     useState,
     useCallback,
@@ -17,18 +19,20 @@ interface IFileTypes {
 
 interface Props {
     setImgCount: Dispatch<SetStateAction<number>>;
+    orderId: string;
 }
 
-const DragDrop:FC<Props> = ({setImgCount}): JSX.Element => {
+const DragDrop:FC<Props> = ({setImgCount, orderId}): JSX.Element => {
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const [files, setFiles] = useState<IFileTypes[]>([]);
     const fileId = useRef<number>(0);
     const thumbRef = useRef<HTMLDivElement>(null);
     const dragRef = useRef<HTMLLabelElement>(null);
     let dragCounter = 0;
-    const onChangeFiles = useCallback((e: ChangeEvent<HTMLInputElement> | any): void => {
+    const onChangeFiles = useCallback(async (e: ChangeEvent<HTMLInputElement> | any) => {
         let selectFiles: File[] = [];
         let tempFiles: IFileTypes[] = files;
+        let fileIdx = '';
         // temp 변수를 이용하여 선택했던 파일들을 담습니다.
         // 드래그 했을 때와 안했을 때 가리키는 파일 배열을 다르게 해줍니다.
         if (e.type === "drop") {
@@ -38,7 +42,8 @@ const DragDrop:FC<Props> = ({setImgCount}): JSX.Element => {
         }
         for (const file of selectFiles) {
             fileId.current++;
-            updateThumbnail(fileId.current,file);
+            fileIdx = await uploadImages(file).then((rtn)=>rtn.data);
+            updateThumbnail(fileId.current,file, fileIdx);
             tempFiles = [
                 ...tempFiles,
                 {
@@ -48,9 +53,7 @@ const DragDrop:FC<Props> = ({setImgCount}): JSX.Element => {
             ];
         }        
         setImgCount(tempFiles.length);
-        setFiles(tempFiles);
-        console.log(files);
-        console.log(tempFiles);        
+        setFiles(tempFiles);               
     }, [files]);
 
     const handleDragIn = useCallback((e: DragEvent): void => {
@@ -104,16 +107,41 @@ const DragDrop:FC<Props> = ({setImgCount}): JSX.Element => {
         }
     }, [handleDragIn, handleDragOut, handleDragOver, handleDrop]);
 
-    const handleFilterFile = useCallback((id: number, dropElement:any, thumbElement:any, e:any): void => {
+    const handleFilterFile = useCallback((id: number, fileIdx:number, dropElement:any, thumbElement:any, e:any): void => {        
         e.preventDefault();
         e.stopPropagation();
         dropElement.removeChild(thumbElement);
+        removeImages(fileIdx);
         setFiles(files.filter((file:IFileTypes) => file.id !== id));
         setImgCount(files.length);
     }, [files]);
 
+    const uploadImages = async (file : File) =>{   
+        let formData = new FormData();
+        const fileName = `${orderId}_${file.name}`;
+        const api = `api/item-orders/files`;
+        formData.append("file",file,fileName);
+        formData.append("orderId",orderId);
+        return axios.post(`${api}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        });
+    }
 
-    const updateThumbnail = (fileId:number,file:any) => {
+    const removeImages = (fileIdx:any) =>{
+        console.log(fileIdx);                       
+        const api = `api/item-orders/files`;                
+        return axios.delete(`${api}`,{
+            data:{
+                orderId,
+                fileIdx: fileIdx                 
+            },
+            withCredentials:true
+        });
+    }
+
+    const updateThumbnail = (fileId:number,file:any, fileIdx: any) => {
         const dropZoneElement = dragRef.current
         if(dropZoneElement){        
             let thumbnailElement = dropZoneElement.querySelector<HTMLDivElement>(".drop-zone__thumb");
@@ -125,7 +153,7 @@ const DragDrop:FC<Props> = ({setImgCount}): JSX.Element => {
             thumbnailElement.classList.add("drop-zone__thumb");
             let filterElement = document.createElement("div");
             filterElement.classList.add("Files-Filter");
-            filterElement.onclick = (e) => handleFilterFile(fileId, dropZoneElement, thumbnailElement, e)            
+            filterElement.onclick = (e) => handleFilterFile(fileId, fileIdx, dropZoneElement, thumbnailElement, e)            
             filterElement.append("X");
             thumbnailElement.setAttribute("fileId",`${fileId}`);
             thumbnailElement.appendChild(filterElement);            
@@ -151,14 +179,12 @@ const DragDrop:FC<Props> = ({setImgCount}): JSX.Element => {
     return (
         <div>
         <DragDropWrap>
-        
-        <input
+        {/* <input
             type="file"
             id="fileUpload"
             style={{ display: "none" }} // label을 이용하여 구현하기에 없애줌
-            multiple={true} // 파일 다중선택 허용            
-        />
-
+            multiple={true}  // 파일 다중선택 허용                        
+        /> */}
         <label
             className={isDragging ? "File-Dragging" : "File"}
             htmlFor="fileUpload"

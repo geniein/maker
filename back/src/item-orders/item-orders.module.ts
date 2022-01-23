@@ -6,10 +6,11 @@ import { ItemOrders } from 'src/entities/ItemOrders';
 import { UsersService } from 'src/users/users.service';
 import { Users } from 'src/entities/Users';
 import { ItemCarts } from 'src/entities/ItemCarts';
+import { ItemOrderDetails } from 'src/entities/ItemOrderDetails';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ItemOrders,Users,ItemCarts]),    
+    TypeOrmModule.forFeature([ItemOrders,Users,ItemCarts,ItemOrderDetails]),    
   ],
   controllers: [ItemOrdersController],
   providers: [ItemOrdersService]

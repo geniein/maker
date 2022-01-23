@@ -3,6 +3,7 @@ import {EditorWrap,EditorLeft, EditorRight, EditorDetailInfo, EditorBtn  } from 
 
 interface Props{
     setEditorStep: Dispatch<SetStateAction<string>>;
+    orderId: string;
 }
 
 const EditorFirst:FC<Props>=({setEditorStep})=> {

@@ -7,16 +7,17 @@ import EditorThird from './SubEditor/EditorThird'
 
 interface Props{
     editorStep:string;
+    orderId:string;
     setEditorStep: Dispatch<SetStateAction<string>>;    
 }
 
-const EditorMain:FC<Props> =({editorStep,setEditorStep}) =>{
+const EditorMain:FC<Props> =({editorStep,orderId,setEditorStep}) =>{
     return (
         <div style={{display:'flex',justifyContent:'center'}}>
             <EditorWrap>                
-                {editorStep=='first' &&<EditorFirst setEditorStep={setEditorStep}></EditorFirst>}
-                {editorStep=='second' &&<EditorSecond setEditorStep={setEditorStep}></EditorSecond>}
-                {editorStep=='third' &&<EditorThird setEditorStep={setEditorStep}></EditorThird>}
+                {editorStep=='first' &&<EditorFirst setEditorStep={setEditorStep} orderId={orderId}></EditorFirst>}
+                {editorStep=='second' &&<EditorSecond setEditorStep={setEditorStep} orderId={orderId}></EditorSecond>}
+                {editorStep=='third' &&<EditorThird setEditorStep={setEditorStep} orderId={orderId}></EditorThird>}
             </EditorWrap> 
         </div>
     )

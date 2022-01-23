@@ -14,11 +14,11 @@ export const multerOptions = (desPath:string) =>{
 
     storage: diskStorage({
       destination: (request, file, callback) => {
-        const userInfo:any= request.user;                   
-        console.log('------------------');
-        console.log(file);
+        const userInfo:any= request.user;
+        const fileName = file.originalname;        
+        const orderId:string = fileName.split('_').length > 1 ? fileName.split('_')[0]+'/' : '';                 
         let uploadPath: string = desPath || 'public';
-        uploadPath = uploadPath + '/' + userInfo.userId + '/';
+        uploadPath = uploadPath + '/' + userInfo.userId + '/' + orderId;
         if (!existsSync(uploadPath)) {        
           mkdirSync(uploadPath,{recursive:true});
         }

@@ -5,17 +5,18 @@ import {EditorWrap,EditorLeft, EditorRight, EditorDetailInfo, EditorBtn, EditorC
 
 interface Props{
     setEditorStep: Dispatch<SetStateAction<string>>;
+    orderId: string;
 }
 
-const EditorSecond:FC<Props>=({setEditorStep})=> {
+const EditorSecond:FC<Props>=({setEditorStep, orderId})=> {
     const [imgCounter, setImgCounter] =useState(0);
     return (
         <div>        
             <EditorCenterWrap>
-                <EditorCenter>
-    <div className='center_title'>필요한 사진 수 : <span>41</span> 장 │ 불러온 사진 수 : {imgCounter}장 <div className='upload_btn'>사진업로드</div></div>
+                <div className='center_title'>필요한 사진 수 : <span>41</span> 장 │ 불러온 사진 수 : {imgCounter}장 <div className='upload_btn'>사진업로드</div></div>                
+                <EditorCenter>    
                     {/* <div className='center_main'></div> */}
-                    <DragDrop setImgCount={setImgCounter}></DragDrop>
+                    <DragDrop setImgCount={setImgCounter} orderId={orderId}></DragDrop>
                 </EditorCenter>
             </EditorCenterWrap>
             <BottomBtn>

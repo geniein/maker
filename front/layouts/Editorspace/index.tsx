@@ -2,15 +2,18 @@ import EditorMain from '@components/EditorMain'
 import EditorProcess from '@components/EditorProcess'
 import React, { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
-import { Route, Switch } from 'react-router'
+import { Route, Switch, useLocation } from 'react-router'
 
 const Editorspace =() => {
-    const isMobile = useMediaQuery({query:"(max-width: 576px)"});
+    const location = useLocation<any>();
+    const orderId = location.state.orderId;
+    const isMobile = useMediaQuery({query:"(max-width: 576px)"});    
     const [editorStep, setEditorStep] = useState('first');
+    
     return (
         <div>
             <EditorProcess editorStep={editorStep}></EditorProcess>
-            <EditorMain editorStep={editorStep} setEditorStep={setEditorStep}></EditorMain>         
+            <EditorMain editorStep={editorStep} orderId={orderId} setEditorStep={setEditorStep}></EditorMain>         
         </div>
     )
 }
