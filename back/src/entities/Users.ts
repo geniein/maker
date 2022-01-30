@@ -26,8 +26,14 @@ import { ItemOrders } from './ItemOrders';
     @Column('varchar', { name: 'userPassword', length: 100, select: false })
     userPassword: string;
 
-    @Column('varchar', { name: 'email', length: 30 })
+    @Column('varchar', { name: 'email', length: 100 })
     email: string;
+
+    @Column('varchar', { name: 'kakaoEmail', length: 100 })
+    kakaoEmail: string;
+
+    @Column('varchar', { name: 'naverEmail', length: 100 })
+    naverEmail: string;
   
     @Column('varchar', { name: 'userName', length: 30 })
     userName: string;

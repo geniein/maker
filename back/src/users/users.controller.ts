@@ -30,14 +30,7 @@ export class UsersController {
     if (!user) {
       throw new NotFoundException();
     }
-    const result = await this.usersService.signup(
-      data.userId,
-      data.email,
-      data.userName,
-      data.userNickname,
-      data.userPassword,
-      data.phoneNumber,      
-    );
+    const result = await this.usersService.signup(data);
     if (result) {
       return 'ok';
     } else {
@@ -45,10 +38,21 @@ export class UsersController {
     }
   }
 
-  @ApiCookieAuth('connect.sid')
-  @ApiOperation({ summary: '내 정보 가져오기 by ID' })
-  @Get(':id')
-  async getProfile(@Param('id') id: string) {    
+  // @ApiCookieAuth('connect.sid')
+  // @ApiOperation({ summary: '내 정보 가져오기 by ID' })
+  // @Get(':id')
+  // async getProfile(@Param('id') id: string) {    
+  //   const result = await this.usersService.findById(id);
+  //   if (result) {
+  //     return true;
+  //   }else {
+  //     return false;
+  //   }   
+  // }
+  
+  @ApiOperation({ summary: '아이디 중복 체크' })
+  @Get('duple/:id')
+  async chkDupleId(@Param('id') id: string) {    
     const result = await this.usersService.findById(id);
     if (result) {
       return true;
@@ -56,11 +60,11 @@ export class UsersController {
       return false;
     }   
   }
-  
-  @ApiOperation({ summary: '아이디 중복 체크' })
-  @Get('duple/:id')
-  async chkDupleId(@Param('id') id: string) {    
-    const result = await this.usersService.findById(id);
+
+  @ApiOperation({ summary: '로그인 타입별 email 확인' })  
+  @Post('logintype')
+  async chkLoginType(@Body() data: SignupRequestDto) {    
+    const result = await this.usersService.findByEmail(data);
     if (result) {
       return true;
     }else {
@@ -78,6 +82,19 @@ export class UsersController {
     }else {
       return false;
     }          
+  }
+
+  @ApiOperation({ summary: 'SNS 로그인' })  
+  @Post('loginsns')
+  async loginsms(@Body() data: SignupRequestDto) {
+    const result = await this.usersService.findByEmail(data);
+    console.log('SNS Log In');
+    console.log(result);
+    const userData: Users = new Users();
+    userData.userId = result.userId;
+    userData.userPassword = result.userPassword;
+    const user = this.login(userData);
+    return user;
   }
   
   @ApiOperation({ summary: '로그인' })

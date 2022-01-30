@@ -18,8 +18,8 @@ const Login = () => {
         (e) => {
             e.preventDefault();
             axios.post('/api/users/login',{
-                email: userId,
-                password: userPassword
+                userId,
+                userPassword
             }).then((res)=>{                
                 console.log('sucess');
                 history.push('/');
@@ -29,6 +29,121 @@ const Login = () => {
         },
         [userId, userPassword],
     )
+
+    const onClickLoginSns = useCallback(
+        (e) => {
+            e.preventDefault();
+            axios.post('/api/users/loginsns',{
+                userId,
+                userPassword
+            }).then((res)=>{                
+                console.log('sucess');
+                history.push('/');
+            }).catch((err)=>{
+                alert('입력정보를 확인해주시기 바라니다.');
+            });
+        },
+        [userId, userPassword],
+    )
+
+    const onClickKaKao = useCallback( async(e) => {                   
+        e.preventDefault();
+        // await window.Kakao.Auth.authorize({
+        //     redirectUri: 'http://localhost:3030/workspace/login'
+        // })
+        axios.get('/auth/kakao',
+        {
+            headers: {                
+                "Access-Control-Allow-Origin": "*",                
+            }
+        } ).then((res)=>console.log(res));        
+    //     await window.Kakao.Auth.login({          
+    //         success: async (res:any)=>{             
+    //         await window.Kakao.API.request({
+    //             url: '/v2/user/me',
+    //             success: function(res:any) {                                      
+    //                 // axios.post('/auth/login',
+    //                 // { test : 'abc'
+    //                 // }
+    //                 // ).then((res)=>console.log(res));
+    //                 console.log(res);
+    //                 console.log(res.kakao_account);
+    //                 // loginTypeChk(res.kakao_account.email, 'kakao');
+    //             },
+    //             fail: function(error:any) {
+    //                 console.error(error)
+    //             }
+    //         })
+    //     },
+    //     fail :  (e:any)=>{      
+    //         console.log(e);
+    //     },          
+    //     });
+    }, []);
+
+    const onClickKaKaoLogout = useCallback( async(e) => {                   
+        e.preventDefault();
+        // axios.get('/auth/kakao',
+        // {
+        //     headers: {                
+        //         "Access-Control-Allow-Origin": "*",                
+        //     }
+        // } ).then((res)=>console.log(res));        
+        await window.Kakao.Auth.login({          
+            success: async (res:any)=>{             
+            await window.Kakao.API.request({
+                url: '/v1/user/unlink',                
+                success: function(res:any) {                                      
+                    // axios.post('/auth/login',
+                    // { test : 'abc'
+                    // }
+                    // ).then((res)=>console.log(res));
+                    console.log(res);
+                    console.log(res.kakao_account);
+                    // loginTypeChk(res.kakao_account.email, 'kakao');
+                },
+                fail: function(error:any) {
+                    console.error(error)
+                }
+            })
+        },
+        fail :  (e:any)=>{      
+            console.log(e);
+        },          
+        });
+    }, []);
+
+    // const loginTypeChk = (email: string, type: string) =>{        
+    //     const cond:any = new Object();
+    //     switch(type){
+    //         case 'kakao':
+    //             cond['kakaoEmail'] = email;
+    //             break;
+    //         case 'naver':
+    //             cond['naverEmail'] = email;
+    //             break;
+    //         default:
+    //             cond['email'] = email;
+    //             break;
+    //     }
+    //     axios.post('/api/users/logintype',cond)
+    //     .then((res)=>{
+    //         if(res.data){    
+    //             axios.post('/api/users/loginsns',cond)
+    //             .then((res)=>{                
+    //                 console.log('sucess');
+    //                 history.push('/');
+    //             }).catch((err)=>{
+    //                 alert('입력정보를 확인해주시기 바라니다.');
+    //             });
+    //         }else{
+    //             alert('연동된 계정이 없습니다. 신규가입해 주시기 바랍니다.');
+    //             return false;
+    //         }
+    //     }
+    //     );
+    // }
+
     return (
         <div>
             <LoginTop>
@@ -70,13 +185,13 @@ const Login = () => {
                     </LoginLayoutLeft>                                        
                     <LoginLayoutRight>
                         <p className='login_title'>SNS계정로그인</p>                        
-                        <div className='sns_box naver'>
+                        <div className='sns_box naver' onClick={onClickKaKaoLogout}>
                             <span>
                                 <img src='/public/logo/logo_naver.png'/>
                             </span>
                             네이버 로그인
                         </div>
-                        <div className='sns_box kakao'>
+                        <div className='sns_box kakao' onClick={onClickKaKao}>
                             <span>
                                 <img src='/public/logo/logo_kakao.png'/>
                             </span>
@@ -111,7 +226,7 @@ const Login = () => {
                         <input type='submit' className='login_naver' value='네이버 로그인' onClick={onClickLogin}></input>                          
                     </div>
                     <div className='login_box'>
-                        <input type='submit' className='login_kakao' value='카카오 로그인' onClick={onClickLogin}></input>                          
+                        <input type='submit' className='login_kakao' value='카카오 로그인' onClick={onClickKaKao}></input>                          
                     </div>
                     
                     

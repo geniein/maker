@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from 'src/entities/Users';
 import { ItemOrders } from 'src/entities/ItemOrders';
+import { SignupRequestDto } from './dto/signup-reqeust.dto';
 
 @Injectable()
 export class UsersService {
@@ -20,19 +21,28 @@ export class UsersService {
     });
   }
 
-  async signup(userId: string, email: string, userName: string, userNickname: string, password: string, phoneNumber: string) {
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const user = await this.usersRepository.findOne({ where: { email } });
+  async findByEmail(email: Object) {
+    return this.usersRepository.findOne({
+      where: { email },
+      select: ['userId', 'email', 'userPassword'],
+    });
+  }
+
+  async signup(data:SignupRequestDto) {
+    const hashedPassword = await bcrypt.hash(data.userPassword, 12);
+    const user = await this.usersRepository.findOne({ where: { email: data.email } });
     if (user) {
       return false;
     }
     const returned = await this.usersRepository.save({
-      email,      
-      userName,
-      userNickname,
+      email : data.email,      
+      kakaoEmail : data.kakaoEmail,      
+      naverEmail : data.naverEmail,      
+      userName : data.userName,
+      userNickname : data.userNickname,
       userPassword: hashedPassword,
-      userId,      
-      phoneNumber,
+      userId : data.userId,      
+      phoneNumber : data.phoneNumber,
       createdAt: new Date()
     });
     return true;

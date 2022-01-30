@@ -9,16 +9,16 @@ export class AuthService {
     constructor(
         @InjectRepository(Users) private usersRepository: Repository<Users>,
     ) {}
-    async validateUser(email: string, password: string) {
+    async validateUser(userId: string, userPassword: string) {
         const user = await this.usersRepository.findOne({
-          where: { email },
-          select: ['id', 'email', 'userPassword'],
+          where: { userId },
+          select: ['id', 'userId', 'email', 'userPassword'],
         });
-        console.log(email, password, user);
+        console.log(userId, userPassword, user);
         if (!user) {
           return null;
         }
-        const result = await bcrypt.compare(password, user.userPassword);
+        const result = await bcrypt.compare(userPassword, user.userPassword);
         if (result) {
           const { userPassword, ...userWithoutPassword } = user;
           return userWithoutPassword;

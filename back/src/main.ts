@@ -14,7 +14,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3055;  
 
   app.enableCors({
-    origin: true,
+    origin: '*',
     credentials: true,
   });
   app.useStaticAssets(

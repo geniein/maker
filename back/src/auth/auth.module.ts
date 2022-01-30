@@ -6,12 +6,15 @@ import { LocalSerializer } from './local.serializer';
 import { LocalStrategy } from './local.strategy';
 import { AuthService } from './auth.service';
 import { Users } from '../entities/Users';
+import { KakaoStrategy } from './kakao.strategy';
+import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
     PassportModule.register({ session: true }),
     TypeOrmModule.forFeature([Users]),
   ],
-  providers: [AuthService, LocalStrategy, LocalSerializer]
+  controllers:[AuthController],
+  providers: [AuthService, LocalStrategy, LocalSerializer, KakaoStrategy]
 })
 export class AuthModule {}

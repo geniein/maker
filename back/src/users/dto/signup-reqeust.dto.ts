@@ -18,6 +18,20 @@ export class SignupRequestDto {
   })
   public email: string;
 
+  @IsEmail()
+  @ApiProperty({
+    example: 'test@naver.com',
+    description: '이메일',
+  })
+  public kakaoEmail: string;
+
+  @IsEmail()
+  @ApiProperty({
+    example: 'test@naver.com',
+    description: '이메일',
+  })
+  public naverEmail: string;
+
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
