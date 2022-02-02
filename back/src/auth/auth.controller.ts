@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, Req, UseGuards} from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Query, Req, Res, UseGuards} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 
@@ -16,15 +16,16 @@ export  class AuthController {
     @Get('/kakao/redirect')
     @HttpCode(200)
     @UseGuards(AuthGuard('kakao'))
-    async kakaoLoginCallback(@Req() req): Promise<{accessToken: string}> {
-        console.log(req);
-        return {accessToken : 'pass'};
-    }
-
-    @Post('/login')
-    @HttpCode(200)
-    // @UseGuards(AuthGuard('kakao'))
-    async userLogin(@Body() data:any){
-        console.log(data);        
+    async kakaoLoginCallback(@Req() req, @Query() access_code, @Res()res):Promise<any> {
+        console.log(access_code);                
+        const token = access_code['code'];
+        res.redirect(`http://localhost:3030/`);        
+        // const res = await this.kakaoService.getToken(token, this.client_id, this.redirect_uri)
+        // const userinfo = await this.kakaoService.getUserInfo(res.access_token);
+        // this.access_token = res.access_token;
+        // console.log(userinfo['access_token']);
+        // return userinfo;
+        // return {accessToken : token};
+        // return {accessToken : 'pass'};
     }
 }

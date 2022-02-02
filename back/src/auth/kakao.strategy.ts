@@ -15,15 +15,17 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(accessToken, refreshToken, profile, done) {
-    console.log(accessToken)
-    console.log(profile)
+    // console.log(accessToken)
+    // console.log(profile)
     const profileJson = profile._json;
     const kakao_account = profileJson.kakao_account;
-    const payload = {
-      name: kakao_account.profile.nickname,
-      kakaoId: profileJson.id,
-      email: kakao_account.has_email && !kakao_account.email_needs_agreement ? kakao_account.email : null
-    };
-    done(null, payload);
+    const user = await this.authService.validateUser('cubya@hotmail.co.kr', '123123a');
+    // const payload = {
+    //   name: kakao_account.profile.nickname,
+    //   kakaoId: profileJson.id,
+    //   email: kakao_account.has_email && !kakao_account.email_needs_agreement ? kakao_account.email : null
+    // };
+    console.log(user);
+    done(null, user);
   }
 }

@@ -17,12 +17,13 @@ export class UsersController {
   @ApiCookieAuth('connect.sid')
   @ApiOperation({ summary: '내 정보 가져오기' })
   @Get()
-  async getUser(@User() user: Users) {    
+  async getUser(@User() user: Users) {
+    console.log(user);
     return user || false;
   }
 
   @ApiOperation({summary: '회원가입'})
-  @UseGuards(NotLoggedInGuard)
+  @UseGuards(LoggedInGuard)
   @Post()
   async signup(@Body() data: SignupRequestDto) {
     console.log(data);
@@ -102,7 +103,7 @@ export class UsersController {
   @Post('login')
   async login(@User() user: Users) {
     console.log('Log In');
-    return user;
+    return 'user';
   }
 
   @ApiCookieAuth('connect.sid')

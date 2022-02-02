@@ -30,21 +30,11 @@ const Login = () => {
         [userId, userPassword],
     )
 
-    const onClickLoginSns = useCallback(
-        (e) => {
-            e.preventDefault();
-            axios.post('/api/users/loginsns',{
-                userId,
-                userPassword
-            }).then((res)=>{                
-                console.log('sucess');
-                history.push('/');
-            }).catch((err)=>{
-                alert('입력정보를 확인해주시기 바라니다.');
-            });
-        },
-        [userId, userPassword],
-    )
+    const onClickTEST = ()=>{
+        axios.post('/api/users',{
+            data : 'test'
+        }).then((res)=>console.log(res)).catch((e)=>console.log(e));
+    }
 
     const onClickKaKao = useCallback( async(e) => {                   
         e.preventDefault();
@@ -54,7 +44,7 @@ const Login = () => {
         axios.get('/auth/kakao',
         {
             headers: {                
-                "Access-Control-Allow-Origin": "*",                
+                "Access-Control-Allow-Origin": "*",                 
             }
         } ).then((res)=>console.log(res));        
     //     await window.Kakao.Auth.login({          
@@ -185,18 +175,24 @@ const Login = () => {
                     </LoginLayoutLeft>                                        
                     <LoginLayoutRight>
                         <p className='login_title'>SNS계정로그인</p>                        
-                        <div className='sns_box naver' onClick={onClickKaKaoLogout}>
+                        <div className='sns_box naver' onClick={onClickTEST}>
                             <span>
                                 <img src='/public/logo/logo_naver.png'/>
                             </span>
                             네이버 로그인
                         </div>
-                        <div className='sns_box kakao' onClick={onClickKaKao}>
+                        {/* <div className='sns_box kakao' onClick={onClickKaKao}>
                             <span>
                                 <img src='/public/logo/logo_kakao.png'/>
                             </span>
                             카카오 로그인
-                        </div>
+                        </div> */}
+                         <a className='sns_box kakao' href='/auth/kakao'>
+                            <span>
+                                <img src='https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png'/>
+                            </span>
+                            카카오 로그인
+                        </a>
                         <div className='sns_info'>
                             <span>SNS를 통한 로그인 시,<br/></span>
                             회원만이 누릴 수 있는 혜택에서 제외될 수 있습니다. <br/>
@@ -225,9 +221,12 @@ const Login = () => {
                     <div className='login_box'>
                         <input type='submit' className='login_naver' value='네이버 로그인' onClick={onClickLogin}></input>                          
                     </div>
-                    <div className='login_box'>
+                    {/* <div className='login_box'>
                         <input type='submit' className='login_kakao' value='카카오 로그인' onClick={onClickKaKao}></input>                          
-                    </div>
+                    </div> */}
+                    <a href="/auth/kakao">
+                        <input type='submit' className='login_kakao' value='카카오 로그인'></input>                          
+                    </a>
                     
                     
                     <div className='btn_wrap'>                                

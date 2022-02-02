@@ -14,8 +14,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3055;  
 
   app.enableCors({
-    origin: '*',
-    credentials: true,
+    origin: 'http://123.212.67.50/',    
   });
   app.useStaticAssets(
     process.env.NODE_ENV === 'production'
