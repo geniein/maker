@@ -5,7 +5,7 @@ import { SignupRequestDto } from './dto/signup-reqeust.dto';
 import { ApiCookieAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Users } from 'src/entities/Users';
 import { User } from '../decorators/user.decorator';
-import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+import { LocalAuthGuard } from 'src/auth/auth.guard';
 import { LoggedInGuard } from 'src/auth/log-in.guard';
 import { NotLoggedInGuard } from 'src/auth/not-log-in.guard';
 

@@ -25,12 +25,26 @@ export class SignupRequestDto {
   })
   public kakaoEmail: string;
 
+  @IsString()
+  @ApiProperty({
+    example: '1223212',
+    description: '카카오APIID',
+  })
+  public kakaoId: string;
+
   @IsEmail()
   @ApiProperty({
     example: 'test@naver.com',
     description: '이메일',
   })
   public naverEmail: string;
+
+  @IsString()
+  @ApiProperty({
+    example: '2321242',
+    description: '네이버APIID',
+  })
+  public naverId: string;
 
   @IsString()
   @IsNotEmpty()

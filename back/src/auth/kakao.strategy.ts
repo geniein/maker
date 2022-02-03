@@ -14,18 +14,32 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
     super({ clientID: kakaoConfig.clientID, callbackURL: kakaoConfig.callbackURL });
   }
 
-  async validate(accessToken, refreshToken, profile, done) {
-    // console.log(accessToken)
-    // console.log(profile)
+  async validate(accessToken, refreshToken, profile, done) {        
     const profileJson = profile._json;
-    const kakao_account = profileJson.kakao_account;
-    const user = await this.authService.validateUser('cubya@hotmail.co.kr', '123123a');
+    const kakao_account = profileJson.kakao_account;    
+    let user = await this.authService.validateUserKakao(profileJson.id);
+
+    if(!user){
+      const userInfo = {
+        email : kakao_account.email,
+        kakaoEmail : kakao_account.email,
+        kakaoId : profileJson.id,
+        userName: kakao_account.profile.nickname,
+        userNickname: kakao_account.profile.nickname,
+        phoneNumber : kakao_account.profile.phonenumber,
+        userId : profileJson.id,
+        createdAt : new Date()
+      }      
+      const signup = await this.authService.signUserKakao(userInfo);
+      if(signup){
+        user = await this.authService.validateUserKakao(profileJson.id);
+      }
+    }
     // const payload = {
     //   name: kakao_account.profile.nickname,
     //   kakaoId: profileJson.id,
     //   email: kakao_account.has_email && !kakao_account.email_needs_agreement ? kakao_account.email : null
-    // };
-    console.log(user);
-    done(null, user);
+    // };    
+    done(null, user);    
   }
 }

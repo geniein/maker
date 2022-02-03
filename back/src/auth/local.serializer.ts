@@ -15,16 +15,16 @@ export class LocalSerializer extends PassportSerializer {
   }
 
   serializeUser(user: Users, done: CallableFunction) {
-    console.log('serializeUser');
-    console.log(user); 
-    done(null, user.userId);
+    // const rtn = user.userId !== undefined ? user.userId: user;
+    console.log('serializeUser');    
+    done(null, user.id);
   }
 
-  async deserializeUser(userId: string, done: CallableFunction) {
+  async deserializeUser(id: number, done: CallableFunction) {
     return await this.usersRepository
       .findOneOrFail(
         {
-          userId: userId,
+          id: id,
         },
         {
           select: ['id', 'userId', 'userName','userNickname','level'],

@@ -25,4 +25,33 @@ export class AuthService {
         }
         return null;
     }
+
+    async validateUserKakao (kakaoId: string) {
+      const user = await this.usersRepository.findOne({
+        where: { kakaoId },
+        select: ['id', 'userId', 'email', 'userPassword'],
+      });
+      console.log(kakaoId, user);
+      if (!user) {
+        return null;
+      }      
+      return user;
+  }
+//import { SignupRequestDto } from './dto/signup-reqeust.dto';
+  async signUserKakao (data: any) {
+    const hashedPassword = await bcrypt.hash('@!sdwaw02123', 12);    
+    const returned = await this.usersRepository.save({
+      email : data.email,      
+      kakaoEmail : data.kakaoEmail,
+      kakaoId: data.kakaoId,      
+      naverEmail : data.naverEmail,            
+      naverId: data.naverId,
+      userName : data.userName,
+      userNickname : data.userNickname,
+      userPassword: hashedPassword,
+      userId : data.userId,      
+      createdAt: new Date()
+    });
+    return true;
+}
 }
