@@ -10,8 +10,7 @@ export const FooterWrap = styled.footer`
 export const FooterContainer = styled.div`    
     text-align: left;    
     margin: 0 auto;
-    width: 100%;
-    ${responsiveWidth};
+    width: 100%;    
 `;
 
 export const FooterTop = styled.ul`

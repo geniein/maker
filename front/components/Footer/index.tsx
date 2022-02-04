@@ -8,14 +8,15 @@ const Footer = () => {
                 <FooterTop>            
                     <li className='footer_top_l'> 
                         <p className='footer_title'>
-                            Footer <br/>
-                            <span className='font'>hello world</span>
+                            (주)커네팅(Connec-thinK) <br/>
+                            <span className='font'>대표 : 이승민</span>
                         </p>
                         <p className='cs_title'>
-                            CS CENTER
+                            CS CENTER <br/>
+                            울산 중구 학성로 95-6 <br/>울산중구청 청년디딤터 4층 401호
                         </p>
                         <p className='cs_number'>
-                            Tel : 010-0000-0000
+                            Tel : 1566-1635
                         </p>
                     </li>
                     <li className='footer_top_r'>
@@ -51,17 +52,17 @@ const Footer = () => {
                                 <img src='/public/footer/sns_b.png'/>
                             </li>
                         </ul>
-                        <ul className='btn_wrap'>
+                        {/* <ul className='btn_wrap'>
                             <li>
                                 자유선언
                             </li>
                             <li>
                                 토요일
                             </li>
-                        </ul>
+                        </ul> */}
                     </li>
                 </FooterTop>                     
-                <FooterMid> 
+                {/* <FooterMid> 
                     <li>
                         MAKER
                     </li>
@@ -77,13 +78,12 @@ const Footer = () => {
                     <li>
                         LIFE
                     </li>
-                    </FooterMid>                     
+                </FooterMid>                      */}
                 <FooterBot>
-                    <li> MAKER
+                    <li> COPYRIGHT()
                     </li>
-                    <li>/</li>
-                    <li>HELLOW WOLRD</li>
-                    <li>SHOW A WHOLE NEW WOLRD FOR YOU</li>
+                    <li>(주)커네팅</li>
+                    <li>ALL RIGHTS RESERVED.</li>                    
                 </FooterBot>                     
             </FooterContainer>
         </FooterWrap>

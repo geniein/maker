@@ -76,5 +76,12 @@ export class AddItemOrderDto {
         example: '0',
         description: '파일 idx',
     })
-    public fileIdx: number;    
+    public fileIdx: number;
+    
+    @IsString()    
+    @ApiProperty({
+        example: 'N',
+        description: '컨텐츠 상태',
+    })
+    public contentStatus: string;
 }
