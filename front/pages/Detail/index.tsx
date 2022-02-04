@@ -1,7 +1,4 @@
-import Footer from '@components/Footer'
-import Header from '@components/Header'
 import Review from '@components/Review'
-import TopMenu from '@components/TopMenu'
 import fetcher from '@utils/fetcher'
 import axios from 'axios'
 import React, { FC } from 'react'

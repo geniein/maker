@@ -1,6 +1,5 @@
 import VideoJS from '@components/VideoJS';
 import fetcher from '@utils/fetcher';
-import axios from 'axios'
 import React, { Dispatch, FC, SetStateAction, useEffect } from 'react'
 import useSWR from 'swr';
 import {EditorWrap,EditorLeft, EditorRight, EditorDetailInfo, EditorBtn  } from '../styles'

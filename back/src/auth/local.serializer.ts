@@ -27,12 +27,10 @@ export class LocalSerializer extends PassportSerializer {
           id: id,
         },
         {
-          select: ['id', 'userId', 'userName','userNickname','level'],
+          select: ['id', 'userId', 'userName','userNickname','kakaoId','naverId','level'],
         },
       )
-      .then((user) => {
-        console.log('check here');
-        console.log('user', user);
+      .then((user) => {        
         done(null, user);
       })
       .catch((error) => done(error));

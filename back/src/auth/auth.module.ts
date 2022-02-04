@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
 import { Users } from '../entities/Users';
 import { KakaoStrategy } from './kakao.strategy';
 import { AuthController } from './auth.controller';
+import { NaverStrategy } from './naver.strategy';
 
 @Module({
   imports: [
@@ -15,6 +16,6 @@ import { AuthController } from './auth.controller';
     TypeOrmModule.forFeature([Users]),
   ],
   controllers:[AuthController],
-  providers: [AuthService, LocalStrategy, LocalSerializer, KakaoStrategy]
+  providers: [AuthService, LocalStrategy, LocalSerializer, KakaoStrategy, NaverStrategy]
 })
 export class AuthModule {}

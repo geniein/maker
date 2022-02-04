@@ -81,6 +81,7 @@ export const LoginLayoutLeft = styled.li`
                 height: 30px;
                 text-align: center;
                 line-height: 30px;
+                cursor: pointer;
             }
         }
     }
@@ -167,6 +168,8 @@ export const LoginContainer = styled.div`
         text-align: left;
     }
     .login_box {
+        display: flex;
+        justify-content: center;
         width: 100%;
         height: 40px;
         position: relative;
@@ -198,8 +201,11 @@ export const LoginContainer = styled.div`
             background-color: #09bc00;
             border: 0px;
             width: 322px;
-            height: 60px;            
+            height: 60px;
+            line-height: 60px;
+            text-align: center;            
             border-radius: 2px;        
+            padding: 20px;
         }
         .login_kakao{
             color: #fff;
@@ -207,8 +213,11 @@ export const LoginContainer = styled.div`
             background-color: #f5dc00;
             border: 0px;
             width: 322px;
+            line-height: 60px;
+            text-align: center;
             height: 60px;            
             border-radius: 2px;        
+            padding: 20px;
         }    
     }
     .btn_wrap{

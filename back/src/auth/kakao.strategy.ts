@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 
 const kakaoConfig = {
   clientID: '29481a10b44985b3235049ad6e1a21bc', 
-  callbackURL: 'http://localhost:3055/auth/kakao/redirect' 
+  callbackURL: 'http://localhost:3055/oauth/kakao/redirect' 
 }
 
 @Injectable()
@@ -15,24 +15,26 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(accessToken, refreshToken, profile, done) {        
-    const profileJson = profile._json;
+    const prefix = 'KAKAO#'
+    const profileJson = profile._json;    
+    const kakaoId= prefix+profileJson.id;
     const kakao_account = profileJson.kakao_account;    
-    let user = await this.authService.validateUserKakao(profileJson.id);
+    let user = await this.authService.validateUserKakao(kakaoId);
 
     if(!user){
       const userInfo = {
         email : kakao_account.email,
         kakaoEmail : kakao_account.email,
-        kakaoId : profileJson.id,
+        kakaoId,
         userName: kakao_account.profile.nickname,
         userNickname: kakao_account.profile.nickname,
         phoneNumber : kakao_account.profile.phonenumber,
-        userId : profileJson.id,
+        userId : kakaoId,
         createdAt : new Date()
       }      
-      const signup = await this.authService.signUserKakao(userInfo);
+      const signup = await this.authService.signupUserSNS(userInfo);
       if(signup){
-        user = await this.authService.validateUserKakao(profileJson.id);
+        user = await this.authService.validateUserKakao(kakaoId);
       }
     }
     // const payload = {

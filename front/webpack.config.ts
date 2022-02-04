@@ -79,7 +79,7 @@ const config: webpack.Configuration = {
         target: 'http://localhost:3055',
         changeOrigin: true,
       },
-      '/auth/': {
+      '/oauth/': {
         target: 'http://localhost:3055',
         changeOrigin: true,
       },

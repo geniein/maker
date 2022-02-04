@@ -23,7 +23,7 @@ export class UsersController {
   }
 
   @ApiOperation({summary: '회원가입'})
-  @UseGuards(LoggedInGuard)
+  @UseGuards(NotLoggedInGuard)
   @Post()
   async signup(@Body() data: SignupRequestDto) {
     console.log(data);

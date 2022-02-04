@@ -28,69 +28,16 @@ const Login = () => {
             });
         },
         [userId, userPassword],
-    )
-
-    const onClickTEST = ()=>{
-        axios.post('/api/users',{
-            data : 'test'
-        }).then((res)=>console.log(res)).catch((e)=>console.log(e));
-    }
-
-    const onClickKaKao = useCallback( async(e) => {                   
-        e.preventDefault();
-        // await window.Kakao.Auth.authorize({
-        //     redirectUri: 'http://localhost:3030/workspace/login'
-        // })
-        axios.get('/auth/kakao',
-        {
-            headers: {                
-                "Access-Control-Allow-Origin": "*",                 
-            }
-        } ).then((res)=>console.log(res));        
-    //     await window.Kakao.Auth.login({          
-    //         success: async (res:any)=>{             
-    //         await window.Kakao.API.request({
-    //             url: '/v2/user/me',
-    //             success: function(res:any) {                                      
-    //                 // axios.post('/auth/login',
-    //                 // { test : 'abc'
-    //                 // }
-    //                 // ).then((res)=>console.log(res));
-    //                 console.log(res);
-    //                 console.log(res.kakao_account);
-    //                 // loginTypeChk(res.kakao_account.email, 'kakao');
-    //             },
-    //             fail: function(error:any) {
-    //                 console.error(error)
-    //             }
-    //         })
-    //     },
-    //     fail :  (e:any)=>{      
-    //         console.log(e);
-    //     },          
-    //     });
-    }, []);
-
+    )       
     const onClickKaKaoLogout = useCallback( async(e) => {                   
-        e.preventDefault();
-        // axios.get('/auth/kakao',
-        // {
-        //     headers: {                
-        //         "Access-Control-Allow-Origin": "*",                
-        //     }
-        // } ).then((res)=>console.log(res));        
+        e.preventDefault();              
         await window.Kakao.Auth.login({          
             success: async (res:any)=>{             
             await window.Kakao.API.request({
                 url: '/v1/user/unlink',                
-                success: function(res:any) {                                      
-                    // axios.post('/auth/login',
-                    // { test : 'abc'
-                    // }
-                    // ).then((res)=>console.log(res));
+                success: function(res:any) {                                                          
                     console.log(res);
-                    console.log(res.kakao_account);
-                    // loginTypeChk(res.kakao_account.email, 'kakao');
+                    console.log(res.kakao_account);                    
                 },
                 fail: function(error:any) {
                     console.error(error)
@@ -102,37 +49,6 @@ const Login = () => {
         },          
         });
     }, []);
-
-    // const loginTypeChk = (email: string, type: string) =>{        
-    //     const cond:any = new Object();
-    //     switch(type){
-    //         case 'kakao':
-    //             cond['kakaoEmail'] = email;
-    //             break;
-    //         case 'naver':
-    //             cond['naverEmail'] = email;
-    //             break;
-    //         default:
-    //             cond['email'] = email;
-    //             break;
-    //     }
-    //     axios.post('/api/users/logintype',cond)
-    //     .then((res)=>{
-    //         if(res.data){    
-    //             axios.post('/api/users/loginsns',cond)
-    //             .then((res)=>{                
-    //                 console.log('sucess');
-    //                 history.push('/');
-    //             }).catch((err)=>{
-    //                 alert('입력정보를 확인해주시기 바라니다.');
-    //             });
-    //         }else{
-    //             alert('연동된 계정이 없습니다. 신규가입해 주시기 바랍니다.');
-    //             return false;
-    //         }
-    //     }
-    //     );
-    // }
 
     return (
         <div>
@@ -148,11 +64,11 @@ const Login = () => {
                         <form id='logininfo'>
                             <p className='login_title'>회원로그인</p>                           
                             <div className='login_box'>
-                                <input type='text' id='userId' className='login_text' placeholder='input your ID' onChange={(e:any)=>{setUserId(e.target.value)}}>
+                                <input type='text' id='userId' className='login_text' placeholder='아이디' onChange={(e:any)=>{setUserId(e.target.value)}}>
                                 </input>
                             </div>
                             <div className='login_box'>
-                                <input type='password' id='userPwd' className='login_text' placeholder='input your Password' onChange={(e:any)=>{setUserPassword(e.target.value)}}>
+                                <input type='password' id='userPwd' className='login_text' placeholder='비밀번호' onChange={(e:any)=>{setUserPassword(e.target.value)}}>
                                 </input>
                             </div>
                             <div className='login_box'>
@@ -174,25 +90,23 @@ const Login = () => {
                         </form>
                     </LoginLayoutLeft>                                        
                     <LoginLayoutRight>
-                        <p className='login_title'>SNS계정로그인</p>                        
-                        <div className='sns_box naver' onClick={onClickTEST}>
-                            <span>
-                                <img src='/public/logo/logo_naver.png'/>
-                            </span>
-                            네이버 로그인
-                        </div>
-                        {/* <div className='sns_box kakao' onClick={onClickKaKao}>
+                        <p className='login_title'>SNS계정로그인</p>
+                        <a href='/oauth/naver' style={{textDecorationLine: 'none'}}>
+                            <div className='sns_box naver'>
+                                <span>
+                                    <img src='/public/logo/logo_naver.png'/>
+                                </span>
+                                네이버 로그인
+                            </div>
+                        </a>
+                        <a href='/oauth/kakao' style={{textDecorationLine: 'none'}}>
+                        <div className='sns_box kakao'>
                             <span>
                                 <img src='/public/logo/logo_kakao.png'/>
                             </span>
                             카카오 로그인
-                        </div> */}
-                         <a className='sns_box kakao' href='/auth/kakao'>
-                            <span>
-                                <img src='https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png'/>
-                            </span>
-                            카카오 로그인
-                        </a>
+                        </div>
+                        </a>                        
                         <div className='sns_info'>
                             <span>SNS를 통한 로그인 시,<br/></span>
                             회원만이 누릴 수 있는 혜택에서 제외될 수 있습니다. <br/>
@@ -208,27 +122,26 @@ const Login = () => {
                 <form id='logininfo'>
                     <p className='login_title'>회원로그인</p>                           
                     <div className='login_box'>
-                        <input type='text' id='userId' className='login_text' placeholder='input your ID' onChange={(e:any)=>{setUserId(e.target.value)}}>
+                        <input type='text' id='userId' className='login_text' placeholder='아이디' onChange={(e:any)=>{setUserId(e.target.value)}}>
                         </input>
                     </div>
                     <div className='login_box'>
-                        <input type='password' id='userPwd' className='login_text' placeholder='input your Password' onChange={(e:any)=>{setUserPassword(e.target.value)}}>
+                        <input type='password' id='userPwd' className='login_text' placeholder='비밀번호' onChange={(e:any)=>{setUserPassword(e.target.value)}}>
                         </input>
                     </div>
                     <div className='login_box'>
                         <input type='submit' className='login_btn' value='로그인' onClick={onClickLogin}></input>                                                  
                     </div>
+                    <a href='/oauth/naver' style={{textDecorationLine: 'none'}}>
                     <div className='login_box'>
-                        <input type='submit' className='login_naver' value='네이버 로그인' onClick={onClickLogin}></input>                          
+                        <div className='login_naver'>네이버 로그인</div>
                     </div>
-                    {/* <div className='login_box'>
-                        <input type='submit' className='login_kakao' value='카카오 로그인' onClick={onClickKaKao}></input>                          
-                    </div> */}
-                    <a href="/auth/kakao">
-                        <input type='submit' className='login_kakao' value='카카오 로그인'></input>                          
                     </a>
-                    
-                    
+                    <a href='/oauth/kakao' style={{textDecorationLine: 'none'}}>
+                        <div className='login_box'>
+                            <div className='login_kakao'>카카오 로그인</div>                          
+                        </div>
+                    </a> 
                     <div className='btn_wrap'>                                
                         <ul className='sub_options'>
                             <li>

@@ -1,7 +1,6 @@
 import fetcher from '@utils/fetcher';
 import axios from 'axios';
 import React, { FC, useCallback, useImperativeHandle, useState } from 'react'
-import { useLocation } from 'react-router';
 import useSWR from 'swr';
 import { Container, CSMenu, CSTop, NoticeInner, NoticeTable, Paging, GoListBtn, NoticeWrap } from '../styles'
 import NewPost from '@components/NewPost'

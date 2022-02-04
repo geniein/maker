@@ -104,7 +104,11 @@ export const BtnWrap = styled.div`
     width: 100%;
     height: auto;
     text-align: center;
-    margin: 50px 0;    
+    margin: 50px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     
     .btn_submit{
         border: 0px;
@@ -120,6 +124,8 @@ export const BtnWrap = styled.div`
         border: 0px;
         width: 300px;
         margin: 0 30px 20px 30px;
+        line-height: 60px;
+        text-align: center;
         height: 60px;
         color: #fff;
         cursor: pointer;
@@ -133,6 +139,8 @@ export const BtnWrap = styled.div`
         border: 0px;
         width: 300px;
         margin: 0 30px 20px 30px;
+        line-height: 60px;
+        text-align: center;
         height: 60px;
         color: #fff;
         cursor: pointer;

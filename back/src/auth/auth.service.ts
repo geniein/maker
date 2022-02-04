@@ -37,8 +37,7 @@ export class AuthService {
       }      
       return user;
   }
-//import { SignupRequestDto } from './dto/signup-reqeust.dto';
-  async signUserKakao (data: any) {
+  async signupUserSNS (data: any) {
     const hashedPassword = await bcrypt.hash('@!sdwaw02123', 12);    
     const returned = await this.usersRepository.save({
       email : data.email,      
@@ -53,5 +52,16 @@ export class AuthService {
       createdAt: new Date()
     });
     return true;
-}
+  }
+  async validateUserNaver (naverId: string) {
+    const user = await this.usersRepository.findOne({
+      where: { naverId },
+      select: ['id', 'userId', 'email', 'userPassword'],
+    });
+    console.log(naverId, user);
+    if (!user) {
+      return null;
+    }      
+    return user;
+  }
 }
