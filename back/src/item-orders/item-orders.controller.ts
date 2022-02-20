@@ -25,7 +25,7 @@ export class ItemOrdersController {
     return false;
   }
 
-  @UseGuards(LoggedInGuard)
+  // @UseGuards(LoggedInGuard)
   @Post('details')
   async getItemOrderDetails(@User() user: Users, @Body() data: AddItemOrderDto ) {
     const result =  this.itemOrdersService.getItemOrderDetail(data.orderId);
@@ -48,7 +48,7 @@ export class ItemOrdersController {
   }
 
   @ApiOperation({ summary: '사용자 이미지 파일 추가' })
-  @UseGuards(LoggedInGuard)
+  // @UseGuards(LoggedInGuard)
   @UseInterceptors(FileInterceptor('file',multerOptions('uploads')))
   @Post('files')
   async addItemOrderImageUpload(@UploadedFile() file: Express.Multer.File, @Body() data: AddItemOrderDto) {
@@ -65,7 +65,7 @@ export class ItemOrdersController {
   }
 
   @ApiOperation({ summary: '사용자 이미지 파일 삭제' })
-  @UseGuards(LoggedInGuard)  
+  // @UseGuards(LoggedInGuard)  
   @Delete('files')
   async removeItemOrderImageUpload(@UploadedFile() file: Express.Multer.File, @Body() data: AddItemOrderDto) {
     // const itemcontent = this.itemContentsService.findByUk(data.)    

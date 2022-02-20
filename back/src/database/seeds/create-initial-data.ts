@@ -245,6 +245,19 @@ export class CreateInitialData implements Seeder {
               srcPath:'/public/resource/',
               thumbnail:'/public/content/letter/6.jpg',
               discount: 10
+          },
+          { 
+            contentCode:"letter",
+              contentId:"proto",
+              category: 'PROTO',
+              title: '[NEW]',
+              price: 70000,
+              hashTag:'#BRAND NEW',
+              content:'Prototype',
+              author:'ingenie',
+              srcPath:'/public/proto/',
+              thumbnail:'/public/proto/1.jpg',
+              discount: 10
           }
     ])
       .execute();  

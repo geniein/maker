@@ -11,16 +11,17 @@ const EditorFifth:FC<Props>=({setEditorStep, orderId})=> {
 
     const onClickDone = ()=>{
         const apiUrl = ``;
-        const data = {
-            orderId,
-            approval : true
-            }
-        axios.post(apiUrl,data)
-        .then((res)=>{
-            console.log(res)
-            alert('정상적으로 출력이 요청되었습니다. MyPage에서 상태를 확인하세요.');
-        })
-        .catch((e)=>console.log(e));
+        alert('정상적으로 출력이 요청되었습니다. MyPage에서 상태를 확인하세요.');
+        // const data = {
+        //     orderId,
+        //     approval : true
+        //     }
+        // axios.post(apiUrl,data)
+        // .then((res)=>{
+        //     console.log(res)
+        //     alert('정상적으로 출력이 요청되었습니다. MyPage에서 상태를 확인하세요.');
+        // })
+        // .catch((e)=>console.log(e));
     }
     
     return (

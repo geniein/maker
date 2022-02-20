@@ -14,8 +14,8 @@ const Workspace = loadable(() => import('@layouts/Workspace'));
 const App = () => {
     return(      
         <Switch>
-          <Redirect exact path="/" to="/workspace/main" />                    
-          <Route path="/workspace/:workspace" component={Workspace} /> 
+          <Redirect exact path="/" to="/editorspace" />                    
+          {/* <Route path="/workspace/:workspace" component={Workspace} />  */}
           <Route path="/editorspace" component={Editorspace} /> 
           {/* <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} /> 

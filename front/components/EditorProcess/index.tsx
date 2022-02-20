@@ -12,7 +12,7 @@ const EditorProcess:FC<Props> =({editorStep}) =>{
             <EditorTop>
                 <div className='top_inner'>
                     <div className='title'>
-                        Place a name of title
+                        {/* 밀키트 유통 전문점 우리집놀러와 */}
                     </div>
                     <ul className='process_bar'>
                         <EditorProcessItem>
@@ -33,16 +33,16 @@ const EditorProcess:FC<Props> =({editorStep}) =>{
                                 <div className='post'>STEP 3 <br/>장면 편집하기</div>
                             </div>
                         </EditorProcessItem>
-                        {/* <EditorProcessItem>
-                            <div className='process_item' style={ editorStep=='forth' ? {backgroundColor:'#fff'}: undefined}>
+                        <EditorProcessItem>
+                            <div className='process_item' style={ editorStep=='fourth' ? {backgroundColor:'#fff'}: undefined}>
                                 <div className='pre'><img src={'/public/logo/step4.png'}/></div>
                                 <div className='post'>STEP 4 <br/>자막 변경하기</div>
                             </div>
-                        </EditorProcessItem> */}
+                        </EditorProcessItem>
                         <EditorProcessItem>
                             <div className='process_item' style={ editorStep=='fifth' ? {backgroundColor:'#fff'}: undefined}>
                                 <div className='pre'><img src={'/public/logo/step5.png'}/></div>
-                                <div className='post'>STEP 4 <br/>제작 완료!</div>
+                                <div className='post'>STEP 5 <br/>제작 완료!</div>
                             </div>
                         </EditorProcessItem>
                     </ul>

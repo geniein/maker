@@ -18,7 +18,7 @@ export const multerOptions = (desPath:string) =>{
         const fileName = file.originalname;        
         const orderId:string = fileName.split('_').length > 1 ? fileName.split('_')[0]+'/' : '';                 
         let uploadPath: string = desPath || 'public';
-        uploadPath = uploadPath + '/' + userInfo.userId + '/' + orderId;
+        uploadPath = uploadPath + '/' + 'cubya@hotmail.co.kr' + '/' + orderId;
         if (!existsSync(uploadPath)) {        
           mkdirSync(uploadPath,{recursive:true});
         }

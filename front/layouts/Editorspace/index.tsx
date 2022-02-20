@@ -6,8 +6,8 @@ import { Route, Switch, useLocation } from 'react-router'
 
 const Editorspace =() => {
     const location = useLocation<any>();
-    const orderId = location.state.orderId;
-    const contentId = location.state.contentId;
+    const orderId = location.state?.orderId || '202202210003ORDER35106';
+    const contentId = location.state?.contentId || 'proto';
     const isMobile = useMediaQuery({query:"(max-width: 576px)"});    
     const [editorStep, setEditorStep] = useState('first');
     

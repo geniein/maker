@@ -51,24 +51,24 @@ const EditorFirst:FC<Props>=({setEditorStep, contentId})=> {
                     <p>{hashTag}</p>
                 </div>
                 <EditorDetailInfo>
-                    <div className='detail_part'>
-                        <span>신랑이름</span>
-                        <input type='text'></input>
-                    </div>
-                    <div className='detail_part'>
-                        <span>신랑이름</span>
-                        <input type='text'></input>
-                    </div>
-                    <div className='detail_part'>
-                        <span>신랑이름</span>
-                        <input type='text'></input>
-                    </div>
-                    <div className='detail_part'>
-                        <span>신랑이름</span>
+                    <div className='detail_part' style={{width:'98%'}}>
+                        <span>가게이름</span>
                         <input type='text'></input>
                     </div>
                     <div className='detail_part' style={{width:'98%'}}>
-                        <span>날짜</span>
+                        <span>위치</span>
+                        <input type='text'></input>
+                    </div>                    
+                    {/* <div className='detail_part'>
+                        <span>음식이름</span>
+                        <input type='text'></input>
+                    </div>
+                    <div className='detail_part'>
+                        <span>가격</span>
+                        <input type='text'></input>
+                    </div> */}
+                    <div className='detail_part' style={{width:'98%'}}>
+                        <span>한줄매장소개</span>
                         <input type='text'></input>
                     </div> 
                     <div className='detail_part' style={{width:'98%'}}>

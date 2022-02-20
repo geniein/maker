@@ -172,10 +172,25 @@ const DragDrop:FC<Props> = ({setImgCount, orderId}): JSX.Element => {
     }
     useEffect(() => {
         initDragEvents();
-    
+        axios.post(`/api/item-orders/details`,{orderId})
+            .then((res)=>{
+                console.log(res);
+                let rtnList = res.data || [];
+                rtnList = rtnList.map((val:any, idx:number)=>`${val.filePath}${val.fileName}`)
+                console.log(rtnList);
+            });  
         return () => resetDragEvents();
     }, [initDragEvents, resetDragEvents]);
 
+
+    // useEffect(() => {
+    //     axios.post(`/api/item-orders/details`,{orderId})
+    //     .then((res)=>{
+    //         console.log(res);
+    //         let rtnList = res.data || [];
+    //         rtnList = rtnList.map((val:any, idx:number)=>`${val.filePath}${val.fileName}`)            
+    //     }); 
+    // },[]);
     return (
         <div>
         <DragDropWrap>

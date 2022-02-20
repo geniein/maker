@@ -29,6 +29,7 @@ const EditorThird:FC<Props>=({setEditorStep, orderId})=>{
         <div>
             <EditorLeft>
                 <ReactCrop src={src} crop={crop} onChange={ (newCrop:any) => setCrop(newCrop)} />
+                <img src='/public/proto/optionbar.JPG'></img>
             </EditorLeft>
             <EditorRight>       
                 <div className='image_list'>
@@ -45,12 +46,12 @@ const EditorThird:FC<Props>=({setEditorStep, orderId})=>{
                                 <img src={val}/>
                             </div>
                             )
-                    })}
+                    })}                    
                 </div>
             </EditorRight>
             <BottomBtn>
                 <div className='btn pre_button' onClick={()=>setEditorStep('second')}>Pre</div>
-                <div className='btn post_button' onClick={()=>setEditorStep('fifth')}>Post</div>
+                <div className='btn post_button' onClick={()=>setEditorStep('fourth')}>Post</div>
             </BottomBtn>
         </div>
     )

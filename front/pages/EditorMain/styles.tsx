@@ -288,3 +288,25 @@ export const BottomBtn = styled.div`
         margin: auto;
     }
 `;
+export const SubtitlesList = styled.h2`
+    padding: 10px;
+    font-size: 14px;
+    color: #F39F0D;
+    margin-bottom: 4px;
+    font-family: 'Noto_B';
+    `;
+
+export const InputSubtitles = styled.input`
+    padding: 8px;
+    font-size: 13px;
+    font-family: Verdana;
+    height: 40px;
+    margin-left: 3px;
+    outline: 0;
+    width: 96%;
+    float: left;
+    border: 1px solid #fff;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    color: #5e5e5e;
+`;
