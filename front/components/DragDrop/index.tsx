@@ -25,6 +25,7 @@ interface Props {
 const DragDrop:FC<Props> = ({setImgCount, orderId}): JSX.Element => {
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const [files, setFiles] = useState<IFileTypes[]>([]);
+    const [fileList, setFileList] = useState<any[]>([]);
     const fileId = useRef<number>(0);
     const thumbRef = useRef<HTMLDivElement>(null);
     const dragRef = useRef<HTMLLabelElement>(null);
@@ -43,7 +44,7 @@ const DragDrop:FC<Props> = ({setImgCount, orderId}): JSX.Element => {
         for (const file of selectFiles) {
             fileId.current++;
             fileIdx = await uploadImages(file).then((rtn)=>rtn.data);
-            updateThumbnail(fileId.current,file, fileIdx);
+            // updateThumbnail(fileId.current,file, fileIdx);
             tempFiles = [
                 ...tempFiles,
                 {
@@ -51,7 +52,8 @@ const DragDrop:FC<Props> = ({setImgCount, orderId}): JSX.Element => {
                 object: file
                 }
             ];
-        }        
+        }
+        // getImages(orderId);                
         setImgCount(tempFiles.length);
         setFiles(tempFiles);               
     }, [files]);
@@ -141,7 +143,37 @@ const DragDrop:FC<Props> = ({setImgCount, orderId}): JSX.Element => {
         });
     }
 
-    const updateThumbnail = (fileId:number,file:any, fileIdx: any) => {
+    // const updateThumbnail = (fileId:number,file:any, fileIdx: any) => {
+    //     const dropZoneElement = dragRef.current
+    //     if(dropZoneElement){        
+    //         let thumbnailElement = dropZoneElement.querySelector<HTMLDivElement>(".drop-zone__thumb");
+    //         let introElement = dropZoneElement.querySelector<HTMLSpanElement>(".drop-box-intro");
+    //         if (introElement) {
+    //             introElement.remove();
+    //         }
+    //         thumbnailElement = document.createElement("div");
+    //         thumbnailElement.classList.add("drop-zone__thumb");
+    //         let filterElement = document.createElement("div");
+    //         filterElement.classList.add("Files-Filter");
+    //         filterElement.onclick = (e) => handleFilterFile(fileId, fileIdx, dropZoneElement, thumbnailElement, e)            
+    //         filterElement.append("X");
+    //         thumbnailElement.setAttribute("fileId",`${fileId}`);
+    //         thumbnailElement.appendChild(filterElement);            
+    //         dropZoneElement.appendChild(thumbnailElement);                
+    //         // Show thumbnail for image files
+    //         if (file.type.startsWith("image/")) {
+    //         const reader = new FileReader();
+    //         reader.readAsDataURL(file);
+    //         reader.onload = () => {
+    //             if(thumbnailElement) thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+    //         };
+    //         } else {
+    //             thumbnailElement.style.backgroundImage = `null`;
+    //         }
+    //     }
+    // }
+    const updateThumbnail = (fileId:number,path:any, fileIdx: any) => {
+        console.log('updateThumbnail')
         const dropZoneElement = dragRef.current
         if(dropZoneElement){        
             let thumbnailElement = dropZoneElement.querySelector<HTMLDivElement>(".drop-zone__thumb");
@@ -158,27 +190,35 @@ const DragDrop:FC<Props> = ({setImgCount, orderId}): JSX.Element => {
             thumbnailElement.setAttribute("fileId",`${fileId}`);
             thumbnailElement.appendChild(filterElement);            
             dropZoneElement.appendChild(thumbnailElement);                
-            // Show thumbnail for image files
-            if (file.type.startsWith("image/")) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                if(thumbnailElement) thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
-            };
-            } else {
-                thumbnailElement.style.backgroundImage = `null`;
+            // Show thumbnail for image files            
+            if(thumbnailElement){
+                thumbnailElement.style.backgroundImage = `url('${path}')`;
             }
         }
     }
+    const getImages = async (orderId:string) =>{
+        let rtn:any[] = [];
+        await axios.post(`/api/item-orders/details`,{orderId})
+        .then((res)=>{            
+            let rtnList = res.data || [];
+            rtnList = rtnList.map((val:any, idx:number)=>`${val.filePath}${val.fileName}`)
+            setFileList(rtnList);
+            rtn = rtnList;
+        });
+        return rtn;
+    }
+
     useEffect(() => {
+        const asyncGetImage = async () =>{
+            return await getImages(orderId);
+        }
+        console.log('useEffect')        
         initDragEvents();
-        axios.post(`/api/item-orders/details`,{orderId})
-            .then((res)=>{
-                console.log(res);
-                let rtnList = res.data || [];
-                rtnList = rtnList.map((val:any, idx:number)=>`${val.filePath}${val.fileName}`)
-                console.log(rtnList);
-            });  
+        const fileList = asyncGetImage();
+        for(let i=0; i< fileList.length; i++){            
+            updateThumbnail(i, fileList[i],i);
+        }
+        
         return () => resetDragEvents();
     }, [initDragEvents, resetDragEvents]);
 
